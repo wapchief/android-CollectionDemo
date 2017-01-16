@@ -1,4 +1,4 @@
-# android-CollectionDemo
+# 集合了多个优秀开源框架所编译的Demo
 1、使用SwipeRefreshLayout实现下拉刷新，上拉加载数据.内部嵌套RecyclerView替换ListView实现
 
 > 使用方法及介绍：（待更新）
