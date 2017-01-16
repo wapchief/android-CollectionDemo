@@ -12,7 +12,7 @@ import android.view.View;
 
 /**
  * Created by WuBing on 2017/1/11 0011 下午 2:29.
- * 描述：
+ * 描述：自定义分割线的布局
  */
 public class DividItemDecoration extends RecyclerView.ItemDecoration{
     private static final int[] ATTRS = new int[]{
