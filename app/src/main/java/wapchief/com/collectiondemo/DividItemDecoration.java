@@ -11,7 +11,7 @@ import android.util.Log;
 import android.view.View;
 
 /**
- * Created by WuBing on 2017/1/11 0011 下午 2:29.
+ * Created by WuBing on 2017/1/11 0011
  * 描述：自定义分割线的布局
  */
 public class DividItemDecoration extends RecyclerView.ItemDecoration{
