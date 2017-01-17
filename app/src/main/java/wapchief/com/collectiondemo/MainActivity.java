@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
 //    MaterialRefreshLayout refresh;
     @BindView(R.id.bt)
     Button bt;
-    @BindView(R.id.tv)
-    TextView tv;
+    @BindView(R.id.bt2)
+    Button bt2;
 
     @BindView(R.id.recyclerView1)
     RecyclerView recyclerView;
@@ -44,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //     多个监听
-    @OnClick({R.id.et, R.id.tv})
+    @OnClick({R.id.et, R.id.bt2})
     void submix(View view) {
         switch (view.getId()) {
             case R.id.et:
                 UToasts.showShort(this, "输入框被点击了");
                 break;
-            case R.id.tv:
+            case R.id.bt2:
                 UToasts.showShort(this, "tv被点击了");
                 Intent intent=new Intent(MainActivity.this,RecyclerViewActivity.class);
                 startActivity(intent);
