@@ -1,5 +1,6 @@
 # 集合了多个开源框架所编译的Demo
-所有页面均使用ButterKnife，绑定View。如过没有接触过建议先学习一下，可以看第三篇文章。
+__所有页面均使用ButterKnife，绑定View。如过没有接触过建议先学习一下，可以看第三篇文章。__
+
 
 1、使用SwipeRefreshLayout实现下拉刷新，上拉加载数据.内部嵌套RecyclerView替换ListView实现
 
