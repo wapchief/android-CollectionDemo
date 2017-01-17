@@ -18,8 +18,10 @@
             </intent-filter>
         </activity>
         <!--注册页面-->
-        <activity android:name=".RecyclerViewActivity"
-                  android:persistableMode="persistAcrossReboots"/>
+        <activity
+            android:name=".RecyclerViewActivity"
+            android:persistableMode="persistAcrossReboots"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

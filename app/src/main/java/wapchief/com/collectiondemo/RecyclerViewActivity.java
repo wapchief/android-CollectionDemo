@@ -1,6 +1,6 @@
 package wapchief.com.collectiondemo;
 
-import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -9,11 +9,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -24,41 +26,46 @@ import butterknife.ButterKnife;
 public class RecyclerViewActivity extends AppCompatActivity {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
-
     RecyclerViewAdapter adapter;
     @BindView(R.id.swipeRefreshLayout)
     SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindColor(R.color.black_transparent)
+    int black_transparent;
+    @BindColor(R.color.black)
+    int black;
+    @BindColor(R.color.blue)
+    int blue;
+    @BindColor(R.color.white)
+    int white;
+    @BindView(R.id.view_relat)
+    RelativeLayout viewRelat;
     private List data = new ArrayList<>();
-    Handler handler=new Handler();
-
+    Handler handler = new Handler();
     TextView tv_item;
     boolean isLoading;
+    LinearLayoutManager layoutManager;
 
-    private Context context;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_view);
-//        context=this;
         ButterKnife.bind(this);
         initview();
         initData();
-//    View view= LayoutInflater.from(this).inflate(R.layout.recycler_view_item,null);
-//        ButterKnife.bind(this, view);
-//        tv_item.setText("测试钱钱钱钱钱钱钱");
-
     }
 
     private void initview() {
 
         tv_item = (TextView) findViewById(R.id.tv_item);
-        adapter = new RecyclerViewAdapter(this,data);
+        adapter = new RecyclerViewAdapter(this, data);
         //设置刷新状态颜色
         swipeRefreshLayout.setColorSchemeResources(
                 R.color.blue
-                ,R.color.oriange
-                ,R.color.black
-                ,R.color.red);
+                , R.color.oriange
+                , R.color.black
+                , R.color.red);
         //开启一个刷新的线程
         swipeRefreshLayout.post(new Runnable() {
             @Override
@@ -82,9 +89,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
                 }, 1800);
             }
         });
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-//        recyclerView.addItemDecoration(new DividItemDecoration(this, DividItemDecoration.VERTICAL_LIST));
         recyclerView.setAdapter(adapter);
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -95,6 +101,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
                 Log.d("测试-----------test", "状态改变 = " + newState);
 
             }
+
             /**
              * 当RecyclerView滑动时触发
              * 类似点击事件的MotionEvent.ACTION_MOVE
@@ -102,15 +109,16 @@ public class RecyclerViewActivity extends AppCompatActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                Log.d("测试-----------test", "正在滚动");
 
+                selectItem();
+
+                //获取可见item个数
                 int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
                 if (lastVisibleItemPosition + 1 == adapter.getItemCount()) {
-
-                    Log.d("测试--------------test", "执行加载");
-
+                    //加载
                     boolean isRefreshing = swipeRefreshLayout.isRefreshing();
                     if (isRefreshing) {
+                        tvTitle.setBackgroundColor(getResources().getColor(R.color.black_transparent));
                         adapter.notifyItemRemoved(adapter.getItemCount());
                         return;
                     }
@@ -121,11 +129,13 @@ public class RecyclerViewActivity extends AppCompatActivity {
                             public void run() {
                                 getdata();
                                 Log.d("测试--------------test", "完成加载更多");
+
                                 isLoading = false;
                             }
                         }, 1000);
                     }
                 }
+
             }
         });
         //点击事件
@@ -133,7 +143,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Log.d("测试--------------test", "点击了item = " + position);
-                UToasts.showShort(RecyclerViewActivity.this,"点击了item:"+position);
+                UToasts.showShort(RecyclerViewActivity.this, "点击了item:" + position);
             }
 
             @Override
@@ -152,7 +162,6 @@ public class RecyclerViewActivity extends AppCompatActivity {
             public void run() {
                 getdata();
             }
-
         }, 1500);
     }
 
@@ -162,9 +171,17 @@ public class RecyclerViewActivity extends AppCompatActivity {
      */
     private void getdata() {
 
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 10; i++) {
             data.add(i);
         }
+
+        updateView();
+    }
+
+    /**
+     * 更新数据
+     */
+    private void updateView() {
         //数据刷新,重绘当前可见区域
         adapter.notifyDataSetChanged();
         //setRefreshing方法必须在view初始化完毕之后使用
@@ -173,5 +190,40 @@ public class RecyclerViewActivity extends AppCompatActivity {
         adapter.notifyItemRemoved(adapter.getItemCount());
     }
 
+    /**
+     * 设置上拉加载，title变透明的效果
+     */
+    public void selectItem() {
+        if (getScollYDistance() <= 0) {
+            //静止并处于最顶端状态
+            tvTitle.setBackgroundColor(black_transparent);
+            tvTitle.setTextColor(black);
+        } else if (getScollYDistance() > 0 && getScollYDistance() <= 400) {//滑动在0-360距离的时候
+            if (getScollYDistance() <= 200) {//处于滑动到中间的时候
+                tvTitle.setTextColor(blue);
+            } else {//滑出到200以外
+//                tvTitle.setBackgroundColor(Color.argb((int) 255, 254, 184, 6));
+                tvTitle.setTextColor(white);
+            }
+            float scale = (float) getScollYDistance() / 400;
+            float alpha = (255 * scale);
+            // 只是layout背景透明(仿知乎滑动效果)
+            tvTitle.setBackgroundColor(Color.argb((int) alpha, 254, 184, 6));
+        } else {
+            tvTitle.setBackgroundColor(Color.argb((int) 255, 254, 184, 6));
+        }
 
+    }
+
+    /**
+     * 获取第一个可见的child
+     *
+     * @return
+     */
+    public int getScollYDistance() {
+        int position = layoutManager.findFirstVisibleItemPosition();
+        View firstVisiableChildView = layoutManager.findViewByPosition(position);
+        int itemHeight = firstVisiableChildView.getHeight();
+        return (position) * itemHeight - firstVisiableChildView.getTop();
+    }
 }
