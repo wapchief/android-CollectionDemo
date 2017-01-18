@@ -19,16 +19,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="vertical">
         <Button
             android:id="@+id/bt"
             android:text="get查询"
             android:layout_width="wrap_content"
             android:layout_height="50dp"/>
-        <TextView
-            android:id="@+id/tv"
+        <Button
+            android:id="@+id/bt2"
             android:text="刷新页测试"
             android:background="@android:color/darker_gray"
             android:layout_width="wrap_content"
