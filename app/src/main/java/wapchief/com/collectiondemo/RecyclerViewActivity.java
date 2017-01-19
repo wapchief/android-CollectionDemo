@@ -31,7 +31,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindColor(R.color.black_transparent)
+    @BindColor(R.color.theme_lanse)
     int black_transparent;
     @BindColor(R.color.black)
     int black;
@@ -92,7 +92,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
+        //添加分割线
+        recyclerView.addItemDecoration(new DividItemDecoration(this,LinearLayoutManager.VERTICAL));
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             //当RecyclerView的滑动状态改变时触发
@@ -197,8 +198,9 @@ public class RecyclerViewActivity extends AppCompatActivity {
         if (getScollYDistance() <= 0) {
             //静止并处于最顶端状态
             tvTitle.setBackgroundColor(black_transparent);
-            tvTitle.setTextColor(black);
-        } else if (getScollYDistance() > 0 && getScollYDistance() <= 400) {//滑动在0-360距离的时候
+            tvTitle.setTextColor(white);
+            tvTitle.setVisibility(View.VISIBLE);
+        } else if (getScollYDistance() > 0 && getScollYDistance() <= 400) {//滑动在0-400距离的时候
             if (getScollYDistance() <= 200) {//处于滑动到中间的时候
                 tvTitle.setTextColor(blue);
             } else {//滑出到200以外
@@ -210,7 +212,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
             // 只是layout背景透明(仿知乎滑动效果)
             tvTitle.setBackgroundColor(Color.argb((int) alpha, 254, 184, 6));
         } else {
-            tvTitle.setBackgroundColor(Color.argb((int) 255, 254, 184, 6));
+//            tvTitle.setBackgroundColor(Color.argb((int) 0, 254, 184, 6));
+            tvTitle.setVisibility(View.GONE);
         }
 
     }

@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="match_parent">
 <TextView
     android:id="@+id/tv_title"
     android:layout_width="match_parent"
     android:layout_height="48dp"
     android:gravity="center"
-    android:background="@color/theme"
+    android:textColor="@color/white"
+    android:background="@color/theme_lanse"
     android:text="RecyclerView+SwipeRefreshLayout"/>
  <RelativeLayout
      android:id="@+id/view_relat"
@@ -21,7 +23,7 @@
     android:layout_height="match_parent">
 <android.support.v7.widget.RecyclerView
     android:id="@+id/recyclerView"
-    android:dividerHeight="10dp"
+    android:dividerHeight="2dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
 </android.support.v4.widget.SwipeRefreshLayout>
