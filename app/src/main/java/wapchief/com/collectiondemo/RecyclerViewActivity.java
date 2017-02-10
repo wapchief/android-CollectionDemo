@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -41,6 +42,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
     int white;
     @BindView(R.id.view_relat)
     RelativeLayout viewRelat;
+    @BindView(R.id.back_top)
+    ImageView backTop;
     private List data = new ArrayList<>();
     Handler handler = new Handler();
     TextView tv_item;
@@ -93,7 +96,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         //添加分割线
-        recyclerView.addItemDecoration(new DividItemDecoration(this,LinearLayoutManager.VERTICAL));
+        recyclerView.addItemDecoration(new DividItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             //当RecyclerView的滑动状态改变时触发
@@ -150,6 +153,12 @@ public class RecyclerViewActivity extends AppCompatActivity {
             @Override
             public void onItemLongClick(View view, int position) {
 
+            }
+        });
+        backTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.scrollToPosition(0);
             }
         });
     }
@@ -215,18 +224,27 @@ public class RecyclerViewActivity extends AppCompatActivity {
 //            tvTitle.setBackgroundColor(Color.argb((int) 0, 254, 184, 6));
             tvTitle.setVisibility(View.GONE);
         }
+        if (getScollYDistance()>=400){
+            backTop.setVisibility(View.VISIBLE);
+        }else {
+            backTop.setVisibility(View.GONE);
+        }
 
     }
 
     /**
-     * 获取第一个可见的child
+     * 获取滑动的总距离
      *
      * @return
      */
     public int getScollYDistance() {
         int position = layoutManager.findFirstVisibleItemPosition();
+
         View firstVisiableChildView = layoutManager.findViewByPosition(position);
+        int firstVisiableChildViewTop = firstVisiableChildView.getTop();
         int itemHeight = firstVisiableChildView.getHeight();
-        return (position) * itemHeight - firstVisiableChildView.getTop();
+
+        //第一个可见的item*item高度-最顶端位置
+        return (position) * itemHeight - firstVisiableChildViewTop;
     }
 }
