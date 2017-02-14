@@ -18,3 +18,6 @@ __所有页面均使用ButterKnife，绑定View。如过没有接触过建议先
 
 > 使用方法及介绍：http://www.jianshu.com/p/1999b217b90f
 
+5、一行代码搞定使用LinearLayoutManager一键返回顶部
+> http://www.jianshu.com/p/e9778888d1c3
+
