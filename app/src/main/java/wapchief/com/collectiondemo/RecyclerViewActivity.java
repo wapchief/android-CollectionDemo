@@ -201,7 +201,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
     }
 
     /**
-     * 设置上拉加载，title变透明的效果
+     * 设置滑动距离时的效果
      */
     public void selectItem() {
         if (getScollYDistance() <= 0) {
@@ -224,6 +224,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
 //            tvTitle.setBackgroundColor(Color.argb((int) 0, 254, 184, 6));
             tvTitle.setVisibility(View.GONE);
         }
+        //弹出top返回顶部按钮
         if (getScollYDistance()>=400){
             backTop.setVisibility(View.VISIBLE);
         }else {
@@ -243,7 +244,6 @@ public class RecyclerViewActivity extends AppCompatActivity {
         View firstVisiableChildView = layoutManager.findViewByPosition(position);
         int firstVisiableChildViewTop = firstVisiableChildView.getTop();
         int itemHeight = firstVisiableChildView.getHeight();
-
         //第一个可见的item*item高度-最顶端位置
         return (position) * itemHeight - firstVisiableChildViewTop;
     }

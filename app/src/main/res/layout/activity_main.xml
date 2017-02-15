@@ -29,10 +29,9 @@
             android:layout_height="50dp"/>
         <Button
             android:id="@+id/bt2"
-            android:text="刷新页测试"
-            android:background="@android:color/darker_gray"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp" />
+            android:text="RecyclerView+swipeRefrashlayout"
+             android:layout_width="wrap_content"
+            android:layout_height="50dp" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
