@@ -1,8 +1,9 @@
-package wapchief.com.collectiondemo;
+package wapchief.com.collectiondemo.bean;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import wapchief.com.collectiondemo.bean.NewBeans;
 
 /**
  * Created by WuBing on 2017/1/6 0006 下午 1:50.

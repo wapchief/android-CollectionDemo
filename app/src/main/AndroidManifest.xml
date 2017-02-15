@@ -22,6 +22,8 @@
             android:name=".RecyclerViewActivity"
             android:persistableMode="persistAcrossReboots"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!--FlowLayout-->
+        <activity android:name=".activity.FlowLayoutActivity"/>
     </application>
 
 </manifest>

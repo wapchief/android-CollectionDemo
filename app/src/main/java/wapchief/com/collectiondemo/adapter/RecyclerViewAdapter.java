@@ -1,4 +1,4 @@
-package wapchief.com.collectiondemo;
+package wapchief.com.collectiondemo.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
+
+import wapchief.com.collectiondemo.R;
 
 
 /**

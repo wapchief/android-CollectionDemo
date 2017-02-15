@@ -15,7 +15,8 @@
         android:id="@+id/et"
         android:text="13838705888"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"/>
+        android:layout_height="50dp"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,11 +27,17 @@
             android:id="@+id/bt"
             android:text="get查询"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"/>
+            android:layout_height="50dp"
+            android:visibility="gone"/>
         <Button
             android:id="@+id/bt2"
             android:text="RecyclerView+swipeRefrashlayout"
              android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+        <Button
+            android:id="@+id/bt_tfl"
+            android:text="TagFlowLayout"
+            android:layout_width="wrap_content"
             android:layout_height="50dp" />
     </LinearLayout>
 

@@ -1,4 +1,4 @@
-package wapchief.com.collectiondemo;
+package wapchief.com.collectiondemo.customView;
 
 import android.content.Context;
 import android.content.res.TypedArray;

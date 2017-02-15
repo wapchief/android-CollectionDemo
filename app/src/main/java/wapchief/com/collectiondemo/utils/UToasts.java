@@ -1,4 +1,4 @@
-package wapchief.com.collectiondemo;
+package wapchief.com.collectiondemo.utils;
 
 import android.content.Context;
 import android.widget.Toast;

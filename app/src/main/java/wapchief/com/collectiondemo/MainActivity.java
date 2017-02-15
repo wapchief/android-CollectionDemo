@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -16,6 +15,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.OkHttpClient;
+import wapchief.com.collectiondemo.activity.FlowLayoutActivity;
+import wapchief.com.collectiondemo.adapter.RecyclerViewAdapter;
+import wapchief.com.collectiondemo.customView.DividItemDecoration;
+import wapchief.com.collectiondemo.utils.UToasts;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -23,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.et)
     EditText et;
-//    @BindView(R.id.refresh)
+    //    @BindView(R.id.refresh)
 //    MaterialRefreshLayout refresh;
     @BindView(R.id.bt)
     Button bt;
@@ -34,9 +37,12 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     RecyclerViewAdapter adapter;
+    @BindView(R.id.bt_tfl)
+    Button btTfl;
     private List<String> data;
 
-    OkHttpClient okHttpClient=new OkHttpClient();
+    OkHttpClient okHttpClient = new OkHttpClient();
+
     //     单个监听bt
     @OnClick(R.id.bt)
     void submit() {
@@ -44,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //     多个监听
-    @OnClick({R.id.et, R.id.bt2})
+    @OnClick({R.id.et, R.id.bt2,R.id.bt_tfl})
     void submix(View view) {
         switch (view.getId()) {
             case R.id.et:
@@ -52,8 +58,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.bt2:
                 UToasts.showShort(this, "tv被点击了");
-                Intent intent=new Intent(MainActivity.this,RecyclerViewActivity.class);
+                Intent intent = new Intent(MainActivity.this, RecyclerViewActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.bt_tfl:
+                Intent intent1=new Intent(MainActivity.this, FlowLayoutActivity.class);
+                startActivity(intent1);
                 break;
         }
     }
@@ -70,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
     private final int STATE_REFRESH = 1;
     private final int STATE_LOADMORE = 2;
     private int curState = STATE_NORMAL;
-
 
 
 //    mApi=retrofit

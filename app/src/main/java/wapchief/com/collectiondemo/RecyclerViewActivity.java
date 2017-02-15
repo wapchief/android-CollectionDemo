@@ -19,6 +19,9 @@ import java.util.List;
 import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import wapchief.com.collectiondemo.adapter.RecyclerViewAdapter;
+import wapchief.com.collectiondemo.customView.DividItemDecoration;
+import wapchief.com.collectiondemo.utils.UToasts;
 
 /**
  * Created by WuBing on 2017/1/10 0010 上午 9:22.
