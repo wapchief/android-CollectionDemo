@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <solid android:color="@color/theme" />
+    <corners android:topLeftRadius="6dp"
+        android:topRightRadius="6dp"
+        android:bottomRightRadius="6dp"
+        android:bottomLeftRadius="6dp"/>
+    <padding android:left="6dp"
+        android:right="6dp"/>
+
+</shape>
+<!--圆角按钮-->
