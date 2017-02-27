@@ -21,7 +21,7 @@ import wapchief.com.collectiondemo.R;
  * Created by Wu on 2017/2/20 0020 下午 3:06.
  * 描述：图片缓存
  */
-public class GlideActivity extends AppCompatActivity {
+public class GlidePicassoActivity extends AppCompatActivity {
     @BindView(R.id.img_glide)
     ImageView imgGlide;
     @BindView(R.id.glide_bt)

@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.OkHttpClient;
 import wapchief.com.collectiondemo.activity.FlowLayoutActivity;
-import wapchief.com.collectiondemo.activity.GlideActivity;
+import wapchief.com.collectiondemo.activity.GlidePicassoActivity;
 import wapchief.com.collectiondemo.activity.OkhttpRetrofitActivity;
 import wapchief.com.collectiondemo.adapter.RecyclerViewAdapter;
 import wapchief.com.collectiondemo.customView.DividItemDecoration;
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent2);
                 break;
             case R.id.bt_glide:
-                Intent intent3 = new Intent(MainActivity.this, GlideActivity.class);
+                Intent intent3 = new Intent(MainActivity.this, GlidePicassoActivity.class);
                 startActivity(intent3);
                 break;
         }
