@@ -3,6 +3,35 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <Button
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="glide"
+            android:layout_height="wrap_content"
+            android:id="@+id/glide_bt"/>
+        <Button
+            android:text="picasso"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/picasso_bt"/>
+        <Button
+            android:text="清空缓存"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/clean_bt"/>
+
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/img_glide"
         android:layout_width="match_parent"

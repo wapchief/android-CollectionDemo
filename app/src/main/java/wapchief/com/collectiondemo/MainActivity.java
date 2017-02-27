@@ -20,6 +20,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.OkHttpClient;
 import wapchief.com.collectiondemo.activity.FlowLayoutActivity;
+import wapchief.com.collectiondemo.activity.GlideActivity;
+import wapchief.com.collectiondemo.activity.OkhttpRetrofitActivity;
 import wapchief.com.collectiondemo.adapter.RecyclerViewAdapter;
 import wapchief.com.collectiondemo.customView.DividItemDecoration;
 import wapchief.com.collectiondemo.utils.UToasts;
@@ -43,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
     RecyclerViewAdapter adapter;
     @BindView(R.id.bt_tfl)
     Button btTfl;
+    @BindView(R.id.bt_retrofit)
+    Button btRetrofit;
+    @BindView(R.id.bt_glide)
+    Button btGlide;
     private List<String> data;
 
     OkHttpClient okHttpClient = new OkHttpClient();
@@ -54,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //     多个监听
-    @OnClick({R.id.et, R.id.bt2,R.id.bt_tfl})
+    @OnClick({R.id.et, R.id.bt2, R.id.bt_tfl, R.id.bt_retrofit,R.id.bt_glide})
     void submix(View view) {
         switch (view.getId()) {
             case R.id.et:
@@ -66,8 +72,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.bt_tfl:
-                Intent intent1=new Intent(MainActivity.this, FlowLayoutActivity.class);
+                Intent intent1 = new Intent(MainActivity.this, FlowLayoutActivity.class);
                 startActivity(intent1);
+                break;
+            case R.id.bt_retrofit:
+                Intent intent2 = new Intent(MainActivity.this, OkhttpRetrofitActivity.class);
+                startActivity(intent2);
+                break;
+            case R.id.bt_glide:
+                Intent intent3 = new Intent(MainActivity.this, GlideActivity.class);
+                startActivity(intent3);
                 break;
         }
     }
@@ -157,13 +171,14 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * 单击回退
+     *
      * @param keyCode
      * @param event
      * @return
      */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-     if (keyCode==KeyEvent.KEYCODE_BACK){
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             exitBy2Click();
         }
         return false;
