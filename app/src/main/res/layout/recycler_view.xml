@@ -12,7 +12,8 @@
     android:gravity="center"
     android:textColor="@color/white"
     android:background="@color/theme_lanse"
-    android:text="RecyclerView+SwipeRefreshLayout"/>
+    android:text="RecyclerView+SwipeRefreshLayout"
+    android:textAllCaps="false"/>
  <RelativeLayout
      android:id="@+id/view_relat"
      android:layout_width="match_parent"

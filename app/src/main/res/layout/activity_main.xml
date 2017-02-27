@@ -28,27 +28,32 @@
             android:text="get查询"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            android:textAllCaps="false"/>
         <Button
             android:id="@+id/bt2"
             android:text="RecyclerView+swipeRefrashlayout"
              android:layout_width="wrap_content"
-            android:layout_height="50dp" />
+            android:layout_height="50dp"
+            android:textAllCaps="false"/>
         <Button
             android:id="@+id/bt_tfl"
             android:text="TagFlowLayout"
             android:layout_width="wrap_content"
-            android:layout_height="50dp" />
+            android:layout_height="50dp"
+            android:textAllCaps="false"/>
         <Button
             android:id="@+id/bt_retrofit"
-            android:text="Retrofittest"
+            android:text="okhttp+Retrofit"
             android:layout_width="wrap_content"
-            android:layout_height="50dp" />
+            android:layout_height="50dp"
+            android:textAllCaps="false"/>
         <Button
             android:id="@+id/bt_glide"
             android:text="Glide和Picasso"
             android:layout_width="wrap_content"
-            android:layout_height="50dp" />
+            android:layout_height="50dp"
+            android:textAllCaps="false"/>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

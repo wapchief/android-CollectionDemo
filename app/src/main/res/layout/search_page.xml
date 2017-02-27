@@ -11,7 +11,8 @@
         android:gravity="center"
         android:textColor="@color/white"
         android:background="@color/theme_lanse"
-        android:text="FlowLayout"/>
+        android:text="FlowLayout"
+        android:textAllCaps="false"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

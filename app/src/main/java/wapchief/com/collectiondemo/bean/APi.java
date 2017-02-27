@@ -1,6 +1,8 @@
 package wapchief.com.collectiondemo.bean;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 import wapchief.com.collectiondemo.bean.NewBeans;
@@ -11,6 +13,9 @@ import wapchief.com.collectiondemo.bean.NewBeans;
  */
 public interface APi {
 //    @Headers({"6e1ce94fe231e817fb31daec3b3084d0","Content-Type:application/json"})
-    @GET("mobile/git")
-    Call<NewBeans> getiphone(@Query("phone") String phone, @Query("key") String key);
+    @GET("/mobile/get")
+    Call<NewBeans> getphone(@Query("phone") String phone);
+
+    Call<ResponseBody> listRepos(@Query("tel") String phone);
 }
+

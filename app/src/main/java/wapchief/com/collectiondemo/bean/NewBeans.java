@@ -6,10 +6,21 @@ package wapchief.com.collectiondemo.bean;
  */
 public class NewBeans {
 
+
+    @Override
+    public String toString() {
+        return "NewBeans{" +
+                "resultcode='" + resultcode + '\'' +
+                ", reason='" + reason + '\'' +
+                ", result=" + result +
+                ", error_code=" + error_code +
+                '}';
+    }
+
     /**
      * resultcode : 200
      * reason : Return Successd!
-     * result : {"province":"河南","city":"郑州","areacode":"0371","zip":"450000","company":"移动","card":""}
+     * result : {"province":"广东","city":"中山","areacode":"0760","zip":"528400","company":"移动","card":""}
      * error_code : 0
      */
 
@@ -51,11 +62,23 @@ public class NewBeans {
     }
 
     public static class ResultBean {
+        @Override
+        public String toString() {
+            return "ResultBean{" +
+                    "province='" + province + '\'' +
+                    ", city='" + city + '\'' +
+                    ", areacode='" + areacode + '\'' +
+                    ", zip='" + zip + '\'' +
+                    ", company='" + company + '\'' +
+                    ", card='" + card + '\'' +
+                    '}';
+        }
+
         /**
-         * province : 河南
-         * city : 郑州
-         * areacode : 0371
-         * zip : 450000
+         * province : 广东
+         * city : 中山
+         * areacode : 0760
+         * zip : 528400
          * company : 移动
          * card :
          */
