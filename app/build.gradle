@@ -29,6 +29,7 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     //ok
     compile 'com.squareup.okhttp3:okhttp:3.5.0'
+    compile 'com.zhy:okhttputils:2.6.2'
     //ButterKnife
     compile 'com.jakewharton:butterknife:8.2.1'
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
@@ -38,4 +39,14 @@ dependencies {
     compile 'com.zhy:flowlayout-lib:1.0.3'
     //TabLayout
     compile 'com.android.support:design:23.2.0'
+    compile 'com.squareup.retrofit2:converter-scalars:2.1.0' //ConverterFactory的String依赖包
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0' //RxJavaCallAdapter依赖包
+    compile 'io.reactivex:rxandroid:1.2.1' // RxAndroid依赖包
+    //图片加载框架
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    //Util集合
+    compile 'com.blankj:utilcode:1.3.6'
+    //baseAdapter
+    //baseAdapter
+    compile 'com.zhy:base-rvadapter:3.0.3'
 }

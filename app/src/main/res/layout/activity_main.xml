@@ -39,6 +39,16 @@
             android:text="TagFlowLayout"
             android:layout_width="wrap_content"
             android:layout_height="50dp" />
+        <Button
+            android:id="@+id/bt_retrofit"
+            android:text="Retrofittest"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
+        <Button
+            android:id="@+id/bt_glide"
+            android:text="glide"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
