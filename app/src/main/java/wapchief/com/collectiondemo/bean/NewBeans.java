@@ -1,7 +1,7 @@
 package wapchief.com.collectiondemo.bean;
 
 /**
- * Created by WuBing on 2017/1/6 0006 下午 2:12.
+ * Created by Wu on 2017/1/6 0006 下午 2:12.
  * 描述：
  */
 public class NewBeans {

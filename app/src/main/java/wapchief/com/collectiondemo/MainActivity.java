@@ -22,6 +22,7 @@ import okhttp3.OkHttpClient;
 import wapchief.com.collectiondemo.activity.FlowLayoutActivity;
 import wapchief.com.collectiondemo.activity.GlidePicassoActivity;
 import wapchief.com.collectiondemo.activity.OkhttpRetrofitActivity;
+import wapchief.com.collectiondemo.activity.UpdatePhotoActivity;
 import wapchief.com.collectiondemo.adapter.RecyclerViewAdapter;
 import wapchief.com.collectiondemo.customView.DividItemDecoration;
 import wapchief.com.collectiondemo.utils.UToasts;
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     Button btRetrofit;
     @BindView(R.id.bt_glide)
     Button btGlide;
+    @BindView(R.id.bt_cardview)
+    Button btCardview;
     private List<String> data;
 
     OkHttpClient okHttpClient = new OkHttpClient();
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //     多个监听
-    @OnClick({R.id.et, R.id.bt2, R.id.bt_tfl, R.id.bt_retrofit,R.id.bt_glide})
+    @OnClick({R.id.et, R.id.bt2, R.id.bt_tfl, R.id.bt_retrofit, R.id.bt_glide,R.id.bt_cardview})
     void submix(View view) {
         switch (view.getId()) {
             case R.id.et:
@@ -82,6 +85,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.bt_glide:
                 Intent intent3 = new Intent(MainActivity.this, GlidePicassoActivity.class);
                 startActivity(intent3);
+                break;
+            case R.id.bt_cardview:
+                Intent intent4 = new Intent(MainActivity.this, UpdatePhotoActivity.class);
+                startActivity(intent4);
                 break;
         }
     }
@@ -207,4 +214,5 @@ public class MainActivity extends AppCompatActivity {
             System.exit(0);
         }
     }
+
 }

@@ -3,7 +3,7 @@
     package="wapchief.com.collectiondemo">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,7 +17,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--注册页面-->
         <activity
             android:name=".RecyclerViewActivity"
             android:persistableMode="persistAcrossReboots"
@@ -27,7 +26,11 @@
         <!--网络访问-->
         <activity android:name=".activity.OkhttpRetrofitActivity"/>
         <!--glide图片加载-->
-        <activity android:name=".activity.GlideActivity"/>
+        <activity android:name=".activity.GlidePicassoActivity"/>
+        <!--圆角头像+选择器-->
+        <activity android:name=".activity.UpdatePhotoActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
     </application>
 
 </manifest>

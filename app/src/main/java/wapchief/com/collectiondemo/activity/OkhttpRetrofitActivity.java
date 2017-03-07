@@ -1,8 +1,14 @@
 package wapchief.com.collectiondemo.activity;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -63,6 +69,18 @@ public class OkhttpRetrofitActivity extends AppCompatActivity {
     List<NewBeans.ResultBean> list;
     NewBeans newBeans = new NewBeans();
 
+    /** 没有网络 */
+    public static final int NETWORKTYPE_INVALID = 0;
+    /** wap网络 */
+    public static final int NETWORKTYPE_WAP = 1;
+    /** 2G网络 */
+    public static final int NETWORKTYPE_2G = 2;
+    /** 3G和3G以上网络，或统称为快速网络 */
+    public static final int NETWORKTYPE_3G = 3;
+    /** wifi网络 */
+    public static final int NETWORKTYPE_WIFI = 4;
+    static int mNetWorkType;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,7 +121,7 @@ public class OkhttpRetrofitActivity extends AppCompatActivity {
         Retrofit.Builder builder = new Retrofit.Builder();
 
         // 2.添加主机地址
-        builder.baseUrl(HttpUrl.parse(host_address))
+        builder.baseUrl(HttpUrl.parse(URL))
                 // .client(mOkHttpClient)可以使用指定的OkHttpClient
                 // 3.添加数据转换工厂
                 .addConverterFactory(ScalarsConverterFactory.create())// 处理基本数据类型
@@ -161,7 +179,8 @@ public class OkhttpRetrofitActivity extends AppCompatActivity {
     }
 
     public void okhttpGet() {
-        OkHttpUtils.get()
+        OkHttpUtils
+                .get()
                 .url(URL)
                 .addParams("phone", etHttp.getText().toString())
                 .build()
@@ -173,9 +192,6 @@ public class OkhttpRetrofitActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response, int id) {
-//                        UToasts.showShort(OkhttpRetrofitActivity.this,"响应成功:"+response+"==="+id);
-//                        JSONObject jsonObject=newBeans.getResult();
-//                        tv.setText(response);
                         Gson gson = new Gson();
                         NewBeans newBeans = gson.fromJson(response, NewBeans.class);
                         newBeans.getResult();
@@ -201,7 +217,8 @@ public class OkhttpRetrofitActivity extends AppCompatActivity {
     }
 
     public void okhttpPost() {
-        OkHttpUtils.post()
+        OkHttpUtils
+                .post()
                 .url(URL)
                 .addParams("phone", etHttp.getText().toString())
                 .build()
@@ -246,10 +263,44 @@ public class OkhttpRetrofitActivity extends AppCompatActivity {
                 okhttpPost();
                 break;
             case R.id.bt_reGet:
+                if (getNetWorkType(this)==NETWORKTYPE_WIFI){
+                    UToasts.showShort(this,"当前是wifi");
+                }else {
+                    UToasts.showShort(this,"不是wifi");
+                }
                 break;
             case R.id.bt_rePost:
                 break;
         }
+    }
+    /**
+     * 获取网络状态，wifi,wap,2g,3g.
+     *
+     * @param context 上下文
+     * @return int 网络状态 {@link #NETWORKTYPE_2G},{@link #NETWORKTYPE_3G},          *{@link #NETWORKTYPE_INVALID},{@link #NETWORKTYPE_WAP}* <p>{@link #NETWORKTYPE_WIFI}
+     */
+    public static int getNetWorkType(Context context) {
+        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = manager.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            String type = networkInfo.getTypeName();
+            if (type.equalsIgnoreCase("WIFI")) {
+                mNetWorkType = NETWORKTYPE_WIFI;
+            } else if (type.equalsIgnoreCase("MOBILE")) {
+                String proxyHost = android.net.Proxy.getDefaultHost();
+                mNetWorkType = TextUtils.isEmpty(proxyHost)
+                        ? (isFastMobileNetwork(context) ? NETWORKTYPE_3G : NETWORKTYPE_2G)
+                        : NETWORKTYPE_WAP;
+            }
+        } else {
+            mNetWorkType = NETWORKTYPE_INVALID;
+        }
+        return mNetWorkType;
+    }
+
+    private static boolean isFastMobileNetwork(Context context) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }

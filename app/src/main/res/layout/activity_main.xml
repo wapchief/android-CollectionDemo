@@ -54,6 +54,12 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:textAllCaps="false"/>
+        <Button
+            android:id="@+id/bt_cardview"
+            android:text="CardView上传图片"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:textAllCaps="false"/>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

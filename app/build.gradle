@@ -23,7 +23,6 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
-
     //Retrofit
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
@@ -39,9 +38,12 @@ dependencies {
     compile 'com.zhy:flowlayout-lib:1.0.3'
     //TabLayout
     compile 'com.android.support:design:23.2.0'
-    compile 'com.squareup.retrofit2:converter-scalars:2.1.0' //ConverterFactory的String依赖包
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0' //RxJavaCallAdapter依赖包
-    compile 'io.reactivex:rxandroid:1.2.1' // RxAndroid依赖包
+    compile 'com.squareup.retrofit2:converter-scalars:2.1.0'
+    //ConverterFactory的String依赖包
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    //RxJavaCallAdapter依赖包
+    compile 'io.reactivex:rxandroid:1.2.1'
+    // RxAndroid依赖包
     //图片加载框架
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
@@ -50,4 +52,5 @@ dependencies {
     //baseAdapter
     //baseAdapter
     compile 'com.zhy:base-rvadapter:3.0.3'
+    compile 'com.android.support:cardview-v7:25.1.0'
 }
