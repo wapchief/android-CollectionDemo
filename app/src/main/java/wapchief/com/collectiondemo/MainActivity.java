@@ -2,13 +2,19 @@ package wapchief.com.collectiondemo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -53,8 +59,11 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.bt_cardview)
     Button btCardview;
     private List<String> data;
-
+    @BindView(R.id.side_bar_img)
+    ImageView side_bar_img;
     OkHttpClient okHttpClient = new OkHttpClient();
+    @BindView(R.id.nav_view)
+    NavigationView nav_view;
 
     //     单个监听bt
     @OnClick(R.id.bt)
@@ -63,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //     多个监听
-    @OnClick({R.id.et, R.id.bt2, R.id.bt_tfl, R.id.bt_retrofit, R.id.bt_glide,R.id.bt_cardview})
+    @OnClick({R.id.et, R.id.bt2, R.id.bt_tfl, R.id.bt_retrofit, R.id.bt_glide, R.id.bt_cardview,R.id.side_bar_img})
     void submix(View view) {
         switch (view.getId()) {
             case R.id.et:
@@ -90,7 +99,16 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent4 = new Intent(MainActivity.this, UpdatePhotoActivity.class);
                 startActivity(intent4);
                 break;
+            case R.id.side_bar_img:
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.side_main);
+                if (drawer.isDrawerOpen(GravityCompat.START)){
+                    drawer.closeDrawer(GravityCompat.START);
+                }else {
+                    drawer.openDrawer(GravityCompat.START);
+                }
+                break;
         }
+
     }
 
     private String AppKey = "6e1ce94fe231e817fb31daec3b3084d0";
@@ -112,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.side_bar_main);
         ButterKnife.bind(this);
 //        data();
 //        adapter=new RecyclerViewAdapter(this,data);
@@ -121,58 +139,8 @@ public class MainActivity extends AppCompatActivity {
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         //线性布局的分割线
         recyclerView.addItemDecoration(new DividItemDecoration(this, DividItemDecoration.VERTICAL_LIST));
-//        recyclerView.setLayoutManager(manager);
-        //网格布局
-//        recyclerView.setLayoutManager(new GridLayoutManager(this,4));
-//        recyclerView.setAdapter(adapter);
-//        submit();
-//        bt.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //创建对象
-//                Retrofit retrofit = new Retrofit.Builder()
-//                        .baseUrl(URL)
-//                        .addConverterFactory(GsonConverterFactory.create())
-//                        .build();
-//                APi api = retrofit.create(APi.class);
-//                final Call<NewBeans> call = api.getiphone(et.getText().toString(), AppKey);
-//
-//                new Thread() {
-//
-//                    @Override
-//                    public void run() {
-//                        Response<NewBeans> bodyResponse = null;
-//                        try {
-//                            bodyResponse = call.execute();
-//                        } catch (IOException e) {
-//                            Toast.makeText(MainActivity.this, "加载失败", Toast.LENGTH_SHORT).show();
-//                        }
-//                        final String body = bodyResponse.body().getResult().getCity();
-//                        tv.setText(body);
-//
-//                        super.run();
-//
-//                    }
-//                }.start();
-//                call.enqueue(new Callback<NewBeans>() {
-//                    @Override
-//                    /**
-//                     * 利用从NewBeans中获取信息，
-//                     */
-//                    public void onResponse(Call<NewBeans> call, Response<NewBeans> response) {
-//                        tv.setText(response.body().toString());
-//                    }
-//                    @Override
-//                    /**
-//                     * 联网失败的消息，异常消息存放到Throwable中，
-//                     * 通过.getMessage获取反馈的消息
-//                     */
-//                    public void onFailure(Call<NewBeans> call, Throwable t) {
-//                        tv.setText(t.getMessage());
-//                    }
-//                });
-//            }
-//        });
+        //加载侧滑菜单
+        setNavClick();
 
     }
 
@@ -213,6 +181,37 @@ public class MainActivity extends AppCompatActivity {
             finish();
             System.exit(0);
         }
+    }
+
+    /**
+     * NavigationView侧滑菜单
+     */
+    public void setNavClick() {
+        nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                int id = item.getItemId();
+                if (id == R.id.side_bar1) {
+
+                } else if (id == R.id.side_bar2) {
+
+                } else if (id == R.id.side_bar3) {
+
+                } else if (id == R.id.side_bar4) {
+
+                } else if (id == R.id.side_bar5) {
+
+                } else if (id == R.id.side_bar6) {
+
+                } else if (id == R.id.side_bar7) {
+
+                }
+
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.side_main);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
     }
 
 }
