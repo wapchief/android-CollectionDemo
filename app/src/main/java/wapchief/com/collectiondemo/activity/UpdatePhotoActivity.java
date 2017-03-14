@@ -85,8 +85,8 @@ public class UpdatePhotoActivity extends AppCompatActivity {
         ));
         dialog.getWindow().setWindowAnimations(R.style.Dialog_Anim_Style);
 //        dialog.setCanceledOnTouchOutside(true);
+        //图库
         update_dialog_TK=(TextView)view.findViewById(R.id.update_dialog_TK);
-
         update_dialog_TK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +103,14 @@ public class UpdatePhotoActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+        //相机拍照
+        update_dialog_PZ = (TextView) view.findViewById(R.id.update_dialog_PZ);
+        update_dialog_PZ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
     }
 
     /**

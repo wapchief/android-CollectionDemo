@@ -4,6 +4,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 import wapchief.com.collectiondemo.bean.NewBeans;
 
@@ -12,10 +13,11 @@ import wapchief.com.collectiondemo.bean.NewBeans;
  * 描述：
  */
 public interface APi {
-//    @Headers({"6e1ce94fe231e817fb31daec3b3084d0","Content-Type:application/json"})
-    @GET("/mobile/get")
-    Call<NewBeans> getphone(@Query("phone") String phone);
+//    http://apis.juhe.cn/mobile/get?phone=13429667914&key=6e1ce94fe231e817fb31daec3b3084d0
+    @GET("mobile/get?phone=13429667914&key=6e1ce94fe231e817fb31daec3b3084d0")
+    Call<NewBeans> getPhone(@Query("phone") String phone);
 
-    Call<ResponseBody> listRepos(@Query("tel") String phone);
+    @POST("mobile/get?phone=13429667914&key=6e1ce94fe231e817fb31daec3b3084d0")
+    Call<NewBeans> postPhone(@Query("phone") String phone);
 }
 
