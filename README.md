@@ -25,3 +25,6 @@ __所有页面均使用ButterKnife，绑定View。如过没有接触过建议先
 6、FlowLayout流式布局实现标签、类似热门搜索这种效果
 
 > 使用方法及介绍：http://www.jianshu.com/p/caba209e7c51
+
+
+http://upload-images.jianshu.io/upload_images/2858691-72dd5f64829cd28d.gif?imageMogr2/auto-orient/strip
