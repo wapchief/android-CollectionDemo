@@ -25,7 +25,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 import wapchief.com.collectiondemo.R;
 import wapchief.com.collectiondemo.bean.APi;
 import wapchief.com.collectiondemo.bean.NewBeans;
@@ -51,6 +56,8 @@ public class OkhttpRetrofitActivity extends AppCompatActivity {
     TextView tv;
     @BindView(R.id.bt_network)
     Button btNetwork;
+    @BindView(R.id.bt_RxJava)
+    Button btRxJava;
     private String utl_ok = "http://apis.juhe.cn/mobile/get?phone=";
     private String KEY = "&key=6e1ce94fe231e817fb31daec3b3084d0";
     private String URL;
@@ -86,7 +93,7 @@ public class OkhttpRetrofitActivity extends AppCompatActivity {
         URL = utl_ok + etHttp.getText() + KEY;
     }
 
-    @OnClick({R.id.bt_okGet, R.id.bt_okPost, R.id.bt_reGet, R.id.bt_rePost, R.id.bt_network})
+    @OnClick({R.id.bt_okGet, R.id.bt_okPost, R.id.bt_reGet, R.id.bt_rePost, R.id.bt_network,R.id.bt_RxJava})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_okGet:
@@ -108,8 +115,63 @@ public class OkhttpRetrofitActivity extends AppCompatActivity {
                     UToasts.showShort(this, "不是wifi");
                 }
                 break;
+            case R.id.bt_RxJava:
+                rxjavaGet();
+                break;
         }
     }
+
+    /**
+     * Rxjava之get请求
+     */
+    public void rxjavaGet() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(Url.BASE_JUHE_URL)
+                .build();
+
+        retrofit.create(APi.class)
+                .postRxPhone(etHttp.getText().toString())
+                .subscribeOn(Schedulers.newThread())//开启线程
+                .observeOn(Schedulers.io())//io流
+                .doOnNext(new Action1<NewBeans>() {
+                    @Override
+                    public void call(NewBeans newBeans) {
+
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())//主线程
+                .subscribe(new Subscriber<NewBeans>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        //错误返回
+                    }
+
+                    @Override
+                    public void onNext(NewBeans newBeans) {
+                        if (newBeans.getResultcode().equals("200")) {
+                            tv.setText("RxJava:"
+                                    + "\n"
+                                    + "省：" + newBeans.getResult().getProvince().toString()
+                                    + "\n"
+                                    + "市：" + newBeans.getResult().getCity().toString()
+                                    + "\n"
+                                    + "区号：" + newBeans.getResult().getAreacode()
+                                    + "\n"
+                                    + "运营商：" + newBeans.getResult().getCompany());
+                        } else {
+                            tv.setText("手机号码输入有误，查询失败");
+                        }
+                    }
+                });
+    }
+
     /**
      * retrofit之Get请求
      */

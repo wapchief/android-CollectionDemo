@@ -23,9 +23,12 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
-    //Retrofit
+    //Retrofit+rxjava
+    compile 'io.reactivex:rxjava:x.y.z'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+
     //ok
     compile 'com.squareup.okhttp3:okhttp:3.5.0'
     compile 'com.zhy:okhttputils:2.6.2'
@@ -39,8 +42,6 @@ dependencies {
     //TabLayout
     compile 'com.android.support:design:23.2.0'
     compile 'com.squareup.retrofit2:converter-scalars:2.1.0'
-    //ConverterFactory的String依赖包
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     //RxJavaCallAdapter依赖包
     compile 'io.reactivex:rxandroid:1.2.1'
     // RxAndroid依赖包
