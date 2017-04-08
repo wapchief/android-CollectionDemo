@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -24,6 +25,7 @@ import java.util.TimerTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 import okhttp3.OkHttpClient;
 import wapchief.com.collectiondemo.activity.FlowLayoutActivity;
 import wapchief.com.collectiondemo.activity.GlidePicassoActivity;
@@ -39,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.et)
     EditText et;
-    //    @BindView(R.id.refresh)
-//    MaterialRefreshLayout refresh;
     @BindView(R.id.bt)
     Button bt;
     @BindView(R.id.bt2)
@@ -124,16 +124,11 @@ public class MainActivity extends AppCompatActivity {
     private final int STATE_LOADMORE = 2;
     private int curState = STATE_NORMAL;
 
-
-//    mApi=retrofit
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.side_bar_main);
         ButterKnife.bind(this);
-//        data();
-//        adapter=new RecyclerViewAdapter(this,data);
         //线性布局
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
