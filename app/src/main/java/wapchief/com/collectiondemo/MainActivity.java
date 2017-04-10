@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
     private final int STATE_REFRESH = 1;
     private final int STATE_LOADMORE = 2;
     private int curState = STATE_NORMAL;
-
+    public static boolean isForeground = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,9 +136,33 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividItemDecoration(this, DividItemDecoration.VERTICAL_LIST));
         //加载侧滑菜单
         setNavClick();
+        //注册激光
+        JPushInterface.init(getApplicationContext());
+
+        Log.e("id-------",JPushInterface.getRegistrationID(this));
 
     }
 
+
+    @Override
+    protected void onResume() {
+        isForeground = true;
+        super.onResume();
+    }
+
+
+    @Override
+    protected void onPause() {
+        isForeground = false;
+        super.onPause();
+    }
+
+
+    @Override
+    protected void onDestroy() {
+//        unregisterReceiver(mMessageReceiver);
+        super.onDestroy();
+    }
     /**
      * 单击回退
      *
