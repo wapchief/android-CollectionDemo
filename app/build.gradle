@@ -8,6 +8,7 @@ android {
         applicationId "wapchief.com.collectiondemo"
         minSdkVersion 19
         targetSdkVersion 23
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
 
@@ -28,6 +29,16 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    dexOptions {
+        incremental true
+        javaMaxHeapSize "4g"
     }
 }
 
@@ -69,4 +80,5 @@ dependencies {
     //极光推送
     compile 'cn.jiguang.sdk:jpush:3.0.3'  // 此处以JPush 3.0.3 版本为例。
     compile 'cn.jiguang.sdk:jcore:1.1.1'  // 此处以JCore 1.1.1 版本为例。
+
 }

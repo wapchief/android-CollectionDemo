@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.jpush.im.android.api.JMessageClient;
 
 /**
  * Created by Wu on 2017/4/7 0007 下午 2:45.
@@ -20,6 +21,8 @@ public class BaseApplication extends Application{
         mContext=BaseApplication.this;
         //实例化极光推送
         JPushInterface.init(mContext);
+        //实例化极光IM
+        JMessageClient.init(mContext);
     }
 }
 
