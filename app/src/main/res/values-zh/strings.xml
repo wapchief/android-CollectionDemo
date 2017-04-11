@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, JPush!</string>
-    <string name="app_name">JPush SDK Demo</string>
+    <string name="app_name">CollectionDemo</string>
     <string name="tag_hint">Tag can be number, alphabet, underscore, Chinese. Use , to split many tags.</string>
     <string name="alias_hint">Alias can be number, alphabet, underscore, Chinese.</string>
     <string name="style_hint">style should be number</string>

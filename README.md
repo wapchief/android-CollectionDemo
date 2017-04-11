@@ -26,5 +26,6 @@ __所有页面均使用ButterKnife，绑定View。如过没有接触过建议先
 
 > 使用方法及介绍：http://www.jianshu.com/p/caba209e7c51
 
+7、关于JPush极光推送的基本用法和通知介绍
 
-![](http://upload-images.jianshu.io/upload_images/2858691-72dd5f64829cd28d.gif)
+> 使用方法及介绍：http://www.jianshu.com/p/17daba78454e
