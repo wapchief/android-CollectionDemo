@@ -7,9 +7,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,25 +27,22 @@ import cn.jpush.android.api.JPushInterface;
 import okhttp3.OkHttpClient;
 import wapchief.com.collectiondemo.activity.FlowLayoutActivity;
 import wapchief.com.collectiondemo.activity.GlidePicassoActivity;
+import wapchief.com.collectiondemo.activity.JPushIMActivity;
 import wapchief.com.collectiondemo.activity.OkhttpRetrofitActivity;
 import wapchief.com.collectiondemo.activity.UpdatePhotoActivity;
 import wapchief.com.collectiondemo.adapter.RecyclerViewAdapter;
-import wapchief.com.collectiondemo.customView.DividItemDecoration;
 import wapchief.com.collectiondemo.utils.UToasts;
 
 
 public class MainActivity extends AppCompatActivity {
 
 
-    @BindView(R.id.et)
-    EditText et;
+
     @BindView(R.id.bt)
     Button bt;
     @BindView(R.id.bt2)
     Button bt2;
 
-    @BindView(R.id.recyclerView1)
-    RecyclerView recyclerView;
 
     RecyclerViewAdapter adapter;
     @BindView(R.id.bt_tfl)
@@ -58,12 +53,48 @@ public class MainActivity extends AppCompatActivity {
     Button btGlide;
     @BindView(R.id.bt_cardview)
     Button btCardview;
+    @BindView(R.id.jPush_im)
+    Button jPushIm;
+    @BindView(R.id.side_main)
+    DrawerLayout sideMain;
     private List<String> data;
     @BindView(R.id.side_bar_img)
     ImageView side_bar_img;
     OkHttpClient okHttpClient = new OkHttpClient();
     @BindView(R.id.nav_view)
     NavigationView nav_view;
+
+
+    private String AppKey = "6e1ce94fe231e817fb31daec3b3084d0";
+    private String URL = "http://apis.juhe.cn/";
+    public String mApi = null;
+    private int currentPage = 0;
+    private int totalPages = 0;
+    /**
+     * 记录刷新状态
+     */
+    private final int STATE_NORMAL = 0;
+    private final int STATE_REFRESH = 1;
+    private final int STATE_LOADMORE = 2;
+    private int curState = STATE_NORMAL;
+    public static boolean isForeground = false;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.side_bar_main);
+        ButterKnife.bind(this);
+        //线性布局
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        //加载侧滑菜单
+        setNavClick();
+        //注册激光
+        JPushInterface.init(getApplicationContext());
+
+        Log.e("id-------", JPushInterface.getRegistrationID(this));
+
+    }
 
     //     单个监听bt
     @OnClick(R.id.bt)
@@ -72,12 +103,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //     多个监听
-    @OnClick({R.id.et, R.id.bt2, R.id.bt_tfl, R.id.bt_retrofit, R.id.bt_glide, R.id.bt_cardview,R.id.side_bar_img})
+    @OnClick({
+            R.id.bt2,
+            R.id.bt_tfl,
+            R.id.bt_retrofit,
+            R.id.bt_glide,
+            R.id.bt_cardview,
+            R.id.side_bar_img,
+            R.id.jPush_im})
     void submix(View view) {
         switch (view.getId()) {
-            case R.id.et:
-                UToasts.showShort(this, "输入框被点击了");
-                break;
             case R.id.bt2:
                 UToasts.showShort(this, "tv被点击了");
                 Intent intent = new Intent(MainActivity.this, RecyclerViewActivity.class);
@@ -101,45 +136,17 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.side_bar_img:
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.side_main);
-                if (drawer.isDrawerOpen(GravityCompat.START)){
+                if (drawer.isDrawerOpen(GravityCompat.START)) {
                     drawer.closeDrawer(GravityCompat.START);
-                }else {
+                } else {
                     drawer.openDrawer(GravityCompat.START);
                 }
                 break;
+            case R.id.jPush_im:
+                Intent intent5 = new Intent(MainActivity.this, JPushIMActivity.class);
+                startActivity(intent5);
+                break;
         }
-
-    }
-
-    private String AppKey = "6e1ce94fe231e817fb31daec3b3084d0";
-    private String URL = "http://apis.juhe.cn/";
-    public String mApi = null;
-    private int currentPage = 0;
-    private int totalPages = 0;
-    /**
-     * 记录刷新状态
-     */
-    private final int STATE_NORMAL = 0;
-    private final int STATE_REFRESH = 1;
-    private final int STATE_LOADMORE = 2;
-    private int curState = STATE_NORMAL;
-    public static boolean isForeground = false;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.side_bar_main);
-        ButterKnife.bind(this);
-        //线性布局
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        manager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        //线性布局的分割线
-        recyclerView.addItemDecoration(new DividItemDecoration(this, DividItemDecoration.VERTICAL_LIST));
-        //加载侧滑菜单
-        setNavClick();
-        //注册激光
-        JPushInterface.init(getApplicationContext());
-
-        Log.e("id-------",JPushInterface.getRegistrationID(this));
 
     }
 
@@ -163,6 +170,7 @@ public class MainActivity extends AppCompatActivity {
 //        unregisterReceiver(mMessageReceiver);
         super.onDestroy();
     }
+
     /**
      * 单击回退
      *

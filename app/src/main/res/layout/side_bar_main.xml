@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:id="@+id/side_main"
     android:layout_height="match_parent">
-
+    <!--首页主布局-->
     <include layout="@layout/activity_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

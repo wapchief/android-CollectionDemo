@@ -21,8 +21,8 @@ public class BaseApplication extends Application{
         mContext=BaseApplication.this;
         //实例化极光推送
         JPushInterface.init(mContext);
-        //实例化极光IM
-        JMessageClient.init(mContext);
+        //实例化极光IM,并自动同步聊天记录
+        JMessageClient.init(mContext,true);
     }
 }
 

@@ -67,6 +67,8 @@
         <!--圆角头像+选择器-->
         <activity android:name=".activity.UpdatePhotoActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <!--极光IM-->
+        <activity android:name=".activity.JPushIMActivity"/>
 
         <!--******************************极光推送**********************************-->
 
