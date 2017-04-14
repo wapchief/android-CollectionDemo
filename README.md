@@ -3,8 +3,6 @@ apk下载地址：[点击下载](https://github.com/wapchief/android-CollectionD
 
 ![首页功能列表](https://github.com/wapchief/android-CollectionDemo/blob/master/screenshot/Screenshot_home.png)
 
-![RecyclerView](https://github.com/wapchief/android-CollectionDemo/blob/master/screenshot/JPushMessageLogin.gif)
-
 __所有页面均使用ButterKnife，绑定View。如过没有接触过建议先学习一下，可以看第三篇文章。__
 
 
