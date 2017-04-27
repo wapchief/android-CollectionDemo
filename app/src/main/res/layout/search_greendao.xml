@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:zhy="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/theme_lanse"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:gravity="center_vertical"
+        android:paddingBottom="5dp">
+
+        <Button
+            android:id="@+id/search_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="搜索"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+
+        <android.support.v7.widget.SearchView
+            android:id="@+id/searchview"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:iconifiedByDefault="false"
+            android:queryHint="请输入搜索内容"
+            android:background="@drawable/flowlayout_shap"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+
+        </android.support.v7.widget.SearchView>
+
+    </RelativeLayout>
+
+    <wapchief.com.collectiondemo.customView.MyScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:fillViewport="true"
+        android:focusableInTouchMode="true"
+        android:descendantFocusability="beforeDescendants" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="热门搜索"
+            android:textSize="18sp" />
+
+        <View
+            style="@style/gray_height_1dp"
+            android:layout_marginTop="3dp" />
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/search_greendao_flowlayout"
+            zhy:max_select="-1"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </com.zhy.view.flowlayout.TagFlowLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="搜索历史"
+            android:textSize="18dp" />
+
+        <View
+            style="@style/gray_height_1dp"
+            android:layout_marginTop="3dp" />
+
+
+        <RelativeLayout
+            android:id="@+id/search_greendao_rl"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#00000000"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_centerHorizontal="true"
+                android:text="无搜索记录" />
+        </RelativeLayout>
+
+            <ListView
+                android:id="@+id/search_greendao_lv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:divider="@null"
+                android:dividerHeight="5dp"
+                android:focusable="false" />
+
+            <Button
+                android:id="@+id/search_greendao_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/button_shape"
+                android:text="清空搜索历史"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+    </wapchief.com.collectiondemo.customView.MyScrollView>
+</LinearLayout>

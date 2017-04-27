@@ -11,13 +11,21 @@ import org.greenrobot.greendao.annotation.Id;
 
 @Entity
 public class User {
-
-    @Id
-    private long id;
+    //主键自增
+    @Id(autoincrement = true)
+    private Long id;
     private String name;
 
-    @Generated(hash = 1144922831)
-    public User(long id, String name) {
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
+    @Generated(hash = 873297011)
+    public User(Long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -26,11 +34,11 @@ public class User {
     public User() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

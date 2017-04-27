@@ -12,7 +12,6 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -29,13 +28,13 @@ import wapchief.com.collectiondemo.activity.FlowLayoutActivity;
 import wapchief.com.collectiondemo.activity.GlidePicassoActivity;
 import wapchief.com.collectiondemo.activity.JPushIMActivity;
 import wapchief.com.collectiondemo.activity.OkhttpRetrofitActivity;
+import wapchief.com.collectiondemo.activity.SearchViewGreenDaoActivity;
 import wapchief.com.collectiondemo.activity.UpdatePhotoActivity;
 import wapchief.com.collectiondemo.adapter.RecyclerViewAdapter;
 import wapchief.com.collectiondemo.utils.UToasts;
 
 
 public class MainActivity extends AppCompatActivity {
-
 
 
     @BindView(R.id.bt)
@@ -57,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
     Button jPushIm;
     @BindView(R.id.side_main)
     DrawerLayout sideMain;
+    @BindView(R.id.greendao)
+    Button greendao;
     private List<String> data;
     @BindView(R.id.side_bar_img)
     ImageView side_bar_img;
@@ -110,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
             R.id.bt_glide,
             R.id.bt_cardview,
             R.id.side_bar_img,
-            R.id.jPush_im})
+            R.id.jPush_im,
+            R.id.greendao})
     void submix(View view) {
         switch (view.getId()) {
             case R.id.bt2:
@@ -145,6 +147,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.jPush_im:
                 Intent intent5 = new Intent(MainActivity.this, JPushIMActivity.class);
                 startActivity(intent5);
+                break;
+            case R.id.greendao:
+                Intent intent6 = new Intent(MainActivity.this, SearchViewGreenDaoActivity.class);
+                startActivity(intent6);
                 break;
         }
 

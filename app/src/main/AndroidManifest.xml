@@ -69,6 +69,10 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <!--极光IM-->
         <activity android:name=".activity.JPushIMActivity"/>
+        <!--数据库-->
+        <activity android:name=".activity.SearchViewGreenDaoActivity"
+            android:persistableMode="persistAcrossReboots"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <!--******************************极光推送**********************************-->
 

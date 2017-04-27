@@ -90,6 +90,12 @@
             android:layout_height="50dp"
             android:text="JPush即时通讯"
             android:textAllCaps="false" />
+        <Button
+            android:id="@+id/greendao"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="GreenDao"
+            android:textAllCaps="false" />
     </LinearLayout>
 </ScrollView>
 
