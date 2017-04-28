@@ -2,23 +2,30 @@ package wapchief.com.collectiondemo.activity;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.query.QueryBuilder;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import wapchief.com.collectiondemo.R;
+import wapchief.com.collectiondemo.adapter.SearchViewGreenDaoAdapter;
 import wapchief.com.collectiondemo.bean.User;
 import wapchief.com.collectiondemo.greendao.DaoMaster;
 import wapchief.com.collectiondemo.greendao.DaoSession;
@@ -51,38 +59,53 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
     @BindView(R.id.search_greendao_delete)
     Button searchGreendaoDelete;
     int id = 0;
-    String name = "黄海佳";
-    String[] names={"aaaaa","bbbbbbb","ccccccc","ddddddd","eeeee","fffff"};
+    String name = "";
+    String[] names={"android","HTML","java","PHP","C","C++","NodeJs","Hexo","Github"};
     @BindView(R.id.search_ok)
     Button searchOk;
-    ArrayList<User> list;
+    List<User> list;
     QueryBuilder qb;
     Context mContext;
+    SearchViewGreenDaoAdapter adapter;
+    View viewflowlayout;
+    Context context;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_greendao);
         ButterKnife.bind(this);
         mContext = SearchViewGreenDaoActivity.this;
+        delectUnderline();
         //初始化数据库
         initDbHelp();
         qb = userDao.queryBuilder();
-
-        list = (ArrayList<User>) qb.where(UserDao.Properties.Id.eq(id)).list();
-        List<User> staffs=userDao.queryBuilder().list();
-//        Log.e("all---------", staffs. + "");
-        try {
-//            names = (String[]) staffs.toArray();
-
-            searchGreendaoLv.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names));
-        }catch (Exception e){
-            Log.e("exception-------", e.getMessage());
-        }
-        searchGreendaoLv.setTextFilterEnabled(true);
         initDate();
+        searchGreendaoLv.setTextFilterEnabled(true);
     }
 
     private void initDate() {
+        searchGreendaoFlowlayout.setAdapter(new TagAdapter<String>(names)
+        {
+            @Override
+            public View getView(FlowLayout parent, int position, final String s)
+            {
+                final TextView tv = (TextView) LayoutInflater.from(mContext).inflate(
+                        R.layout.search_page_flowlayout_tv,searchGreendaoFlowlayout,false);
+                tv.setText(s);
+                tv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(mContext,""+s,Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+                return tv;
+            }
+        });
+        //查询所有
+        list = userDao.queryBuilder().list();
+        adapter = new SearchViewGreenDaoAdapter(mContext, list);
+        searchGreendaoLv.setAdapter(adapter);
         //搜索文本监听
         searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -90,19 +113,7 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String query) {
                 name = query;
                 Log.e("name--------", name + "");
-                User entity = new User();
-                entity.setId(null);
-                entity.setName(name);
-//                if (list.size() > 0) {
-//                    Toast.makeText(mContext, "主键重复", Toast.LENGTH_SHORT).show();
-//                } else {
-
-                    userDao.insert(entity);
-                    Toast.makeText(mContext, "插入数据成功:"+query, Toast.LENGTH_SHORT).show();
-
-
-
-//                }
+                insertDB();
                 return false;
             }
 
@@ -110,8 +121,9 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
             //当搜索内容改变
             public boolean onQueryTextChange(String newText) {
                 name = newText;
-                if (newText.equals("")) {
-                    searchGreendaoLv.setFilterText(newText);
+                Log.e("newText---------",newText);
+                if (name.equals("")) {
+                    searchGreendaoLv.setFilterText(name);
                 } else {
 //                    insertDB();
                     searchGreendaoLv.clearTextFilter();
@@ -119,6 +131,16 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
+        try {
+//            names = (String[]) staffs.toArray();
+            List<User> staffs=userDao.queryBuilder().where(UserDao.Properties.Name.like("%name%")).orderAsc(UserDao.Properties.Id).list();
+
+//            searchGreendaoLv.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names));
+        }catch (Exception e){
+            Log.e("exception-------", e.getMessage());
+        }
     }
 
     /*初始化数据库相关*/
@@ -132,14 +154,26 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
 
     //增
     private void insertDB() {
-
+        try {
+            userDao.insert(new User(null, name));
+            Toast.makeText(mContext, "插入数据成功:" + name, Toast.LENGTH_SHORT).show();
+            adapter.notifyDataSetChanged();
+            searchGreendaoRl.setVisibility(View.GONE);
+            searchGreendaoDelete.setVisibility(View.VISIBLE);
+        }catch (Exception e){
+            Toast.makeText(mContext,"插入失败",Toast.LENGTH_SHORT).show();
+        }
 
     }
-    //删
-    private void delectDB(){
+    //清空数据库
+    private void delectAllDB(){
         try {
-            userDao.delete(user);
-
+            userDao.deleteAll();
+            list.clear();
+            adapter.notifyDataSetChanged();
+            searchGreendaoRl.setVisibility(View.VISIBLE);
+            searchGreendaoDelete.setVisibility(View.GONE);
+            Toast.makeText(mContext,"清空数据库",Toast.LENGTH_SHORT).show();
         }catch (Exception e){
             Log.e("exception-----delete", user+"message:"+e.getMessage()+"");
         }
@@ -171,13 +205,33 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
             case R.id.search_greendao_rl:
                 break;
             case R.id.search_greendao_delete:
-                delectDB();
+                delectAllDB();
                 break;
             case R.id.search_ok:
-                searchDB();
+                insertDB();
                 break;
 
         }
+    }
+
+    /**
+     * 去掉searchview下划线
+     */
+    public void delectUnderline(){
+        if (searchGreendaoFlowlayout != null) {
+            try {        //--拿到字节码
+                Class<?> argClass = searchGreendaoFlowlayout.getClass();
+                //--指定某个私有属性,mSearchPlate是搜索框父布局的名字
+                Field ownField = argClass.getDeclaredField("mSearchPlate");
+                //--暴力反射,只有暴力反射才能拿到私有属性
+                ownField.setAccessible(true);
+                View mView = (View) ownField.get(searchGreendaoFlowlayout);
+                //--设置背景
+                mView.setBackgroundColor(Color.TRANSPARENT);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }}
     }
 
     /**
@@ -214,4 +268,6 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
 //        }
 //        return tables;
 //    }
+
+
 }
