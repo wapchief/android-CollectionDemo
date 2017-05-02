@@ -1,7 +1,7 @@
 # 集合了多个开源框架所编译的Demo
 apk下载地址：[点击下载](https://github.com/wapchief/android-CollectionDemo/raw/master/apk/app-debug.apk)
 
-![首页功能列表](http://upload-images.jianshu.io/upload_images/2858691-b796f56b42f200bb.png?imageMogr2/auto-orient/strip%7CimageView2/2)
+![首页功能列表](https://github.com/wapchief/android-CollectionDemo/blob/master/screenshot/Screenshot_home1.png?raw=true)
 
 __所有页面均使用ButterKnife，绑定View。如过没有接触过建议先学习一下，可以看第三篇文章。__
 
