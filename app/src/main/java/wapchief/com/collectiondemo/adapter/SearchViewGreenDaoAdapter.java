@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Adapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -44,12 +45,18 @@ public class SearchViewGreenDaoAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        User tv = (User) getItem(position);
+        final User tv = (User) getItem(position);
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.search_page_flowlayout_tv, null);
             viewHolder = new ViewHolder();
             viewHolder.flowlayout_tv = (TextView) convertView.findViewById(R.id.flowlayout_tv);
+            viewHolder.flowlayout_tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context,tv.getName()+"",Toast.LENGTH_SHORT).show();
+                }
+            });
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
