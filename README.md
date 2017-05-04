@@ -1,6 +1,6 @@
 # 集合了多个开源框架所编译的Demo
 
-apk下载地址 [![Crates.io](https://img.shields.io/crates/d/rustc-serialize.svg)](https://github.com/wapchief/android-CollectionDemo/raw/master/apk/app-debug.apk)
+[![Crates.io](https://img.shields.io/crates/d/rustc-serialize.svg)](https://github.com/wapchief/android-CollectionDemo/raw/master/apk/app-debug.apk)
 
 
 ![首页功能列表](https://github.com/wapchief/android-CollectionDemo/blob/master/screenshot/Screenshot_home1.png?raw=true)
