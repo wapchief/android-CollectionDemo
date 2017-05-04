@@ -123,24 +123,15 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
                 name = newText;
                 Log.e("newText---------", newText);
                 if (name.equals("")) {
-                    searchGreendaoLv.setFilterText(name);
+//                    searchGreendaoLv.setFilterText(name);
                 } else {
 //                    insertDB();
-                    searchGreendaoLv.clearTextFilter();
+//                    searchGreendaoLv.clearTextFilter();
                 }
                 return false;
             }
         });
 
-
-        try {
-//            names = (String[]) staffs.toArray();
-            List<User> staffs = userDao.queryBuilder().where(UserDao.Properties.Name.like("%name%")).orderAsc(UserDao.Properties.Id).list();
-
-//            searchGreendaoLv.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, names));
-        } catch (Exception e) {
-            Log.e("exception-------", e.getMessage());
-        }
     }
 
     /*初始化数据库相关*/
