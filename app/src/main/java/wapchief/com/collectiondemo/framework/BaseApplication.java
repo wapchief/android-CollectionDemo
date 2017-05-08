@@ -18,7 +18,6 @@ import wapchief.com.collectiondemo.greendao.UserDao;
  */
 public class BaseApplication extends Application{
     private Context mContext;
-    private UserDao mUserDao;
     public DaoSession daoSession;
     public SQLiteDatabase db;
     public DaoMaster.DevOpenHelper helper;
@@ -57,12 +56,5 @@ public class BaseApplication extends Application{
 
     }
 
-    public DaoSession getDaoSession() {
-        return daoSession;
-    }
-
-    public SQLiteDatabase getDb() {
-        return db;
-    }
 }
 
