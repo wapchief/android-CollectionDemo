@@ -1,4 +1,4 @@
-package wapchief.com.collectiondemo.bean;
+package wapchief.com.collectiondemo.greendao.model;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;

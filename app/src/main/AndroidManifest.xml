@@ -73,6 +73,10 @@
         <activity android:name=".activity.SearchViewGreenDaoActivity"
             android:persistableMode="persistAcrossReboots"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!--数据库-->
+        <activity android:name=".activity.MessageActivity"
+            android:persistableMode="persistAcrossReboots"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <!--******************************极光推送**********************************-->
 

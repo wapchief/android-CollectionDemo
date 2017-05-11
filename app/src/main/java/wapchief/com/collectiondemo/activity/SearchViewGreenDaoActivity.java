@@ -10,8 +10,6 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -22,11 +20,9 @@ import com.zhy.view.flowlayout.FlowLayout;
 import com.zhy.view.flowlayout.TagAdapter;
 import com.zhy.view.flowlayout.TagFlowLayout;
 
-import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,7 +31,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import wapchief.com.collectiondemo.R;
 import wapchief.com.collectiondemo.adapter.SearchViewGreenDaoAdapter;
-import wapchief.com.collectiondemo.bean.User;
+import wapchief.com.collectiondemo.greendao.model.User;
 import wapchief.com.collectiondemo.greendao.DaoMaster;
 import wapchief.com.collectiondemo.greendao.DaoSession;
 import wapchief.com.collectiondemo.greendao.UserDao;
@@ -85,6 +81,15 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
         searchGreendaoLv.setTextFilterEnabled(true);
     }
 
+    /*初始化数据库相关*/
+    private void initDbHelp() {
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "recluse-db", null);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        DaoMaster daoMaster = new DaoMaster(db);
+        DaoSession daoSession = daoMaster.newSession();
+        userDao = daoSession.getUserDao();
+    }
+
     private void initDate() {
         //搜索历史列表
         updateList();
@@ -95,7 +100,7 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
                 final TextView tv = (TextView) LayoutInflater.from(mContext).inflate(
                         R.layout.search_page_flowlayout_tv, searchGreendaoFlowlayout, false);
                 tv.setText(s);
-                tv.setOnClickListener(new View.OnClickListener() {
+                tv.setOnClickListener( new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(mContext, "" + s, Toast.LENGTH_SHORT).show();
@@ -134,14 +139,6 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
 
     }
 
-    /*初始化数据库相关*/
-    private void initDbHelp() {
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "recluse-db", null);
-        SQLiteDatabase db = helper.getWritableDatabase();
-        DaoMaster daoMaster = new DaoMaster(db);
-        DaoSession daoSession = daoMaster.newSession();
-        userDao = daoSession.getUserDao();
-    }
 
     /**
      * 初始化adapter，更新list，重新加载列表

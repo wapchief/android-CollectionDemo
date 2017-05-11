@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,8 +11,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import wapchief.com.collectiondemo.R;
-import wapchief.com.collectiondemo.bean.FlowLayoutBean;
-import wapchief.com.collectiondemo.bean.User;
+import wapchief.com.collectiondemo.greendao.model.User;
 
 /**
  * Created by Wu on 2017/4/28 0028 上午 9:40.

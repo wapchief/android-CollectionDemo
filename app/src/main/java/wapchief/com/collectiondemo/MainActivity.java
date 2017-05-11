@@ -27,6 +27,7 @@ import okhttp3.OkHttpClient;
 import wapchief.com.collectiondemo.activity.FlowLayoutActivity;
 import wapchief.com.collectiondemo.activity.GlidePicassoActivity;
 import wapchief.com.collectiondemo.activity.JPushIMActivity;
+import wapchief.com.collectiondemo.activity.MessageActivity;
 import wapchief.com.collectiondemo.activity.OkhttpRetrofitActivity;
 import wapchief.com.collectiondemo.activity.SearchViewGreenDaoActivity;
 import wapchief.com.collectiondemo.activity.UpdatePhotoActivity;
@@ -58,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
     DrawerLayout sideMain;
     @BindView(R.id.greendao)
     Button greendao;
+    @BindView(R.id.message_img)
+    ImageView messageImg;
     private List<String> data;
     @BindView(R.id.side_bar_img)
     ImageView side_bar_img;
@@ -112,7 +115,8 @@ public class MainActivity extends AppCompatActivity {
             R.id.bt_cardview,
             R.id.side_bar_img,
             R.id.jPush_im,
-            R.id.greendao})
+            R.id.greendao,
+            R.id.message_img})
     void submix(View view) {
         switch (view.getId()) {
             case R.id.bt2:
@@ -151,6 +155,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.greendao:
                 Intent intent6 = new Intent(MainActivity.this, SearchViewGreenDaoActivity.class);
                 startActivity(intent6);
+                break;
+            case R.id.message_img:
+                Intent intent7 = new Intent(MainActivity.this, MessageActivity.class);
+                startActivity(intent7);
                 break;
         }
 

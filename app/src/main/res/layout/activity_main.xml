@@ -27,8 +27,18 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="首页"
+            android:textColor="@color/white"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:id="@+id/message_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_message"
+            android:layout_marginRight="15dp"
+            android:layout_alignTop="@+id/side_bar_img"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
 <ScrollView
