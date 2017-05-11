@@ -1,9 +1,11 @@
 # 集合了多个开源框架所编译的Demo
 
-[![Crates.io](https://img.shields.io/crates/d/rustc-serialize.svg)](https://github.com/wapchief/android-CollectionDemo/raw/master/apk/app-debug.apk)
+[![Crates.io](https://img.shields.io/badge/downloads-APK-blue.svg)](https://github.com/wapchief/android-CollectionDemo/raw/master/apk/app-debug.apk)
 
 
-![首页功能列表](https://github.com/wapchief/android-CollectionDemo/blob/master/screenshot/Screenshot_home1.png?raw=true)
+更新日志：
+[![](https://img.shields.io/badge/Project-%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-blue.svg)](https://github.com/wapchief/android-CollectionDemo/blob/master/MarkDown/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97.md)
+
 
 __所有页面均使用ButterKnife，绑定View。如过没有接触过建议先学习一下，可以看第三篇文章。__
 
@@ -38,4 +40,4 @@ __所有页面均使用ButterKnife，绑定View。如过没有接触过建议先
 
 8、GreenDao+SearchView+FlowLoyout实现搜索历史和热门搜索
 
-> http://www.jianshu.com/p/4593f963d0fe
+> 使用方法及介绍：http://www.jianshu.com/p/4593f963d0fe
