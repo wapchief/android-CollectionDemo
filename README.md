@@ -1,9 +1,12 @@
 # 集合了多个开源框架所编译的Demo
 
+下载APK：
+
 [![Crates.io](https://img.shields.io/badge/downloads-APK-blue.svg)](https://github.com/wapchief/android-CollectionDemo/raw/master/apk/app-debug.apk)
 
 
 更新日志：
+
 [![](https://img.shields.io/badge/Project-%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-blue.svg)](https://github.com/wapchief/android-CollectionDemo/blob/master/MarkDown/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97.md)
 
 
