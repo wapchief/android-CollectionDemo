@@ -32,6 +32,7 @@ import wapchief.com.collectiondemo.activity.OkhttpRetrofitActivity;
 import wapchief.com.collectiondemo.activity.SearchViewGreenDaoActivity;
 import wapchief.com.collectiondemo.activity.UpdatePhotoActivity;
 import wapchief.com.collectiondemo.adapter.RecyclerViewAdapter;
+import wapchief.com.collectiondemo.framework.system.SystemStatusManager;
 import wapchief.com.collectiondemo.utils.UToasts;
 
 
@@ -42,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
     Button bt;
     @BindView(R.id.bt2)
     Button bt2;
-
-
     RecyclerViewAdapter adapter;
     @BindView(R.id.bt_tfl)
     Button btTfl;
@@ -88,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.side_bar_main);
         ButterKnife.bind(this);
+        new SystemStatusManager(this).setTranslucentStatus(R.color.colorPrimary);
         //线性布局
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);

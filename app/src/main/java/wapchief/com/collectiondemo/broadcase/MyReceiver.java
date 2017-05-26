@@ -35,7 +35,6 @@ import wapchief.com.collectiondemo.greendao.model.Message;
  */
 public class MyReceiver extends BroadcastReceiver{
     private static final String TAG = "JPush";
-    JPushMessageBean.MContentBean mContentBean;
     MessageDao messageDao;
     @Override
     public void onReceive(Context context, Intent intent) {
