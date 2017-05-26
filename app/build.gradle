@@ -89,6 +89,9 @@ dependencies {
     //极光推送
     compile 'cn.jiguang.sdk:jpush:3.0.3'  // 此处以JPush 3.0.3 版本为例。
     compile 'cn.jiguang.sdk:jcore:1.1.1'  // 此处以JCore 1.1.1 版本为例。
+    //数据库
     compile 'org.greenrobot:greendao:3.2.0'
+    //轮播图
+    compile 'com.jude:rollviewpager:1.4.6'
 }
 
