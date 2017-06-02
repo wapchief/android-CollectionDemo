@@ -21,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import wapchief.com.collectiondemo.adapter.RecyclerViewAdapter;
 import wapchief.com.collectiondemo.customView.DividItemDecoration;
+import wapchief.com.collectiondemo.framework.system.SystemStatusManager;
 import wapchief.com.collectiondemo.utils.UToasts;
 
 /**
@@ -57,6 +58,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recycler_view);
+        new SystemStatusManager(this).setTranslucentStatus(R.color.colorPrimary);
+
         ButterKnife.bind(this);
         initview();
         initData();

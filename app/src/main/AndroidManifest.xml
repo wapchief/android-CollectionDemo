@@ -63,7 +63,8 @@
         <!--网络访问-->
         <activity android:name=".activity.OkhttpRetrofitActivity"/>
         <!--glide图片加载-->
-        <activity android:name=".activity.GlidePicassoActivity"/>
+        <activity android:name=".activity.GlidePicassoActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <!--圆角头像+选择器-->
         <activity android:name=".activity.UpdatePhotoActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>

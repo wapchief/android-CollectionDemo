@@ -31,6 +31,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import wapchief.com.collectiondemo.R;
 import wapchief.com.collectiondemo.adapter.SearchViewGreenDaoAdapter;
+import wapchief.com.collectiondemo.framework.system.SystemStatusManager;
+import wapchief.com.collectiondemo.framework.system.X_SystemBarUI;
 import wapchief.com.collectiondemo.greendao.model.User;
 import wapchief.com.collectiondemo.greendao.DaoMaster;
 import wapchief.com.collectiondemo.greendao.DaoSession;
@@ -72,6 +74,7 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_greendao);
         ButterKnife.bind(this);
+        X_SystemBarUI.initSystemBar(this,R.color.colorPrimary);
         mContext = SearchViewGreenDaoActivity.this;
         delectUnderline();
         //初始化数据库
@@ -171,6 +174,7 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
                         .where(UserDao.Properties.Name.eq(name)).build().list();
                 userDao.deleteInTx(list2);
                 //添加
+                if (!name.equals(""))
                 userDao.insert(new User(null, name));
                 Toast.makeText(mContext, "插入数据成功:" + name, Toast.LENGTH_SHORT).show();
             } else {
@@ -181,6 +185,7 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
                         .where(UserDao.Properties.Name.eq(name)).build().list();
                 userDao.deleteInTx(list3);
                 //添加
+                if (!name.equals(""))
                 userDao.insert(new User(null, name));
             }
             updateList();
