@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
+
+import com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +51,10 @@ public class RecyclerViewActivity extends AppCompatActivity {
     RelativeLayout viewRelat;
     @BindView(R.id.back_top)
     ImageView backTop;
+    @BindView(R.id.recyclerView_header)
+    RecyclerViewHeader recyclerViewHeader;
+    @BindView(R.id.vf)
+    ViewFlipper vf;
     private List data = new ArrayList<>();
     Handler handler = new Handler();
     TextView tv_item;
@@ -63,6 +70,17 @@ public class RecyclerViewActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initview();
         initData();
+        initHeader();
+    }
+
+    /*添加header*/
+    private void initHeader() {
+        vf.startFlipping();
+        View view = View.inflate(this, R.layout.item_viewflipper, null);
+        TextView tv = (TextView) view.findViewById(R.id.item_viewfip_tv);
+        tv.setText("新鲜水果限时开抢新鲜水果限时开抢新鲜水果限时开抢新鲜水果限时开抢新鲜水果限时开抢新鲜水果限时开抢！");
+        vf.addView(view);
+        recyclerViewHeader.attachTo(recyclerView);
     }
 
     private void initview() {
@@ -231,9 +249,9 @@ public class RecyclerViewActivity extends AppCompatActivity {
             tvTitle.setVisibility(View.GONE);
         }
         //弹出top返回顶部按钮
-        if (getScollYDistance()>=400){
+        if (getScollYDistance() >= 400) {
             backTop.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             backTop.setVisibility(View.GONE);
         }
 
@@ -253,4 +271,20 @@ public class RecyclerViewActivity extends AppCompatActivity {
         //第一个可见的item*item高度-最顶端位置
         return (position) * itemHeight - firstVisiableChildViewTop;
     }
+
+
+    /**
+     * 设置循环滚动的View数组
+     *
+     * @param views
+     */
+    public void setViews(List<View> views) {
+        if (views == null || views.size() == 0) return;
+        vf.removeAllViews();
+        for (int i = 0; i < views.size(); i++) {
+            vf.addView(views.get(i));
+        }
+        vf.startFlipping();
+    }
+
 }

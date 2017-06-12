@@ -1,45 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/white"
     android:fitsSystemWindows="true"
-    android:layout_height="match_parent">
-<TextView
-    android:id="@+id/tv_title"
-    android:layout_width="match_parent"
-    android:layout_height="48dp"
-    android:gravity="center"
-    android:textColor="@color/white"
-    android:background="@color/theme_lanse"
-    android:text="RecyclerView+SwipeRefreshLayout"
-    android:textAllCaps="false"/>
- <RelativeLayout
-     android:id="@+id/view_relat"
-     android:layout_width="match_parent"
-     android:layout_height="match_parent">
-<android.support.v4.widget.SwipeRefreshLayout
-    android:id="@+id/swipeRefreshLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<android.support.v7.widget.RecyclerView
-    android:id="@+id/recyclerView"
-    android:dividerHeight="2dp"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
-</android.support.v4.widget.SwipeRefreshLayout>
-  <RelativeLayout
-      android:layout_width="80dp"
-      android:layout_height="80dp"
-      android:layout_alignParentBottom="true"
-      android:layout_alignParentEnd="true">
-    <ImageView
-        android:id="@+id/back_top"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/back_top_icon"
-        android:visibility="gone"/>
-  </RelativeLayout>
- </RelativeLayout>
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/theme_lanse"
+        android:gravity="center"
+        android:text="RecyclerView+SwipeRefreshLayout"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+    <RelativeLayout
+        android:id="@+id/view_relat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:dividerHeight="2dp" />
+
+                <com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader
+                    android:id="@+id/recyclerView_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="68dp"
+                            android:background="#FFF6F6F6"
+                            android:orientation="horizontal"
+                            android:paddingBottom="6dp"
+                            android:paddingTop="10dp"
+                            android:visibility="visible">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:background="@color/white"
+                                android:paddingBottom="10dp"
+                                android:paddingLeft="6dp"
+                                android:paddingTop="10dp"
+                                android:src="@drawable/icon_viewfip_left" />
+
+                            <ViewFlipper
+                                android:id="@+id/vf"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:autoStart="true"
+                                android:background="#ffffff"
+                                android:flipInterval="3000"
+                                android:inAnimation="@anim/anim_marquee_in"
+                                android:outAnimation="@anim/anim_marquee_out" />
+                        </LinearLayout>
+                    </RelativeLayout>
+                </com.bartoszlipinski.recyclerviewheader2.RecyclerViewHeader>
+
+            </RelativeLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <RelativeLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true">
+
+            <ImageView
+                android:id="@+id/back_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/back_top_icon"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </RelativeLayout>
 </LinearLayout>

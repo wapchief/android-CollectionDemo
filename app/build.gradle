@@ -69,6 +69,8 @@ dependencies {
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
     //RecyclerView
     compile 'com.android.support:recyclerview-v7:23.1.0'
+    //RecyclerViewHeader
+    compile 'com.bartoszlipinski:recyclerviewheader2:2.0.1'
     //FlowLayout
     compile 'com.zhy:flowlayout-lib:1.0.3'
     //TabLayout
