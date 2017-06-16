@@ -79,7 +79,10 @@
         <activity android:name=".activity.MessageActivity"
             android:persistableMode="persistAcrossReboots"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
+        <!--推送弹窗-->
+        <activity android:name=".activity.JPushDialogActivity"
+            android:persistableMode="persistAcrossReboots"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <!--******************************极光推送**********************************-->
 
         <!-- Required SDK 核心功能-->

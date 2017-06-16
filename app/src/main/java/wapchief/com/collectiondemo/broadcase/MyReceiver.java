@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 
 import cn.jpush.android.api.JPushInterface;
 import wapchief.com.collectiondemo.MainActivity;
+import wapchief.com.collectiondemo.activity.JPushDialogActivity;
 import wapchief.com.collectiondemo.activity.MessageActivity;
 import wapchief.com.collectiondemo.bean.JPushMessageBean;
 import wapchief.com.collectiondemo.bean.JPushModel;
@@ -33,9 +34,10 @@ import wapchief.com.collectiondemo.greendao.model.Message;
  * Created by Wu on 2017/4/7 0007 下午 2:40.
  * 描述：极光推送广播器
  */
-public class MyReceiver extends BroadcastReceiver{
+public class MyReceiver extends BroadcastReceiver {
     private static final String TAG = "JPush";
     MessageDao messageDao;
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
@@ -54,16 +56,21 @@ public class MyReceiver extends BroadcastReceiver{
 //            processCustomMessage(context, bundle);
 
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
-            Log.d(TAG, "[MyReceiver] 接收到推送下来的通知:"+bundle.getString(JPushInterface.EXTRA_ALERT));
+            Log.d(TAG, "[MyReceiver] 接收到推送下来的通知:" + bundle.getString(JPushInterface.EXTRA_ALERT));
             String content = bundle.getString(JPushInterface.EXTRA_ALERT);
 //            mContentBean.setN_content(bundle.getString(JPushInterface.EXTRA_ALERT));
 //            Log.e("mContentBean-Content",mContentBean.getN_content());
             int notifactionId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
-            SimpleDateFormat formatter   =   new   SimpleDateFormat   ("yyyy年MM月dd日   HH:mm:ss");
-            Date curDate =  new Date(System.currentTimeMillis());
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日   HH:mm:ss");
+            Date curDate = new Date(System.currentTimeMillis());
             //获取当前时间
-            String   str   =   formatter.format(curDate);
+            String str = formatter.format(curDate);
+            //自动保存至数据库
             messageDao.insert(new Message(null, str, content));
+            //打开数据库弹窗，手动选择是否保存
+            Intent intent1 = new Intent(context, JPushDialogActivity.class);
+            intent1.putExtra("MESSAGE", content);
+            context.startActivity(intent1);
 
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
 
@@ -74,16 +81,16 @@ public class MyReceiver extends BroadcastReceiver{
             Intent i = new Intent(context, MessageActivity.class);
             i.putExtras(bundle);
             //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             context.startActivity(i);
 
         } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
             Log.d(TAG, "[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
             //在这里根据 JPushInterface.EXTRA_EXTRA 的内容处理代码，比如打开新的Activity， 打开一个网页等..
 
-        } else if(JPushInterface.ACTION_CONNECTION_CHANGE.equals(intent.getAction())) {
+        } else if (JPushInterface.ACTION_CONNECTION_CHANGE.equals(intent.getAction())) {
             boolean connected = intent.getBooleanExtra(JPushInterface.EXTRA_CONNECTION_CHANGE, false);
-            Log.w(TAG, "[MyReceiver]" + intent.getAction() +" connected state change to "+connected);
+            Log.w(TAG, "[MyReceiver]" + intent.getAction() + " connected state change to " + connected);
         } else {
             Log.d(TAG, "[MyReceiver] Unhandled intent - " + intent.getAction());
         }
@@ -104,7 +111,7 @@ public class MyReceiver extends BroadcastReceiver{
         for (String key : bundle.keySet()) {
             if (key.equals(JPushInterface.EXTRA_NOTIFICATION_ID)) {
                 sb.append("\nkey:" + key + ", value:" + bundle.getInt(key));
-            }else if(key.equals(JPushInterface.EXTRA_CONNECTION_CHANGE)){
+            } else if (key.equals(JPushInterface.EXTRA_CONNECTION_CHANGE)) {
                 sb.append("\nkey:" + key + ", value:" + bundle.getBoolean(key));
             } else if (key.equals(JPushInterface.EXTRA_EXTRA)) {
                 if (TextUtils.isEmpty(bundle.getString(JPushInterface.EXTRA_EXTRA))) {
@@ -114,12 +121,12 @@ public class MyReceiver extends BroadcastReceiver{
 
                 try {
                     JSONObject json = new JSONObject(bundle.getString(JPushInterface.EXTRA_EXTRA));
-                    Iterator<String> it =  json.keys();
+                    Iterator<String> it = json.keys();
 
                     while (it.hasNext()) {
                         String myKey = it.next().toString();
                         sb.append("\nkey:" + key + ", value: [" +
-                                myKey + " - " +json.optString(myKey) + "]");
+                                myKey + " - " + json.optString(myKey) + "]");
                     }
                 } catch (JSONException e) {
                     Log.e(TAG, "Get message extra JSON error!");
