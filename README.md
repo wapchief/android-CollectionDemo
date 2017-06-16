@@ -9,6 +9,9 @@
 
 [![](https://img.shields.io/badge/Project-%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97-blue.svg)](https://github.com/wapchief/android-CollectionDemo/blob/master/MarkDown/%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97.md)
 
+联系方式：[![alt text](http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png)](http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=zLutvK_kpamqjL294q_joQ)
+
+或者可以通过简书私信我
 
 __所有页面均使用ButterKnife，绑定View。如过没有接触过建议先学习一下，可以看第三篇文章。__
 
