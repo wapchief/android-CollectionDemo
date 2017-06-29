@@ -1,5 +1,6 @@
 # 集合了多个开源框架所编译的Demo
 
+
 下载APK：
 
 [![Crates.io](https://img.shields.io/badge/downloads-APK-blue.svg)](https://github.com/wapchief/android-CollectionDemo/raw/master/apk/app-debug.apk)
@@ -12,6 +13,10 @@
 联系方式：[![alt text](http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_02.png)](http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=zLutvK_kpamqjL294q_joQ)
 
 或者可以通过简书私信我
+
+
+![](https://github.com/wapchief/android-CollectionDemo/blob/master/screenshot/layout-2017-06-29-134424.png?raw=true)
+
 
 __所有页面均使用ButterKnife，绑定View。如过没有接触过建议先学习一下，可以看第三篇文章。__
 
