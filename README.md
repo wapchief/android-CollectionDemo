@@ -18,7 +18,7 @@
 ![](https://github.com/wapchief/android-CollectionDemo/blob/master/screenshot/layout-2017-06-29-134424.png?raw=true)
 
 
-__所有页面均使用ButterKnife，绑定View。如过没有接触过建议先学习一下，可以看第三篇文章。__
+__所有页面均使用ButterKnife绑定View。相关教程发表在简书。__
 
 
 1、使用SwipeRefreshLayout实现下拉刷新，上拉加载数据.内部嵌套RecyclerView替换ListView实现
