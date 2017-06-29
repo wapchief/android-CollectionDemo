@@ -83,6 +83,11 @@
         <activity android:name=".activity.JPushDialogActivity"
             android:persistableMode="persistAcrossReboots"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!--仿美团-->
+        <activity android:name=".activity.SlidingUpMeiTuanActivity"
+            android:persistableMode="persistAcrossReboots"/>
+
+
         <!--******************************极光推送**********************************-->
 
         <!-- Required SDK 核心功能-->

@@ -95,5 +95,7 @@ dependencies {
     compile 'org.greenrobot:greendao:3.2.0'
     //轮播图
     compile 'com.jude:rollviewpager:1.4.6'
+    //仿美团折叠
+    compile 'com.sothree.slidinguppanel:library:3.3.1'
 }
 

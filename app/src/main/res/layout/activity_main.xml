@@ -64,28 +64,28 @@
             android:id="@+id/bt2"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="RecyclerView+swipeRefrashlayout"
+            android:text="RecyclerView+swipeRefrashlayout+Header"
             android:textAllCaps="false" />
 
         <Button
             android:id="@+id/bt_tfl"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="TagFlowLayout"
+            android:text="TagFlowLayout热门搜索"
             android:textAllCaps="false" />
 
         <Button
             android:id="@+id/bt_retrofit"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="okhttp+Retrofit"
+            android:text="okhttp+Retrofit+RxJava查询手机号码归属地"
             android:textAllCaps="false" />
 
         <Button
             android:id="@+id/bt_glide"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="Glide和Picasso"
+            android:text="Glide+Picasso请求加载网络图片"
             android:textAllCaps="false" />
 
         <Button
@@ -99,13 +99,19 @@
             android:id="@+id/jPush_im"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="JPush即时通讯"
+            android:text="JPush（极光）即时通讯"
             android:textAllCaps="false" />
         <Button
             android:id="@+id/greendao"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:text="GreenDao"
+            android:text="GreenDao+Flow仿热门搜索，本地缓存"
+            android:textAllCaps="false" />
+        <Button
+            android:id="@+id/sliding"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="SlidingUpPanel仿美团配送"
             android:textAllCaps="false" />
     </LinearLayout>
 </ScrollView>

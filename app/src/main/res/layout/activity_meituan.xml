@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/sliding"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00000000"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        sothree:umanoOverlay="true"
+        sothree:umanoPanelHeight="128dp"
+        sothree:umanoShadowHeight="0dp">
+
+        <!-- MAIN CONTENT -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="?attr/actionBarSize"
+                android:clickable="true"
+                android:focusable="false"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:text="这是地图"
+                android:textSize="16sp" />
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#50000000"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="这是订单详情"
+                    android:background="@color/white"
+                    android:gravity="center"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray" />
+
+
+                <ScrollView
+                    android:id="@+id/nestedScroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:text="@string/app_name" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:text="@string/app_name" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:text="@string/app_name" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:text="@string/app_name" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:text="@string/app_name" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:text="@string/app_name" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:text="@string/app_name" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:text="@string/app_name" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:text="@string/app_name" />
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+
+</RelativeLayout>

@@ -30,6 +30,7 @@ import wapchief.com.collectiondemo.activity.JPushIMActivity;
 import wapchief.com.collectiondemo.activity.MessageActivity;
 import wapchief.com.collectiondemo.activity.OkhttpRetrofitActivity;
 import wapchief.com.collectiondemo.activity.SearchViewGreenDaoActivity;
+import wapchief.com.collectiondemo.activity.SlidingUpMeiTuanActivity;
 import wapchief.com.collectiondemo.activity.UpdatePhotoActivity;
 import wapchief.com.collectiondemo.adapter.RecyclerViewAdapter;
 import wapchief.com.collectiondemo.framework.system.SystemStatusManager;
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
     Button greendao;
     @BindView(R.id.message_img)
     ImageView messageImg;
+    @BindView(R.id.sliding)
+    Button sliding;
     private List<String> data;
     @BindView(R.id.side_bar_img)
     ImageView side_bar_img;
@@ -116,7 +119,8 @@ public class MainActivity extends AppCompatActivity {
             R.id.side_bar_img,
             R.id.jPush_im,
             R.id.greendao,
-            R.id.message_img})
+            R.id.message_img,
+            R.id.sliding})
     void submix(View view) {
         switch (view.getId()) {
             case R.id.bt2:
@@ -159,6 +163,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.message_img:
                 Intent intent7 = new Intent(MainActivity.this, MessageActivity.class);
                 startActivity(intent7);
+                break;
+            case R.id.sliding:
+                Intent intent8 = new Intent(MainActivity.this, SlidingUpMeiTuanActivity.class);
+                startActivity(intent8);
                 break;
         }
 

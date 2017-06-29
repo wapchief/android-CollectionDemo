@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:paddingRight="14dp"
+    android:id="@+id/title"
+    android:background="#ffffff">
+
+    <ImageView
+        android:paddingTop="12dp"
+        android:paddingBottom="8dp"
+        android:id="@+id/title_bar_back"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:src="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/title_bar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="英雄联盟"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:textColor="#00000000"
+        android:visibility="visible"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/title_bar_content"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="选项"
+        android:gravity="center"
+        android:textSize="15sp"
+        android:textColor="#525F66"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>
