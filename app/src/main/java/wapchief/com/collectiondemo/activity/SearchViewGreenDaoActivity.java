@@ -31,6 +31,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import wapchief.com.collectiondemo.R;
 import wapchief.com.collectiondemo.adapter.SearchViewGreenDaoAdapter;
+import wapchief.com.collectiondemo.framework.BaseApplication;
+import wapchief.com.collectiondemo.framework.GreenDaoHelper;
 import wapchief.com.collectiondemo.framework.system.SystemStatusManager;
 import wapchief.com.collectiondemo.framework.system.X_SystemBarUI;
 import wapchief.com.collectiondemo.greendao.model.User;
@@ -68,7 +70,7 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
     SearchViewGreenDaoAdapter adapter;
     View viewflowlayout;
     Context context;
-
+    GreenDaoHelper helper;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,18 +81,15 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
         delectUnderline();
         //初始化数据库
         initDbHelp();
-        qb = userDao.queryBuilder();
+
         initDate();
         searchGreendaoLv.setTextFilterEnabled(true);
     }
 
-    /*初始化数据库相关*/
+//    /*初始化数据库相关*/
     private void initDbHelp() {
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "recluse-db", null);
-        SQLiteDatabase db = helper.getWritableDatabase();
-        DaoMaster daoMaster = new DaoMaster(db);
-        DaoSession daoSession = daoMaster.newSession();
-        userDao = daoSession.getUserDao();
+        helper = new GreenDaoHelper(this);
+        userDao = helper.initDao().getUserDao();
     }
 
     private void initDate() {

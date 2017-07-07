@@ -93,6 +93,8 @@ dependencies {
     compile 'cn.jiguang.sdk:jcore:1.1.1'  // 此处以JCore 1.1.1 版本为例。
     //数据库
     compile 'org.greenrobot:greendao:3.2.0'
+    //数据库升级辅助类
+    compile 'com.github.yuweiguocn:GreenDaoUpgradeHelper:v1.4.0'
     //轮播图
     compile 'com.jude:rollviewpager:1.4.6'
     //仿美团折叠
