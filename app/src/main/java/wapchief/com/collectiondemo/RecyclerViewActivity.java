@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
 import wapchief.com.collectiondemo.adapter.RecyclerViewAdapter;
 import wapchief.com.collectiondemo.customView.DividItemDecoration;
 import wapchief.com.collectiondemo.framework.system.SystemStatusManager;
-import wapchief.com.collectiondemo.utils.UToasts;
+import wapchief.com.collectiondemo.utils.ToastsUtils;
 
 /**
  * Created by WuBing on 2017/1/10 0010 上午 9:22.
@@ -171,7 +171,7 @@ public class RecyclerViewActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Log.d("测试--------------test", "点击了item = " + position);
-                UToasts.showShort(RecyclerViewActivity.this, "点击了item:" + position);
+                ToastsUtils.showShort(RecyclerViewActivity.this, "点击了item:" + position);
             }
 
             @Override

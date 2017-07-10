@@ -34,7 +34,7 @@ import wapchief.com.collectiondemo.activity.SlidingUpMeiTuanActivity;
 import wapchief.com.collectiondemo.activity.UpdatePhotoActivity;
 import wapchief.com.collectiondemo.adapter.RecyclerViewAdapter;
 import wapchief.com.collectiondemo.framework.system.SystemStatusManager;
-import wapchief.com.collectiondemo.utils.UToasts;
+import wapchief.com.collectiondemo.utils.ToastsUtils;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     //     单个监听bt
     @OnClick(R.id.bt)
     void submit() {
-        UToasts.showShort(this, "监听成功");
+        ToastsUtils.showShort(this, "监听成功");
     }
 
     //     多个监听
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
     void submix(View view) {
         switch (view.getId()) {
             case R.id.bt2:
-                UToasts.showShort(this, "tv被点击了");
+                ToastsUtils.showShort(this, "tv被点击了");
                 Intent intent = new Intent(MainActivity.this, RecyclerViewActivity.class);
                 startActivity(intent);
                 break;
@@ -193,44 +193,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    /**
-     * 单击回退
-     *
-     * @param keyCode
-     * @param event
-     * @return
-     */
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            exitBy2Click();
-        }
-        return false;
-    }
 
-    /**
-     * 双击退出
-     */
-    private static Boolean isExit = false;
-
-    private void exitBy2Click() {
-        Timer tExit = null;
-        if (isExit == false) {
-            isExit = true; // 准备退出
-            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
-            tExit = new Timer();
-            tExit.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    isExit = false; // 取消退出
-                }
-            }, 2000); // 如果2秒钟内没有按下返回键，则启动定时器取消掉刚才执行的任务
-
-        } else {
-            finish();
-            System.exit(0);
-        }
-    }
 
     /**
      * NavigationView侧滑菜单

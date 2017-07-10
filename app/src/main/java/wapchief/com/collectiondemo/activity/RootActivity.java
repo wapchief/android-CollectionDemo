@@ -4,12 +4,18 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import wapchief.com.collectiondemo.MainActivity;
 import wapchief.com.collectiondemo.RecyclerViewActivity;
+import wapchief.com.collectiondemo.utils.ToastsUtils;
 
 /**
  * Created by Wu on 2017/7/3.
@@ -52,4 +58,43 @@ public class RootActivity extends ListActivity {
         startActivity(new Intent(this, mActivities[position]));
     }
 
+
+    /**
+     * 单击回退
+     *
+     * @param keyCode
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exitBy2Click();
+        }
+        return false;
+    }
+
+    /**
+     * 双击退出
+     */
+    private static Boolean isExit = false;
+
+    private void exitBy2Click() {
+        Timer tExit = null;
+        if (isExit == false) {
+            isExit = true; // 准备退出
+            ToastsUtils.showShort(this,"再按一次退出程序");
+            tExit = new Timer();
+            tExit.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    isExit = false; // 取消退出
+                }
+            }, 2000); // 如果2秒钟内没有按下返回键，则启动定时器取消掉刚才执行的任务
+
+        } else {
+            finish();
+            System.exit(0);
+        }
+    }
 }
