@@ -4,14 +4,14 @@ import android.content.Context;
 import android.widget.Toast;
 
 /**
- * Created by WuBing on 2017/1/9 0009 上午 11:12.
+ * Created by Wu on 2017/1/9 0009 上午 11:12.
  * 描述：
  */
-public class UToasts {
+public class ToastsUtils {
 
 
 
-    private UToasts()
+    private ToastsUtils()
     {
         /* cannot be instantiated */
         throw new UnsupportedOperationException("cannot be instantiated");

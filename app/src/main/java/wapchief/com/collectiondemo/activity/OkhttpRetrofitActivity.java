@@ -34,14 +34,15 @@ import rx.schedulers.Schedulers;
 import wapchief.com.collectiondemo.R;
 import wapchief.com.collectiondemo.bean.APi;
 import wapchief.com.collectiondemo.bean.NewBeans;
-import wapchief.com.collectiondemo.utils.UToasts;
+import wapchief.com.collectiondemo.framework.BaseActivity;
+import wapchief.com.collectiondemo.utils.ToastsUtils;
 import wapchief.com.collectiondemo.utils.Url;
 
 /**
  * Created by Wu on 2017/2/17 0017 上午 10:55.
  * 描述：
  */
-public class OkhttpRetrofitActivity extends AppCompatActivity {
+public class OkhttpRetrofitActivity extends BaseActivity {
     @BindView(R.id.bt_okGet)
     Button btOkGet;
     @BindView(R.id.bt_okPost)
@@ -97,22 +98,27 @@ public class OkhttpRetrofitActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_okGet:
+                showProgressDialog();
                 okhttpGet();
                 break;
             case R.id.bt_okPost:
+                showProgressDialog();
                 okhttpPost();
+                dismissProgressDialog();
                 break;
             case R.id.bt_reGet:
+                showProgressDialog();
                 retrofitGet();
+                dismissProgressDialog();
                 break;
             case R.id.bt_rePost:
                 retrofitPost();
                 break;
             case R.id.bt_network:
                 if (getNetWorkType(this) == NETWORKTYPE_WIFI) {
-                    UToasts.showShort(this, "当前是wifi");
+                    ToastsUtils.showShort(this, "当前是wifi");
                 } else {
-                    UToasts.showShort(this, "不是wifi");
+                    ToastsUtils.showShort(this, "不是wifi");
                 }
                 break;
             case R.id.bt_RxJava:
@@ -254,7 +260,7 @@ public class OkhttpRetrofitActivity extends AppCompatActivity {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(okhttp3.Call call, Exception e, int id) {
-                        UToasts.showShort(OkhttpRetrofitActivity.this, "请求失败:" + e.getMessage().toString());
+                        ToastsUtils.showShort(OkhttpRetrofitActivity.this, "请求失败:" + e.getMessage().toString());
                     }
 
                     @Override
@@ -262,7 +268,7 @@ public class OkhttpRetrofitActivity extends AppCompatActivity {
                         Gson gson = new Gson();
                         NewBeans newBeans = gson.fromJson(response, NewBeans.class);
                         newBeans.getResult();
-                        UToasts.showLong(OkhttpRetrofitActivity.this, newBeans.getReason());
+                        ToastsUtils.showLong(OkhttpRetrofitActivity.this, newBeans.getReason());
 
                         if (newBeans.getResultcode().equals("200")) {
                             tv.setText("okhttpGit请求结果:"
@@ -303,7 +309,7 @@ public class OkhttpRetrofitActivity extends AppCompatActivity {
                         Gson gson = new Gson();
                         NewBeans newBeans = gson.fromJson(response, NewBeans.class);
                         newBeans.getResult();
-                        UToasts.showLong(OkhttpRetrofitActivity.this, newBeans.getReason());
+                        ToastsUtils.showLong(OkhttpRetrofitActivity.this, newBeans.getReason());
 
                         if (newBeans.getResultcode().equals("200")) {
                             tv.setText("okhttpPost请求结果:"

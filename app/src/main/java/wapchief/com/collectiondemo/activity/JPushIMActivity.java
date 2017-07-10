@@ -24,6 +24,7 @@ import wapchief.com.collectiondemo.MainActivity;
 import wapchief.com.collectiondemo.R;
 import wapchief.com.collectiondemo.bean.TModel;
 import wapchief.com.collectiondemo.framework.callback.BasicCallBack;
+import wapchief.com.collectiondemo.utils.ToastsUtils;
 
 /**
  * Created by Wu on 2017/4/11 0011 下午 3:08.
@@ -56,7 +57,7 @@ public class JPushIMActivity extends AppCompatActivity {
             case R.id.jpush_im_submit:
                 dismissSoftKeyboard(this);
                 if (jpushImUserName.getText().toString().equals("")|jpushImPassWord.getText().toString().equals("")){
-                    Toast.makeText(context,"用户名和密码不能为空",Toast.LENGTH_SHORT).show();
+                    ToastsUtils.showShort(context,"用户名和密码不能为空");
                 }else {
                     jpushImRegister(jpushImUserName.getText().toString(),jpushImPassWord.getText().toString());
                 }
@@ -65,7 +66,7 @@ public class JPushIMActivity extends AppCompatActivity {
             case R.id.jpush_im_login:
                 dismissSoftKeyboard(this);
                 if (jpushImUserName.getText().toString().equals("")|jpushImPassWord.getText().toString().equals("")){
-                    Toast.makeText(context,"用户名和密码不能为空",Toast.LENGTH_SHORT).show();
+                    ToastsUtils.showShort(context,"用户名和密码不能为空");
                 }else {
                     jpushImLogin(jpushImUserName.getText().toString(), jpushImPassWord.getText().toString());
                 }
@@ -120,7 +121,7 @@ public class JPushIMActivity extends AppCompatActivity {
                     jpushImUserName.setText("");
                     jpushImPassWord.setText("");
                 } else {
-                    Toast.makeText(context,"注册失败：只能是字母或者数字开头。支持字母、数字、下划线、英文点、减号、 @。",Toast.LENGTH_LONG).show();
+                    ToastsUtils.showShort(context,"注册失败：只能是字母或者数字开头。支持字母、数字、下划线、英文点、减号、 @。");
 
                 }
 //                Log.e("i----", i + "\n"

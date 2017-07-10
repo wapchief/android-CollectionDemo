@@ -12,7 +12,7 @@ import wapchief.com.collectiondemo.MainActivity;
 import wapchief.com.collectiondemo.RecyclerViewActivity;
 
 /**
- * Created by J!nl!n on 2017/3/9.
+ * Created by Wu on 2017/7/3.
  */
 public class RootActivity extends ListActivity {
 
