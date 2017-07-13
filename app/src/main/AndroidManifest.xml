@@ -77,6 +77,7 @@
         <!--数据库-->
         <activity android:name=".activity.SearchViewGreenDaoActivity"
             android:persistableMode="persistAcrossReboots"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <!--数据库-->
         <activity android:name=".activity.MessageActivity"
