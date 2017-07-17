@@ -23,7 +23,7 @@ import wapchief.com.collectiondemo.utils.ToastsUtils;
 public class RootActivity extends ListActivity {
 
     private String[] mTitles = new String[]{
-            "MainActivity+SideBar",
+            "MainActivity+SideBar+GreenDao数据库",
             "RecyclerView+swipeRefrashlayout+Header",
             "TagFlowLayout热门搜索",
             "okhttp+Retrofit+RxJava查询手机号码归属地",
@@ -32,6 +32,7 @@ public class RootActivity extends ListActivity {
             "JPush（极光）即时通讯",
             "GreenDao+Flow仿热门搜索，本地缓存",
             "SlidingUpPanel仿美团配送",
+            "几种按钮计时器的实现方法"
     };
 
     private Class[] mActivities = new Class[]{
@@ -44,6 +45,7 @@ public class RootActivity extends ListActivity {
             JPushIMActivity.class,
             SearchViewGreenDaoActivity.class,
             SlidingUpMeiTuanActivity.class,
+            TimerButtonActivity.class,
 
     };
 

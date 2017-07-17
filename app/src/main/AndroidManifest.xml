@@ -90,8 +90,8 @@
         <!--仿美团-->
         <activity android:name=".activity.SlidingUpMeiTuanActivity"
             android:persistableMode="persistAcrossReboots"/>
-
-
+        <!--按钮计时器-->
+        <activity android:name=".activity.TimerButtonActivity"/>
         <!--******************************极光推送**********************************-->
 
         <!-- Required SDK 核心功能-->
