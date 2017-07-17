@@ -15,7 +15,7 @@
 或者可以通过简书私信我
 
 
-![](https://github.com/wapchief/android-CollectionDemo/blob/master/screenshot/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-07%20%E4%B8%8A%E5%8D%8810.42.32.png?raw=true)
+![](https://github.com/wapchief/android-CollectionDemo/blob/master/screenshot/device-2017-07-17-091058.png?raw=true)
 
 
 __所有页面均使用ButterKnife绑定View。相关教程发表在简书。__
