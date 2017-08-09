@@ -97,7 +97,7 @@ public class GlidePicassoActivity extends AppCompatActivity {
                 initpicasso();
                 break;
             case R.id.clean_bt:
-                cleanImg();
+//                cleanImg();
                 break;
         }
     }

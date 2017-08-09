@@ -31,4 +31,15 @@
         android:text="已有账号？直接登录。"
         android:layout_gravity="center"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="独立的即时通讯项目已经发布：\n
+        https://github.com/wapchief/JPushIM
+        \n完全基于极光sdk开发的IM"
+        />
 </LinearLayout>
