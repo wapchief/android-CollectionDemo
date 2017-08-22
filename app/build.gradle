@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'org.greenrobot.greendao'
 android {
-    compileSdkVersion 23
+    compileSdkVersion 25
     buildToolsVersion "25.0.2"
 
     defaultConfig {
         applicationId "wapchief.com.collectiondemo"
-        minSdkVersion 19
-        targetSdkVersion 23
+        minSdkVersion 14
+        targetSdkVersion 25
         multiDexEnabled true
         versionCode 1
         versionName "1.0"
@@ -37,10 +37,6 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
-    dexOptions {
-        incremental true
-        javaMaxHeapSize "4g"
-    }
 }
 
 greendao {
@@ -54,7 +50,7 @@ greendao {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:appcompat-v7:25.1.0'
     //Retrofit+rxjava
     compile 'io.reactivex:rxjava:x.y.z'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
@@ -68,13 +64,13 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.2.1'
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
     //RecyclerView
-    compile 'com.android.support:recyclerview-v7:23.1.0'
+    compile 'com.android.support:recyclerview-v7:25.0.0'
     //RecyclerViewHeader
     compile 'com.bartoszlipinski:recyclerviewheader2:2.0.1'
     //FlowLayout
     compile 'com.zhy:flowlayout-lib:1.0.3'
     //TabLayout
-    compile 'com.android.support:design:23.2.0'
+    compile 'com.android.support:design:25.0.0'
     compile 'com.squareup.retrofit2:converter-scalars:2.1.0'
     //RxJavaCallAdapter依赖包
     compile 'io.reactivex:rxandroid:1.2.1'
@@ -99,5 +95,7 @@ dependencies {
     compile 'com.jude:rollviewpager:1.4.6'
     //仿美团折叠
     compile 'com.sothree.slidinguppanel:library:3.3.1'
+    //动画库
+    compile 'com.airbnb.android:lottie:2.2.0'
 }
 

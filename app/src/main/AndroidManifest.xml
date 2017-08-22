@@ -45,8 +45,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
-        <activity android:name=".activity.RootActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".activity.RootActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -54,44 +53,38 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".MainActivity">
 
         </activity>
         <activity
             android:name=".RecyclerViewActivity"
-            android:persistableMode="persistAcrossReboots"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:persistableMode="persistAcrossReboots"/>
         <!--FlowLayout-->
         <activity android:name=".activity.FlowLayoutActivity"/>
         <!--网络访问-->
         <activity android:name=".activity.OkhttpRetrofitActivity"/>
         <!--glide图片加载-->
-        <activity android:name=".activity.GlidePicassoActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".activity.GlidePicassoActivity"/>
         <!--圆角头像+选择器-->
-        <activity android:name=".activity.UpdatePhotoActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".activity.UpdatePhotoActivity"/>
         <!--极光IM-->
         <activity android:name=".activity.JPushIMActivity"/>
         <!--数据库-->
         <activity android:name=".activity.SearchViewGreenDaoActivity"
             android:persistableMode="persistAcrossReboots"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:windowSoftInputMode="adjustResize"/>
         <!--数据库-->
         <activity android:name=".activity.MessageActivity"
-            android:persistableMode="persistAcrossReboots"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:persistableMode="persistAcrossReboots"/>
         <!--推送弹窗-->
         <activity android:name=".activity.JPushDialogActivity"
-            android:persistableMode="persistAcrossReboots"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:persistableMode="persistAcrossReboots"/>
         <!--仿美团-->
         <activity android:name=".activity.SlidingUpMeiTuanActivity"
             android:persistableMode="persistAcrossReboots"/>
         <!--按钮计时器-->
         <activity android:name=".activity.TimerButtonActivity"/>
+        <activity android:name=".activity.LottieAnimationActivity"/>
         <!--******************************极光推送**********************************-->
 
         <!-- Required SDK 核心功能-->

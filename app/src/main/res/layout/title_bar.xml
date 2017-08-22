@@ -21,7 +21,6 @@
         android:text="英雄联盟"
         android:gravity="center"
         android:layout_centerHorizontal="true"
-        android:textColor="#00000000"
         android:visibility="visible"
         android:textSize="18sp"/>
 

@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -32,7 +34,8 @@ public class RootActivity extends ListActivity {
             "JPush（极光）即时通讯",
             "GreenDao+Flow仿热门搜索，本地缓存",
             "SlidingUpPanel仿美团配送",
-            "几种按钮计时器的实现方法"
+            "几种按钮计时器的实现方法",
+            "LottieAnimation动画库"
     };
 
     private Class[] mActivities = new Class[]{
@@ -46,6 +49,7 @@ public class RootActivity extends ListActivity {
             SearchViewGreenDaoActivity.class,
             SlidingUpMeiTuanActivity.class,
             TimerButtonActivity.class,
+            LottieAnimationActivity.class,
 
     };
 

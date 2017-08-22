@@ -36,8 +36,13 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:paddingTop="20dp"
+        android:gravity="center_horizontal"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
+        android:enabled="true"
+        android:textIsSelectable="true"
+        android:focusable="true"
+        android:longClickable="true"
         android:text="独立的即时通讯项目已经发布：\n
         https://github.com/wapchief/JPushIM
         \n完全基于极光sdk开发的IM"
