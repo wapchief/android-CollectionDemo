@@ -84,7 +84,7 @@ public class UpdatePhotoActivity extends AppCompatActivity {
     }
 
     private void showHeadDialog() {
-         TextView update_dialog_TK,update_dialog_PZ,update_dialog_cancel;
+        TextView update_dialog_TK, update_dialog_PZ, update_dialog_cancel;
         View view = getLayoutInflater().inflate(R.layout.show_head_dialog, null);
         dialog = new Dialog(this, R.style.dialog_photo);
 
@@ -96,7 +96,7 @@ public class UpdatePhotoActivity extends AppCompatActivity {
         dialog.getWindow().setWindowAnimations(R.style.Dialog_Anim_Style);
 //        dialog.setCanceledOnTouchOutside(true);
         //图库
-        update_dialog_TK=(TextView)view.findViewById(R.id.update_dialog_TK);
+        update_dialog_TK = (TextView) view.findViewById(R.id.update_dialog_TK);
         update_dialog_TK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +108,7 @@ public class UpdatePhotoActivity extends AppCompatActivity {
             }
         });
         //取消
-        update_dialog_cancel= (TextView)view.findViewById(R.id.update_dialog_cancel);
+        update_dialog_cancel = (TextView) view.findViewById(R.id.update_dialog_cancel);
         update_dialog_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,6 +176,7 @@ public class UpdatePhotoActivity extends AppCompatActivity {
 
     /**
      * 回调
+     *
      * @param requestCode
      * @param resultCode
      * @param data

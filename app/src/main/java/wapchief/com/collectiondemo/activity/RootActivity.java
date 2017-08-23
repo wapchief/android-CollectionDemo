@@ -33,7 +33,7 @@ public class RootActivity extends ListActivity {
             "TagFlowLayout热门搜索",
             "okhttp+Retrofit+RxJava查询手机号码归属地",
             "Glide+Picasso请求加载网络图片",
-            "CardView上传图片",
+            "调用系统相机、图库、裁剪、上传图片（适配7.0）",
             "JPush（极光）即时通讯",
             "GreenDao+Flow仿热门搜索，本地缓存",
             "SlidingUpPanel仿美团配送",
