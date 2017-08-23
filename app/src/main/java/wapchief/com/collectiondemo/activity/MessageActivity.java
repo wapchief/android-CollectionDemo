@@ -1,25 +1,22 @@
 package wapchief.com.collectiondemo.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import wapchief.com.collectiondemo.R;
 import wapchief.com.collectiondemo.adapter.ItemTVAdapter;
-import wapchief.com.collectiondemo.adapter.SearchViewGreenDaoAdapter;
-import wapchief.com.collectiondemo.bean.JPushMessageBean;
-import wapchief.com.collectiondemo.bean.JPushModel;
 import wapchief.com.collectiondemo.framework.BaseApplication;
 import wapchief.com.collectiondemo.greendao.DaoMaster;
 import wapchief.com.collectiondemo.greendao.DaoSession;
@@ -34,6 +31,8 @@ public class MessageActivity extends AppCompatActivity {
 
     @BindView(R.id.message_lv)
     ListView messageLv;
+    @BindView(R.id.message_back)
+    ImageView mMessageBack;
     private ItemTVAdapter adapter;
     private List<Message> list;
     MessageDao messageDao;
@@ -60,6 +59,7 @@ public class MessageActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
 
     }
+
     /*初始化数据库相关*/
     private void initDbHelp() {
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(BaseApplication.mBaseApplication, "recluse-db", null);
@@ -69,4 +69,8 @@ public class MessageActivity extends AppCompatActivity {
         messageDao = daoSession.getMessageDao();
     }
 
+    @OnClick(R.id.message_back)
+    public void onViewClicked() {
+        startActivity(new Intent(MessageActivity.this,RootActivity.class));
+    }
 }

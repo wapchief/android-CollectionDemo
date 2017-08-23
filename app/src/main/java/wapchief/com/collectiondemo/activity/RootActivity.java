@@ -4,6 +4,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -15,8 +16,10 @@ import com.airbnb.lottie.LottieAnimationView;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import cn.jpush.android.api.JPushInterface;
 import wapchief.com.collectiondemo.MainActivity;
 import wapchief.com.collectiondemo.RecyclerViewActivity;
+import wapchief.com.collectiondemo.framework.BaseApplication;
 import wapchief.com.collectiondemo.utils.ToastsUtils;
 
 /**
@@ -57,6 +60,7 @@ public class RootActivity extends ListActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setListAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mTitles));
+        Log.e("id===push===", JPushInterface.getRegistrationID(BaseApplication.mBaseApplication));
     }
 
     @Override

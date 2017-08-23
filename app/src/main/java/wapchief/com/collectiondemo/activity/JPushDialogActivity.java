@@ -81,6 +81,7 @@ public class JPushDialogActivity extends AppCompatActivity {
                 //获取当前时间
                 String   str   =   formatter.format(curDate);
                 messageDao.insert(new Message(null, "手动：" + str, message));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 break;
         }

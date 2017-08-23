@@ -8,6 +8,13 @@
         android:layout_height="48dp"
         android:background="@color/theme_lanse">
 
+        <ImageView
+            android:id="@+id/message_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:src="@drawable/jpush_ic_richpush_actionbar_back"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
