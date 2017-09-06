@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -13,6 +14,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -38,13 +41,14 @@ import butterknife.OnClick;
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.api.BasicCallback;
 import wapchief.com.collectiondemo.MainActivity;
+import wapchief.com.collectiondemo.Manifest;
 import wapchief.com.collectiondemo.R;
 
 /**
  * Created by Wu on 2017/2/28 0028 上午 10:14.
  * 描述：
  */
-public class UpdatePhotoActivity extends AppCompatActivity {
+public class UpdatePhotoActivity extends AppCompatActivity{
 
     @BindView(R.id.cardview_img)
     ImageView cardviewImg;
@@ -121,25 +125,70 @@ public class UpdatePhotoActivity extends AppCompatActivity {
         update_dialog_PZ.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 启动系统相机
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                Uri mImageCaptureUri;
-                // 判断7.0android系统
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                    contentUri = FileProvider.getUriForFile(UpdatePhotoActivity.this,
-                            "wapchief.com.collectiondemo.fileProvider",
-                            new File(Environment.getExternalStorageDirectory(), "temp.jpg"));
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
+                //动态获取权限，适配6.0
+                if (Build.VERSION.SDK_INT >= 23) {
+                    int checkCallPhonePermission = ContextCompat.checkSelfPermission(UpdatePhotoActivity.this, android.Manifest.permission.CAMERA);
+                    if(checkCallPhonePermission != PackageManager.PERMISSION_GRANTED){
+                        ActivityCompat.requestPermissions(UpdatePhotoActivity.this,new String[]{android.Manifest.permission.CAMERA},1);
+                        return;
+                    }else{
+
+                        runCamera();
+                    }
                 } else {
-                    mImageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "temp.jpg"));
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
+
+                    runCamera();
                 }
-                startActivityForResult(intent, PHOTO_PZ);
-                dialog.dismiss();
+//                runCamera();
             }
         });
     }
+
+    /**
+     * 获取相机结果回调
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+
+            case 1:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    runCamera();
+                } else {
+                    // Permission Denied
+                    Toast.makeText(UpdatePhotoActivity.this, "请手动打开相机权限", Toast.LENGTH_SHORT)
+                            .show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+    /**
+     * 启动相机
+     */
+    public void runCamera(){
+        // 启动系统相机
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Uri mImageCaptureUri;
+        // 判断7.0android系统
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            contentUri = FileProvider.getUriForFile(UpdatePhotoActivity.this,
+                    "wapchief.com.collectiondemo.fileProvider",
+                    new File(Environment.getExternalStorageDirectory(), "temp.jpg"));
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
+        } else {
+            mImageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "temp.jpg"));
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
+        }
+        startActivityForResult(intent, PHOTO_PZ);
+        dialog.dismiss();
+    }
+
 
     /**
      * 裁剪图片的方法.

@@ -6,8 +6,11 @@
 
     <uses-sdk
         android:minSdkVersion="9"
-        android:targetSdkVersion="23" />
+        android:targetSdkVersion="25" />
 
+    <!--相机-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
     <!-- Required -->
     <permission
         android:name="wapchief.com.collectiondemo.permission.JPUSH_MESSAGE"
