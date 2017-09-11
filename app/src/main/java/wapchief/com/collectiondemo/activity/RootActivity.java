@@ -38,7 +38,8 @@ public class RootActivity extends ListActivity {
             "GreenDao+Flow仿热门搜索，本地缓存",
             "SlidingUpPanel仿美团配送",
             "几种按钮计时器的实现方法",
-            "LottieAnimation动画库"
+            "LottieAnimation动画库",
+            "仿美团、饿了么购物车本地存储数据"
     };
 
     private Class[] mActivities = new Class[]{
@@ -53,6 +54,7 @@ public class RootActivity extends ListActivity {
             SlidingUpMeiTuanActivity.class,
             TimerButtonActivity.class,
             LottieAnimationActivity.class,
+            ShoppingCartActivity.class
 
     };
 

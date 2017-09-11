@@ -40,7 +40,7 @@ android {
 }
 
 greendao {
-    schemaVersion 1//数据库版本号
+    schemaVersion 2//数据库版本号
     daoPackage 'wapchief.com.collectiondemo.greendao'//设置DaoMaster、DaoSession、Dao包名
     targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
     //targetGenDirTest：设置生成单元测试目录
@@ -97,5 +97,11 @@ dependencies {
     compile 'com.sothree.slidinguppanel:library:3.3.1'
     //动画库
     compile 'com.airbnb.android:lottie:2.2.0'
+    //tab切换的库
+    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.0.0@aar'
+    //折叠视图
+    compile 'com.github.cpoopc:scrollablelayoutlib:1.0.1'
+    //购物车副列表
+    compile 'com.flipboard:bottomsheet-core:1.5.3'
 }
 

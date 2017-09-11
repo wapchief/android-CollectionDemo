@@ -20,6 +20,6 @@ public class SQLiteOpenHelper extends DaoMaster.OpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         super.onUpgrade(db, oldVersion, newVersion);
         //设置需要升级的表
-        MigrationHelper.migrate(db,MessageDao.class,UserDao.class);
+        MigrationHelper.migrate(db,MessageDao.class,UserDao.class,CarShopDao.class);
     }
 }

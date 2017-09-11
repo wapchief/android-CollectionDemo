@@ -96,7 +96,10 @@
             android:persistableMode="persistAcrossReboots"/>
         <!--按钮计时器-->
         <activity android:name=".activity.TimerButtonActivity"/>
+        <!--Lottie动画-->
         <activity android:name=".activity.LottieAnimationActivity"/>
+        <!--仿购物车实现-->
+        <activity android:name=".activity.ShoppingCartActivity"/>
         <!--******************************极光推送**********************************-->
 
         <!-- Required SDK 核心功能-->

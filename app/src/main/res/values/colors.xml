@@ -18,4 +18,7 @@
     <color name="grey">#8C8C8C</color>
     <color name="light_red">#fa4b4b</color>
     <color name="theme_lanse">#3F51B5</color>
+    <color name="gray_meituan">#494042</color>
+    <color name="gray_meituan2">#e6494042</color>
+
 </resources>

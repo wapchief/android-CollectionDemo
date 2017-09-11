@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/title_bottom"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/gray_meituan2"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="80dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/shopping_money"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/white"
+                android:text="总计：¥0"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@color/oriange"
+            android:textColor="@color/white"
+            android:text="去结算"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="80dp"
+        android:paddingLeft="15dp"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/shopping_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/car" />
+
+     <TextView
+         android:id="@+id/shopping_number"
+         android:layout_width="12dp"
+         android:layout_height="12dp"
+         android:background="@color/oriange"
+         android:gravity="center"
+         android:layout_marginRight="10dp"
+         android:layout_marginTop="5dp"
+         android:textColor="@color/white"
+         android:text="0"
+         android:textSize="10sp"
+         android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+</RelativeLayout>

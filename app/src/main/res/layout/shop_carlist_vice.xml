@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#eeeeee"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <wapchief.com.collectiondemo.customView.MyScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+    <RelativeLayout android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView android:text="购物车"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView android:text="清空"
+            android:textSize="18sp"
+            android:id="@+id/clear"
+            android:clickable="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/title_line"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#ecedef" />
+
+    <wapchief.com.collectiondemo.customView.MyListView
+        android:id="@+id/lv_product"
+        android:background="@color/white"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        tools:listitem="@layout/product_item">
+    </wapchief.com.collectiondemo.customView.MyListView>
+
+    </LinearLayout>
+
+
+    </wapchief.com.collectiondemo.customView.MyScrollView>
+
+
+</LinearLayout>
