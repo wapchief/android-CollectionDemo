@@ -92,11 +92,16 @@ public class ShopRightAdapter extends BaseAdapter {
                         list.get(i).getSpec(),
                         list.get(i).getStockCount());
                 Log.e("carDaonum=", num + "\n"+list.get(i).getPrice()*num);
-                if (num<=0){
-                    dao.delete(shop);
-                }else {
-                    dao.update(shop);
+                try {
+                    if (num<=0){
+                        dao.delete(shop);
+                    }else {
+                        dao.update(shop);
+                    }
+                }catch (Exception e){
+
                 }
+
             }
         });
 
