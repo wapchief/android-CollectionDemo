@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.utils.EmptyUtils;
+
 import java.util.List;
 
 import wapchief.com.collectiondemo.R;
@@ -64,10 +66,20 @@ public class CatListViceAdapter extends BaseAdapter {
             viewholder.tv_name.setText(dataList.get(position).getName());
             viewholder.tv_count.setText(""+dataList.get(position).getNum());
             viewholder.tv_price.setText(dataList.get(position).getPrice()+"");
+        if (dataList.get(position).getNum()<=0||viewholder.tv_count.getText().equals("0")||
+                EmptyUtils.isEmpty(dataList.get(position).getNum())){
+            viewholder.iv_remove.setVisibility(View.GONE);
+            viewholder.tv_count.setVisibility(View.GONE);
+
+        }else {
+            viewholder.iv_remove.setVisibility(View.VISIBLE);
+            viewholder.tv_count.setVisibility(View.VISIBLE);
+        }
             viewholder.iv_add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //                    context.handlerCarNum(1,dataList.valueAt(position),true);
+                    viewholder.iv_remove.setVisibility(View.VISIBLE);
                     goodsAdapter.notifyDataSetChanged();
 
                 }
@@ -75,6 +87,10 @@ public class CatListViceAdapter extends BaseAdapter {
             viewholder.iv_remove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (dataList.get(position).getNum()==1||viewholder.tv_count.getText().equals("1")){
+                        viewholder.iv_remove.setVisibility(View.GONE);
+                        viewholder.tv_count.setVisibility(View.GONE);
+                    }
 //                    activity.handlerCarNum(0,dataList.valueAt(position),true);
                     goodsAdapter.notifyDataSetChanged();
                 }

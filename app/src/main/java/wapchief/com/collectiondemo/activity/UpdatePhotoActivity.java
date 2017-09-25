@@ -75,6 +75,12 @@ public class UpdatePhotoActivity extends AppCompatActivity{
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkSelfPermission();
+    }
+
     @OnClick({R.id.cardview_img, R.id.ll_update})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -143,7 +149,18 @@ public class UpdatePhotoActivity extends AppCompatActivity{
             }
         });
     }
-
+    /**
+     * 检查权限,获取所有需要的权限
+     * 当targetSdkVersion大于23并且打算在6.0手机上运行时,请动态申请SDK所需要的权限
+     */
+    public void checkSelfPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                  ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            android.Manifest.permission.READ_PHONE_STATE}, 0);
+        }
+    }
     /**
      * 获取相机结果回调
      * @param requestCode
