@@ -99,6 +99,8 @@
         <activity android:name=".activity.LottieAnimationActivity"/>
         <!--仿购物车实现-->
         <activity android:name=".activity.ShoppingCartActivity"/>
+
+        <activity android:name=".activity.KeyBoardActivity"/>
         <!--******************************极光推送**********************************-->
 
         <!-- Required SDK 核心功能-->

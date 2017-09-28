@@ -39,7 +39,8 @@ public class RootActivity extends ListActivity {
             "SlidingUpPanel仿美团配送",
             "几种按钮计时器的实现方法",
             "LottieAnimation动画库",
-            "仿美团、饿了么购物车本地存储数据"
+            "仿美团、饿了么购物车本地存储数据",
+            "XhsEmoticonsKeyboard仿qq微信键盘"
     };
 
     private Class[] mActivities = new Class[]{
@@ -54,8 +55,8 @@ public class RootActivity extends ListActivity {
             SlidingUpMeiTuanActivity.class,
             TimerButtonActivity.class,
             LottieAnimationActivity.class,
-            ShoppingCartActivity.class
-
+            ShoppingCartActivity.class,
+            KeyBoardActivity.class
     };
 
     @Override

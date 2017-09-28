@@ -103,5 +103,8 @@ dependencies {
     compile 'com.github.cpoopc:scrollablelayoutlib:1.0.1'
     //购物车副列表
     compile 'com.flipboard:bottomsheet-core:1.5.3'
-}
+    //键盘选择器，高仿qq
+    compile 'com.github.w446108264:XhsEmoticonsKeyboard:2.0.4'
+    //Emoji表情
+    compile 'com.github.w446108264:AndroidEmoji:1.3-withsource'}
 
