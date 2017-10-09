@@ -101,6 +101,9 @@
         <activity android:name=".activity.ShoppingCartActivity"/>
 
         <activity android:name=".activity.KeyBoardActivity"/>
+        <activity android:name=".activity.VideoPlayerActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
         <!--******************************极光推送**********************************-->
 
         <!-- Required SDK 核心功能-->

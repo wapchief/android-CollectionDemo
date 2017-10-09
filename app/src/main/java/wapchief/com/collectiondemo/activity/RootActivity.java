@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.airbnb.lottie.LottieAnimationView;
 
@@ -40,7 +41,8 @@ public class RootActivity extends ListActivity {
             "几种按钮计时器的实现方法",
             "LottieAnimation动画库",
             "仿美团、饿了么购物车本地存储数据",
-            "XhsEmoticonsKeyboard仿qq微信键盘"
+            "XhsEmoticonsKeyboard仿qq微信键盘",
+            "VideoPlayer播放器"
     };
 
     private Class[] mActivities = new Class[]{
@@ -56,7 +58,8 @@ public class RootActivity extends ListActivity {
             TimerButtonActivity.class,
             LottieAnimationActivity.class,
             ShoppingCartActivity.class,
-            KeyBoardActivity.class
+            KeyBoardActivity.class,
+            VideoPlayerActivity.class
     };
 
     @Override
