@@ -1,5 +1,6 @@
 package wapchief.com.collectiondemo.framework;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -66,4 +67,26 @@ public class BaseActivity extends AppCompatActivity{
             progressDialog.dismiss();
         }
     }
+
+
+    /**
+     * 短时间Toast提示
+     * @param activity
+     * @param s
+     */
+    public void showToast(Activity activity, String s){
+        Toast toast=Toast.makeText(activity,s,Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    /**
+     * 长时间Toast提示
+     * @param activity
+     * @param s
+     */
+    public void showLongToast(Activity activity,String s){
+        Toast toast=Toast.makeText(activity,s,Toast.LENGTH_LONG);
+        toast.show();
+    }
+
 }

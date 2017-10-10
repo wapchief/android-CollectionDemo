@@ -3,8 +3,12 @@ package wapchief.com.collectiondemo.framework;
 import android.app.Application;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.speech.SpeechRecognizer;
 
 import com.github.yuweiguocn.library.greendao.MigrationHelper;
+import com.iflytek.cloud.Setting;
+import com.iflytek.cloud.SpeechConstant;
+import com.iflytek.cloud.SpeechUtility;
 
 import org.greenrobot.greendao.query.QueryBuilder;
 
@@ -40,6 +44,10 @@ public class BaseApplication extends Application {
         //数据库调试。建议打包上线时关闭
         QueryBuilder.LOG_SQL = true;
         QueryBuilder.LOG_VALUES = true;
+        //初始化讯飞语音
+        SpeechUtility.createUtility(mContext, SpeechConstant.APPID +"=59daecea," + SpeechConstant.FORCE_LOGIN +"=true");
+        //讯飞调试日志开启
+//        Setting.setShowLog(true);
         //数据库升级
         updateDB();
     }

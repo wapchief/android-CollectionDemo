@@ -42,7 +42,8 @@ public class RootActivity extends ListActivity {
             "LottieAnimation动画库",
             "仿美团、饿了么购物车本地存储数据",
             "XhsEmoticonsKeyboard仿qq微信键盘",
-            "VideoPlayer播放器"
+            "VideoPlayer播放器",
+            "Voice转文本"
     };
 
     private Class[] mActivities = new Class[]{
@@ -59,7 +60,8 @@ public class RootActivity extends ListActivity {
             LottieAnimationActivity.class,
             ShoppingCartActivity.class,
             KeyBoardActivity.class,
-            VideoPlayerActivity.class
+            VideoPlayerActivity.class,
+            Voice2TextActivity.class
     };
 
     @Override
