@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -206,12 +207,15 @@ public class OkhttpRetrofitActivity extends BaseActivity {
                             + "运营商：" + response.body().getResult().getCompany());
                 } else {
                     tv.setText("手机号码输入有误，查询失败");
+                    Log.e("json=====", response.body().toString()+",");
                 }
             }
 
             //错误返回
             @Override
             public void onFailure(Call<NewBeans> call, Throwable t) {
+                Log.e("jsonFailure=====", t.getMessage()+",");
+
             }
         });
     }

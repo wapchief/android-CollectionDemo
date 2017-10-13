@@ -13,11 +13,6 @@ android {
         versionCode 1
         versionName "1.0"
 
-        ndk {
-            //选择要添加的对应cpu类型的.so库。
-            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a','x86', 'x86_64', 'mips', 'mips64'
-            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
-        }
 
         manifestPlaceholders = [
                 JPUSH_PKGNAME : applicationId,
@@ -32,11 +27,6 @@ android {
         }
     }
 
-    sourceSets {
-        main {
-            jniLibs.srcDirs = ['libs']
-        }
-    }
 }
 
 greendao {
@@ -137,6 +127,8 @@ dependencies {
 
     //视频播放
     compile 'cn.jzvd:jiaozivideoplayer:6.0.1'
-    compile files('libs/Sunflower.jar')
-    compile files('libs/Msc.jar')
+    //讯飞语音
+//    compile files('libs/Sunflower.jar')
+//    compile files('libs/Msc.jar')
+//    //百度语音
 }

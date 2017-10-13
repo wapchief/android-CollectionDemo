@@ -3,11 +3,15 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
     <TextView
         android:id="@+id/voice_tv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="20dp"/>
+    </ScrollView>
     <EditText
         android:id="@+id/voice_et"
         android:layout_width="match_parent"
@@ -18,7 +22,7 @@
         android:id="@+id/voice_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="录音并转换"
+        android:text="讯飞语音识别"
         android:layout_gravity="center"/>
     
     <Button
@@ -29,8 +33,23 @@
         android:text="播放录音"/>
 
     <SeekBar
+        android:visibility="gone"
         android:id="@+id/voice_seekbar"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="2dp" />
+        android:layout_height="2dp" />bd
+
+    <Button
+        android:id="@+id/voice_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="百度语音识别"/>
+
+    <Button
+        android:id="@+id/voice_bd_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="百度语音停止"/>
 </LinearLayout>

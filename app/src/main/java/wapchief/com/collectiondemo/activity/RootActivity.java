@@ -43,7 +43,7 @@ public class RootActivity extends ListActivity {
             "仿美团、饿了么购物车本地存储数据",
             "XhsEmoticonsKeyboard仿qq微信键盘",
             "VideoPlayer播放器",
-            "Voice转文本"
+            "Voice转文本(讯飞语音+百度语音)"
     };
 
     private Class[] mActivities = new Class[]{

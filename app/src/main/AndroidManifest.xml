@@ -109,6 +109,18 @@
             android:screenOrientation="portrait" />
         <!--语音转文本-->
         <activity android:name=".activity.Voice2TextActivity"/>
+        <!--******************************百度语音**********************************-->
+        <meta-data android:name="com.baidu.speech.APP_ID"
+            android:value="8172882" />
+        <meta-data
+            android:name="com.baidu.speech.API_KEY"
+            android:value="R3crsZhvpqQSrLGUvG7kuG0pCnpTbXvb" />
+        <meta-data
+            android:name="com.baidu.speech.SECRET_KEY"
+            android:value="6MafqZkSLoNYUML1YduHPDYBg1kkPLHj" />
+
+        <service android:name="com.baidu.speech.VoiceRecognitionService" android:exported="false"/>
+
         <!--******************************极光推送**********************************-->
 
         <!-- Required SDK 核心功能-->
