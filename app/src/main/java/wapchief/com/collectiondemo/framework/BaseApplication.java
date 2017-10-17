@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.speech.SpeechRecognizer;
 
+import com.alibaba.idst.nls.NlsClient;
 import com.github.yuweiguocn.library.greendao.MigrationHelper;
 import com.iflytek.cloud.Setting;
 import com.iflytek.cloud.SpeechConstant;
@@ -48,6 +49,8 @@ public class BaseApplication extends Application {
         SpeechUtility.createUtility(mContext, SpeechConstant.APPID +"=59daecea," + SpeechConstant.FORCE_LOGIN +"=true");
         //讯飞调试日志开启
 //        Setting.setShowLog(true);
+        NlsClient.openLog(true);
+        NlsClient.configure(mContext);
         //数据库升级
         updateDB();
     }

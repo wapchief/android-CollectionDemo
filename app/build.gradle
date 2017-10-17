@@ -13,6 +13,11 @@ android {
         versionCode 1
         versionName "1.0"
 
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
 
         manifestPlaceholders = [
                 JPUSH_PKGNAME : applicationId,
@@ -127,8 +132,6 @@ dependencies {
 
     //视频播放
     compile 'cn.jzvd:jiaozivideoplayer:6.0.1'
-    //讯飞语音
-//    compile files('libs/Sunflower.jar')
-//    compile files('libs/Msc.jar')
-//    //百度语音
+    compile files('libs/NlsClientSdk.jar')
+    compile 'com.alibaba:fastjson:1.1.56.android'
 }

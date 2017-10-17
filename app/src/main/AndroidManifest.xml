@@ -108,7 +108,10 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait" />
         <!--语音转文本-->
-        <activity android:name=".activity.Voice2TextActivity"/>
+        <activity android:name=".activity.Voice2TextActivity"
+            android:windowSoftInputMode="stateHidden">
+
+        </activity>
         <!--******************************百度语音**********************************-->
         <meta-data android:name="com.baidu.speech.APP_ID"
             android:value="8172882" />

@@ -5,7 +5,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="150dp">
     <TextView
         android:id="@+id/voice_tv"
         android:layout_width="match_parent"
@@ -16,8 +16,15 @@
         android:id="@+id/voice_et"
         android:layout_width="match_parent"
         android:layout_marginTop="20dp"
+
         android:layout_height="wrap_content" />
 
+    <LinearLayout
+        android:gravity="center"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
     <Button
         android:id="@+id/voice_bt"
         android:layout_width="wrap_content"
@@ -31,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="播放录音"/>
-
+    </LinearLayout>
     <SeekBar
         android:visibility="gone"
         android:id="@+id/voice_seekbar"
@@ -39,6 +46,12 @@
         android:layout_width="match_parent"
         android:layout_height="2dp" />bd
 
+    <LinearLayout
+        android:gravity="center"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
     <Button
         android:id="@+id/voice_bd"
         android:layout_width="wrap_content"
@@ -52,4 +65,25 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="百度语音停止"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <Button
+        android:id="@+id/voice_ali"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="阿里语音识别"/>
+
+    <Button
+        android:id="@+id/voice_ali_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="阿里语音停止"/>
+    </LinearLayout>
 </LinearLayout>

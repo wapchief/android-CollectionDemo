@@ -16,6 +16,12 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.idst.nls.NlsClient;
+import com.alibaba.idst.nls.NlsListener;
+import com.alibaba.idst.nls.StageListener;
+import com.alibaba.idst.nls.internal.protocol.NlsRequest;
+import com.alibaba.idst.nls.internal.protocol.NlsRequestProto;
 import com.baidu.speech.EventListener;
 import com.baidu.speech.EventManager;
 import com.baidu.speech.EventManagerFactory;
@@ -34,18 +40,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import wapchief.com.collectiondemo.R;
+import wapchief.com.collectiondemo.bean.AliVoice;
 import wapchief.com.collectiondemo.bean.BaiDuVoice;
 import wapchief.com.collectiondemo.controller.MyRecognizer;
 import wapchief.com.collectiondemo.framework.BaseActivity;
@@ -71,6 +79,10 @@ public class Voice2TextActivity extends BaseActivity implements EventListener {
     Button mVoiceBd;
     @BindView(R.id.voice_bd_stop)
     Button mVoiceBdStop;
+    @BindView(R.id.voice_ali)
+    Button mVoiceAli;
+    @BindView(R.id.voice_ali_stop)
+    Button mVoiceAliStop;
     private MediaPlayer mp = new MediaPlayer();
     //语音听写
     private SpeechRecognizer recognizer;
@@ -88,6 +100,7 @@ public class Voice2TextActivity extends BaseActivity implements EventListener {
 
 
     MyRecognizer myRecognizer;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,12 +111,14 @@ public class Voice2TextActivity extends BaseActivity implements EventListener {
 
     private void initView() {
 //        mSharedPreferences=getSharedPreferences()
+        initPermission();
         recognizer = SpeechRecognizer.createRecognizer(this, null);
         initMP();
         baiduRecognizer();
+        initAliRecognizer();
     }
 
-    @OnClick({R.id.voice_bt, R.id.voice_play,R.id.voice_bd,R.id.voice_bd_stop})
+    @OnClick({R.id.voice_bt, R.id.voice_play, R.id.voice_bd, R.id.voice_bd_stop,R.id.voice_ali,R.id.voice_ali_stop})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.voice_bt:
@@ -125,10 +140,22 @@ public class Voice2TextActivity extends BaseActivity implements EventListener {
 //                timer.schedule(task,mp.getDuration(),500);
                 break;
             case R.id.voice_bd:
-start();
+                start();
                 break;
             case R.id.voice_bd_stop:
-stop();
+                stop();
+                break;
+            case R.id.voice_ali:
+                mVoiceTv.setText("正在录音.....");
+                nlsRequest.authorize("LTAIUw0pk2a4ZpEm","tXhl0Tr4hmZy5RfKvh77rCbrs7wAKT");
+                nlsClient.start();
+                mVoiceAli.setText("录音中...");
+                break;
+            case R.id.voice_ali_stop:
+                mVoiceTv.setText("");
+                nlsClient.stop();
+                mVoiceAli.setText("阿里语音识别");
+//                nlsRequest.
                 break;
         }
     }
@@ -202,12 +229,12 @@ stop();
             resultBuffer.append(mIatResults.get(key));
         }
 
-        mVoiceEt.setText(resultBuffer.toString());
+        mVoiceEt.setText("讯飞识别结果："+resultBuffer.toString());
         mVoiceEt.setSelection(mVoiceEt.length());
         mVoiceTv.setText(resultBuffer.toString());
     }
 
-    //初始化mp
+    //播放音频文件
     private void initMP() {
         File file = new File(Environment.getExternalStorageDirectory(), "/msc/iat.wav");
 
@@ -221,64 +248,14 @@ stop();
 
     }
 
-    private Timer timer = new Timer();
-    TimerTask task = new TimerTask() {
-        @Override
-        public void run() {
-
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        mVoiceSeekbar.setProgress(mp.getCurrentPosition());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
-    };
-
 //    ===================================百度语音=========================================
 
 
+    /*注册服务*/
     private void baiduRecognizer() {
-//        parms.put("accept-audio-data", false);
-//        parms.put("accept-audio-volume", true);
-//        parms.put("pid", 8172882);
 
         manager = EventManagerFactory.create(this, "asr");
         manager.registerListener(this);
-
-        if (enableOffline){
-            loadOfflineEngine();
-        }
-    }
-
-    public void initBaiDu() {
-
-        myRecognizer = new MyRecognizer(this, new EventListener() {
-            @Override
-            public void onEvent(String s, String s1, byte[] bytes, int i, int i1) {
-                if (s.equals(com.baidu.speech.asr.SpeechConstant.CALLBACK_EVENT_ASR_PARTIAL)){
-                    if (s1.contains("\"nlu_result\"")){
-                        if (i1 > 0 && bytes.length > 0) {
-                            Log.e(TAG, "BaiDu解析：" + new String(bytes, i, i1));
-                        }
-                    }
-                }
-                if (s.equals(com.baidu.speech.asr.SpeechConstant.CALLBACK_EVENT_ASR_READY)) {
-                    //引擎就绪，可以说话，ui改变
-                    Log.e(TAG, "BaiDuEvent:"+s + "\n." + s1 + "");
-                }
-                if (s.equals(com.baidu.speech.asr.SpeechConstant.CALLBACK_EVENT_ASR_FINISH)) {
-                    //识别结束
-                    Log.e(TAG, "BaiDuEventFinish:"+s + "\n." + s1 + "");
-
-                }
-            }
-
-        });
     }
 
     private boolean enableOffline = true;
@@ -295,18 +272,18 @@ stop();
         params1.put(com.baidu.speech.asr.SpeechConstant.ACCEPT_AUDIO_VOLUME, false);
         //活动语音检测
         params1.put(com.baidu.speech.asr.SpeechConstant.VAD, com.baidu.speech.asr.SpeechConstant.VAD_DNN);
-        //开启长语音，需要手动停止录音：ASR_START
-        params1.put(com.baidu.speech.asr.SpeechConstant.VAD_ENDPOINT_TIMEOUT, 0);
+        //开启长语音(无静音超时断句)，需要手动停止录音：ASR_START
+//        params1.put(com.baidu.speech.asr.SpeechConstant.VAD_ENDPOINT_TIMEOUT, 0);
         if (enableOffline) {
             //离线在线并行策略
-            params1.put(com.baidu.speech.asr.SpeechConstant.DECODER, 2);
+//            params1.put(com.baidu.speech.asr.SpeechConstant.DECODER, 2);
         }
         //开启语音音频数据回调
-//        params1.put(com.baidu.speech.asr.SpeechConstant.ACCEPT_AUDIO_DATA, true);
-        //设置文件保存路径
-//        params1.put(com.baidu.speech.asr.SpeechConstant.IN_FILE, "/msc/test.pcm");
-        //保存文件
-//        params1.put(com.baidu.speech.asr.SpeechConstant.OUT_FILE, true);
+        params1.put(com.baidu.speech.asr.SpeechConstant.ACCEPT_AUDIO_DATA, true);
+//        //设置文件回调
+//        params1.put(com.baidu.speech.asr.SpeechConstant.IN_FILE, Environment.getExternalStorageDirectory() + "/msc/baidu.wav");
+//        //保存文件
+        params1.put(com.baidu.speech.asr.SpeechConstant.OUT_FILE, Environment.getExternalStorageDirectory() + "/msc/baidu.wav");
 
         String json = null;
         json = new JSONObject(params1).toString();
@@ -318,45 +295,40 @@ stop();
     private void stop() {
         manager.send(com.baidu.speech.asr.SpeechConstant.ASR_STOP, null, null, 0, 0);
     }
-    String jsonstr="{\"results_recognition\":[\"\"],\"origin_result\":{\"corpus_no\":6475915388511426951,\"err_no\":0,\"result\":{\"word\":[\"\"]},\"sn\":\"61d9af66-f57c-4175-ae9c-aa6140e93d14_s-0\"},\"error\":0,\"best_result\":\"\",\"result_type\":\"final_result\"}";
+
+    String jsonstr = "{\"results_recognition\":[\"\"],\"origin_result\":{\"corpus_no\":6475915388511426951,\"err_no\":0,\"result\":{\"word\":[\"\"]},\"sn\":\"61d9af66-f57c-4175-ae9c-aa6140e93d14_s-0\"},\"error\":0,\"best_result\":\"\",\"result_type\":\"final_result\"}";
+
+    /*语音识别回调*/
     public void onEvent(String s, String s1, byte[] bytes, int i, int i1) {
 
-        String logText = "name:" + s;
-        Log.e(TAG, "EventText:"+s+"\n"+s1);
-        if (!StringUtils.isEmpty(s1)) {
-            logText += ",,,,,parame:" + s1;
-        }
-        if (s.equals("asr.partial")||s=="asr.partial") {
-            jsonstr = s1;
-            Gson gson = new Gson();
-            BaiDuVoice voice = gson.fromJson(jsonstr,BaiDuVoice.class);
-            Log.e(TAG, "BaiDuBean:"+jsonstr+"\n========="+voice.toString());
-            mVoiceEt.setText(voice.best_result+=voice.best_result);
-        }
-        if (s.equals(com.baidu.speech.asr.SpeechConstant.CALLBACK_EVENT_ASR_PARTIAL)){
-            if (s1.contains("\"nlu_result\"")){
-                if (i1 > 0 && bytes.length > 0) {
-                    Log.e(TAG, "BaiDu解析：" + new String(bytes, i, i1));
-                    logText += "，，，解析：" + new String(bytes, i, i1);
-                }
-            }
-        }
-        if (s.equals(com.baidu.speech.asr.SpeechConstant.CALLBACK_EVENT_ASR_READY)) {
-            //引擎就绪，可以说话，ui改变
-            Log.e(TAG, "BaiDuEvent:"+s + "\n." + s1 + "");
-        }
-        if (s.equals(com.baidu.speech.asr.SpeechConstant.CALLBACK_EVENT_ASR_FINISH)) {
-            //识别结束
+        switch (s){
+            case com.baidu.speech.asr.SpeechConstant.CALLBACK_EVENT_ASR_PARTIAL:
+                //成功
+                jsonstr = s1;
+                Gson gson = new Gson();
+                BaiDuVoice voice = gson.fromJson(jsonstr, BaiDuVoice.class);
+                Log.e(TAG, "BaiDuBean:" + jsonstr + "\n=========" + voice.toString());
+                mVoiceTv.setText(jsonstr);
+                mVoiceEt.setText("百度识别结果："+voice.best_result);
+                break;
+            case com.baidu.speech.asr.SpeechConstant.CALLBACK_EVENT_ASR_READY:
+                //引擎就绪，可以说话，ui改变
+                mVoiceBd.setText("正在录音....");
+                break;
+            case com.baidu.speech.asr.SpeechConstant.CALLBACK_EVENT_ASR_FINISH:
+                //识别结束
+                mVoiceBd.setText("百度语音识别");
+                break;
 
-            Log.e(TAG, "BaiDuEventFinish:"+s + "\n." + s1 + "");
 
         }
 
-        printLog(logText);
+
     }
+
     /*动态权限申请*/
-    private void initPermission(){
-        String permission[]={Manifest.permission.RECORD_AUDIO,
+    private void initPermission() {
+        String permission[] = {Manifest.permission.RECORD_AUDIO,
                 Manifest.permission.ACCESS_NETWORK_STATE,
                 Manifest.permission.INTERNET,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -369,20 +341,95 @@ stop();
         }
 
         String tmpList[] = new String[applyList.size()];
-        if (!applyList.isEmpty()){
-            ActivityCompat.requestPermissions(this,applyList.toArray(tmpList),123);
+        if (!applyList.isEmpty()) {
+            ActivityCompat.requestPermissions(this, applyList.toArray(tmpList), 123);
         }
     }
 
-    private void printLog(String text){
-        mVoiceTv.append(text + "\n");
+    //*************************************阿里语音识别********************************************
+    String appKey = "nls-service";
+
+    NlsClient nlsClient;
+    NlsRequest nlsRequest;
+    /*初始化*/
+   private void initAliRecognizer(){
+       /*初始化参数*/
+       nlsRequest = new NlsRequest(new NlsRequestProto(getApplicationContext()));
+       nlsRequest.setApp_key(appKey);
+       nlsRequest.setAsr_sc("opu");
+       nlsClient = NlsClient.newInstance(this, mRecognizerListener,mStageLinstener, nlsRequest);
+       nlsClient.setMaxRecordTime(60000);
+       nlsClient.setMaxStallTime(1000);
+       nlsClient.setMinRecordTime(500);
+       nlsClient.setRecordAutoStop(false);
+//       nlsClient.setMinimalSpeechLength(200);
     }
 
-    private void  loadOfflineEngine(){
-        Map<String, Object> parmes2 = new LinkedHashMap<>();
-        parmes2.put(com.baidu.speech.asr.SpeechConstant.DECODER, 2);
-        parmes2.put(com.baidu.speech.asr.SpeechConstant.ASR_OFFLINE_ENGINE_GRAMMER_FILE_PATH, "assets://baidu_speech_grammar.bsg");
-        manager.send(com.baidu.speech.asr.SpeechConstant.ASR_KWS_LOAD_ENGINE, new JSONObject(parmes2).toString(), null, 0, 0);
-    }
+    /*识别监听*/
 
+    private NlsListener mRecognizerListener=new NlsListener(){
+        public void onRecognizingResult(int status,RecognizedResult result){
+            switch (status){
+
+                case NlsClient.ErrorCode.SUCCESS:
+                    //成功
+                    Log.e(TAG, result.asr_out);
+                    JSON.parse(result.asr_out);
+                    mVoiceTv.setText("success:"+result.asr_out);
+                    AliVoice voice = new Gson().fromJson(result.asr_out,AliVoice.class);
+                    mVoiceEt.setText("阿里识别结果："+voice.result);
+                    break;
+                case NlsClient.ErrorCode.RECOGNIZE_ERROR:
+                    mVoiceTv.setText("RECOGNIZE_ERROR:"+"识别失败");
+                    break;
+                case NlsClient.ErrorCode.RECORDING_ERROR:
+                    mVoiceTv.setText("RECORDING_ERROR:"+result.toString());
+
+                    break;
+                case NlsClient.ErrorCode.NOTHING:
+                    mVoiceTv.setText("NOTHING:"+"没有识别结果");
+                    break;
+            }
+
+        }
+
+    };
+
+
+    /*录音状态监听*/
+    private StageListener mStageLinstener = new StageListener(){
+        //录音开始的回调
+        public void onStartRecording(NlsClient recognizer){
+            Log.e(TAG,"onStartRecording:"+recognizer.getObject());
+            super.onStartRecording(recognizer);
+        }
+        //录音结束的回调
+        public void onStopRecording(NlsClient recognizer){
+            Log.e(TAG,"onStopRecording:"+recognizer.getObject());
+            super.onStopRecording(recognizer);
+        }
+        //识别开始的回调
+        public void onStartRecognizing(NlsClient recognizer){
+            Log.e(TAG,"onStartRecognizing:"+recognizer.getObject().toString());
+            super.onStartRecognizing(recognizer);
+        }
+        //识别结束的回调
+        public void onStopRecognizing(NlsClient recognizer){
+
+            Log.e(TAG, "object:"+recognizer.getObject());
+            //获取录音样本，将样本保存到本地
+            try {
+                OutputStream outputStream=new FileOutputStream(new File(Environment.getExternalStorageDirectory() + "/msc/ali.wav"));
+                outputStream.write(recognizer.getObject());
+                outputStream.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Log.e(TAG,"onStopRecognizing:"+recognizer.getObject().toString());
+            super.onStopRecognizing(recognizer);
+        }
+
+    };
 }
