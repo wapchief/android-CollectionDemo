@@ -1,89 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="150dp">
-    <TextView
-        android:id="@+id/voice_tv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/voice_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp" />
     </ScrollView>
+
     <EditText
         android:id="@+id/voice_et"
         android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
 
-        android:layout_height="wrap_content" />
+        android:layout_marginTop="20dp" />
 
     <LinearLayout
-        android:gravity="center"
-
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
-    <Button
-        android:id="@+id/voice_bt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="讯飞语音识别"
-        android:layout_gravity="center"/>
-    
-    <Button
-        android:id="@+id/voice_play"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="播放录音"/>
+
+        <Button
+            android:id="@+id/voice_bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="讯飞语音识别" />
+
+        <Button
+            android:id="@+id/voice_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="播放录音" />
     </LinearLayout>
+
     <SeekBar
-        android:visibility="gone"
         android:id="@+id/voice_seekbar"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="2dp" />bd
+        android:layout_height="2dp"
+        android:layout_marginTop="20dp"
+        android:visibility="gone" />bd
 
     <LinearLayout
-        android:gravity="center"
-
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <Button
-        android:id="@+id/voice_bd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="百度语音识别"/>
 
-    <Button
-        android:id="@+id/voice_bd_stop"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="百度语音停止"/>
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/voice_xf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="讯飞语音识别（无ui）" />
+
+        <Button
+            android:id="@+id/voice_xf_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="讯飞语音停止" />
 
     </LinearLayout>
+
     <LinearLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
         android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/voice_bd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="百度语音识别" />
+
+        <Button
+            android:id="@+id/voice_bd_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="百度语音停止" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
-    <Button
-        android:id="@+id/voice_ali"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="阿里语音识别"/>
 
-    <Button
-        android:id="@+id/voice_ali_stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="阿里语音停止"/>
+        <Button
+            android:id="@+id/voice_ali"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="阿里语音识别" />
+
+        <Button
+            android:id="@+id/voice_ali_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="阿里语音停止" />
     </LinearLayout>
 </LinearLayout>

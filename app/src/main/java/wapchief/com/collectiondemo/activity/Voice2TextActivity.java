@@ -1,7 +1,6 @@
 package wapchief.com.collectiondemo.activity;
 
 import android.Manifest;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -25,10 +24,10 @@ import com.alibaba.idst.nls.internal.protocol.NlsRequestProto;
 import com.baidu.speech.EventListener;
 import com.baidu.speech.EventManager;
 import com.baidu.speech.EventManagerFactory;
-import com.blankj.utilcode.utils.StringUtils;
 import com.google.gson.Gson;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
+import com.iflytek.cloud.RecognizerListener;
 import com.iflytek.cloud.RecognizerResult;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechError;
@@ -55,7 +54,6 @@ import butterknife.OnClick;
 import wapchief.com.collectiondemo.R;
 import wapchief.com.collectiondemo.bean.AliVoice;
 import wapchief.com.collectiondemo.bean.BaiDuVoice;
-import wapchief.com.collectiondemo.controller.MyRecognizer;
 import wapchief.com.collectiondemo.framework.BaseActivity;
 import wapchief.com.collectiondemo.utils.JsonParser;
 
@@ -83,23 +81,19 @@ public class Voice2TextActivity extends BaseActivity implements EventListener {
     Button mVoiceAli;
     @BindView(R.id.voice_ali_stop)
     Button mVoiceAliStop;
+    @BindView(R.id.voice_xf)
+    Button mVoiceXf;
+    @BindView(R.id.voice_xf_stop)
+    Button mVoiceXfStop;
     private MediaPlayer mp = new MediaPlayer();
     //语音听写
     private SpeechRecognizer recognizer;
     //语音听写dialog
     private RecognizerDialog dialog;
-    private SharedPreferences mSharedPreferences;
-    private boolean mTranslateEnable = false;
-    //引擎类型
-    private String mEngineType = SpeechConstant.TYPE_CLOUD;
     private static String TAG = "Activity-Voice2Text";
     //储存听写结果
     private HashMap<String, String> mIatResults = new LinkedHashMap<String, String>();
     private String text;
-    private String dictationResultStr = "[";
-
-
-    MyRecognizer myRecognizer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -110,21 +104,24 @@ public class Voice2TextActivity extends BaseActivity implements EventListener {
     }
 
     private void initView() {
-//        mSharedPreferences=getSharedPreferences()
         initPermission();
         recognizer = SpeechRecognizer.createRecognizer(this, null);
-        initMP();
-        baiduRecognizer();
+        initMediaPlayer();
+        initBaiduRecognizer();
         initAliRecognizer();
     }
 
-    @OnClick({R.id.voice_bt, R.id.voice_play, R.id.voice_bd, R.id.voice_bd_stop,R.id.voice_ali,R.id.voice_ali_stop})
+    @OnClick({R.id.voice_bt, R.id.voice_play,
+            R.id.voice_bd, R.id.voice_bd_stop,
+            R.id.voice_ali, R.id.voice_ali_stop,
+            R.id.voice_xf, R.id.voice_xf_stop})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.voice_bt:
 
                 //1.创建SpeechRecognizer对象
                 dialog = new RecognizerDialog(Voice2TextActivity.this, initListener);
+//                dialog.setUILanguage();
                 //2.设置参数
                 setParam();
                 //3.设置回调
@@ -147,7 +144,7 @@ public class Voice2TextActivity extends BaseActivity implements EventListener {
                 break;
             case R.id.voice_ali:
                 mVoiceTv.setText("正在录音.....");
-                nlsRequest.authorize("LTAIUw0pk2a4ZpEm","tXhl0Tr4hmZy5RfKvh77rCbrs7wAKT");
+                nlsRequest.authorize("LTAIUw0pk2a4ZpEm", "tXhl0Tr4hmZy5RfKvh77rCbrs7wAKT");
                 nlsClient.start();
                 mVoiceAli.setText("录音中...");
                 break;
@@ -156,6 +153,14 @@ public class Voice2TextActivity extends BaseActivity implements EventListener {
                 nlsClient.stop();
                 mVoiceAli.setText("阿里语音识别");
 //                nlsRequest.
+                break;
+            case R.id.voice_xf:
+                startXF();
+                mVoiceXf.setText("录音中...");
+                break;
+            case R.id.voice_xf_stop:
+                stopXF();
+                mVoiceXf.setText("讯飞语音识别（无ui）");
                 break;
         }
     }
@@ -203,9 +208,6 @@ public class Voice2TextActivity extends BaseActivity implements EventListener {
         //设置音频保存路径
         recognizer.setParameter(SpeechConstant.AUDIO_FORMAT, "wav");
         recognizer.setParameter(SpeechConstant.ASR_AUDIO_PATH, Environment.getExternalStorageDirectory() + "/msc/iat.wav");
-//3.开始听写   mIat.startListening(mRecoListener);
-//听写监听器
-
 
     }
 
@@ -229,13 +231,13 @@ public class Voice2TextActivity extends BaseActivity implements EventListener {
             resultBuffer.append(mIatResults.get(key));
         }
 
-        mVoiceEt.setText("讯飞识别结果："+resultBuffer.toString());
+        mVoiceEt.setText("讯飞识别结果：" + resultBuffer.toString());
         mVoiceEt.setSelection(mVoiceEt.length());
-        mVoiceTv.setText(resultBuffer.toString());
+//        mVoiceTv.setText(resultBuffer.toString());
     }
 
     //播放音频文件
-    private void initMP() {
+    private void initMediaPlayer() {
         File file = new File(Environment.getExternalStorageDirectory(), "/msc/iat.wav");
 
         try {
@@ -252,7 +254,7 @@ public class Voice2TextActivity extends BaseActivity implements EventListener {
 
 
     /*注册服务*/
-    private void baiduRecognizer() {
+    private void initBaiduRecognizer() {
 
         manager = EventManagerFactory.create(this, "asr");
         manager.registerListener(this);
@@ -280,9 +282,9 @@ public class Voice2TextActivity extends BaseActivity implements EventListener {
         }
         //开启语音音频数据回调
         params1.put(com.baidu.speech.asr.SpeechConstant.ACCEPT_AUDIO_DATA, true);
-//        //设置文件回调
+        //设置文件回调
 //        params1.put(com.baidu.speech.asr.SpeechConstant.IN_FILE, Environment.getExternalStorageDirectory() + "/msc/baidu.wav");
-//        //保存文件
+        //保存文件
         params1.put(com.baidu.speech.asr.SpeechConstant.OUT_FILE, Environment.getExternalStorageDirectory() + "/msc/baidu.wav");
 
         String json = null;
@@ -301,7 +303,7 @@ public class Voice2TextActivity extends BaseActivity implements EventListener {
     /*语音识别回调*/
     public void onEvent(String s, String s1, byte[] bytes, int i, int i1) {
 
-        switch (s){
+        switch (s) {
             case com.baidu.speech.asr.SpeechConstant.CALLBACK_EVENT_ASR_PARTIAL:
                 //成功
                 jsonstr = s1;
@@ -309,22 +311,109 @@ public class Voice2TextActivity extends BaseActivity implements EventListener {
                 BaiDuVoice voice = gson.fromJson(jsonstr, BaiDuVoice.class);
                 Log.e(TAG, "BaiDuBean:" + jsonstr + "\n=========" + voice.toString());
                 mVoiceTv.setText(jsonstr);
-                mVoiceEt.setText("百度识别结果："+voice.best_result);
+                mVoiceEt.setText("百度识别结果：" + voice.best_result);
                 break;
             case com.baidu.speech.asr.SpeechConstant.CALLBACK_EVENT_ASR_READY:
                 //引擎就绪，可以说话，ui改变
                 mVoiceBd.setText("正在录音....");
                 break;
             case com.baidu.speech.asr.SpeechConstant.CALLBACK_EVENT_ASR_FINISH:
-                //识别结束
+                //识别结束。包含异常及错误信息都通过该方法解析json获取
                 mVoiceBd.setText("百度语音识别");
                 break;
 
+        }
+
+    }
+
+    //*************************************阿里语音识别********************************************
+    String appKey = "nls-service";
+
+    NlsClient nlsClient;
+    NlsRequest nlsRequest;
+
+    /*初始化*/
+    private void initAliRecognizer() {
+       /*初始化参数*/
+        nlsRequest = new NlsRequest(new NlsRequestProto(getApplicationContext()));
+        nlsRequest.setApp_key(appKey);
+        nlsRequest.setAsr_sc("opu");
+        nlsClient = NlsClient.newInstance(this, mRecognizerListener, mStageLinstener, nlsRequest);
+        nlsClient.setMaxRecordTime(60000);
+        nlsClient.setMaxStallTime(1000);
+        nlsClient.setMinRecordTime(500);
+        nlsClient.setRecordAutoStop(false);
+//       nlsClient.setMinimalSpeechLength(200);
+    }
+
+    /*识别监听*/
+    private NlsListener mRecognizerListener = new NlsListener() {
+        public void onRecognizingResult(int status, RecognizedResult result) {
+            switch (status) {
+
+                case NlsClient.ErrorCode.SUCCESS:
+                    //成功
+                    Log.e(TAG, result.asr_out);
+                    JSON.parse(result.asr_out);
+                    mVoiceTv.setText("success:" + result.asr_out);
+                    AliVoice voice = new Gson().fromJson(result.asr_out, AliVoice.class);
+                    mVoiceEt.setText("阿里识别结果：" + voice.result);
+                    break;
+                case NlsClient.ErrorCode.RECOGNIZE_ERROR:
+                    mVoiceTv.setText("RECOGNIZE_ERROR:" + "识别失败");
+                    break;
+                case NlsClient.ErrorCode.RECORDING_ERROR:
+                    mVoiceTv.setText("RECORDING_ERROR:" + result.toString());
+
+                    break;
+                case NlsClient.ErrorCode.NOTHING:
+                    mVoiceTv.setText("NOTHING:" + "没有识别结果");
+                    break;
+            }
 
         }
 
+    };
 
-    }
+
+    /*录音状态监听*/
+    private StageListener mStageLinstener = new StageListener() {
+        //录音开始的回调
+        public void onStartRecording(NlsClient recognizer) {
+            Log.e(TAG, "onStartRecording:" + recognizer.getObject());
+            super.onStartRecording(recognizer);
+        }
+
+        //录音结束的回调
+        public void onStopRecording(NlsClient recognizer) {
+            Log.e(TAG, "onStopRecording:" + recognizer.getObject());
+            super.onStopRecording(recognizer);
+        }
+
+        //识别开始的回调
+        public void onStartRecognizing(NlsClient recognizer) {
+            Log.e(TAG, "onStartRecognizing:" + recognizer.getObject().toString());
+            super.onStartRecognizing(recognizer);
+        }
+
+        //识别结束的回调
+        public void onStopRecognizing(NlsClient recognizer) {
+            //获取录音样本，将样本保存到本地
+            try {
+                OutputStream outputStream = new FileOutputStream(new File(Environment.getExternalStorageDirectory() + "/msc/ali.wav"));
+                outputStream.write(recognizer.getObject());
+                outputStream.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Log.e(TAG, "onStopRecognizing:" + recognizer.getObject().toString());
+            super.onStopRecognizing(recognizer);
+        }
+
+    };
+
 
     /*动态权限申请*/
     private void initPermission() {
@@ -346,90 +435,59 @@ public class Voice2TextActivity extends BaseActivity implements EventListener {
         }
     }
 
-    //*************************************阿里语音识别********************************************
-    String appKey = "nls-service";
-
-    NlsClient nlsClient;
-    NlsRequest nlsRequest;
-    /*初始化*/
-   private void initAliRecognizer(){
-       /*初始化参数*/
-       nlsRequest = new NlsRequest(new NlsRequestProto(getApplicationContext()));
-       nlsRequest.setApp_key(appKey);
-       nlsRequest.setAsr_sc("opu");
-       nlsClient = NlsClient.newInstance(this, mRecognizerListener,mStageLinstener, nlsRequest);
-       nlsClient.setMaxRecordTime(60000);
-       nlsClient.setMaxStallTime(1000);
-       nlsClient.setMinRecordTime(500);
-       nlsClient.setRecordAutoStop(false);
-//       nlsClient.setMinimalSpeechLength(200);
+    //=====================================讯飞=======================================
+    //开启
+    private void startXF() {
+        setParam();
+        recognizer.startListening(recognizerListener);
     }
 
-    /*识别监听*/
+    //停止
+    private void stopXF() {
 
-    private NlsListener mRecognizerListener=new NlsListener(){
-        public void onRecognizingResult(int status,RecognizedResult result){
-            switch (status){
+        recognizer.stopListening();
+    }
 
-                case NlsClient.ErrorCode.SUCCESS:
-                    //成功
-                    Log.e(TAG, result.asr_out);
-                    JSON.parse(result.asr_out);
-                    mVoiceTv.setText("success:"+result.asr_out);
-                    AliVoice voice = new Gson().fromJson(result.asr_out,AliVoice.class);
-                    mVoiceEt.setText("阿里识别结果："+voice.result);
-                    break;
-                case NlsClient.ErrorCode.RECOGNIZE_ERROR:
-                    mVoiceTv.setText("RECOGNIZE_ERROR:"+"识别失败");
-                    break;
-                case NlsClient.ErrorCode.RECORDING_ERROR:
-                    mVoiceTv.setText("RECORDING_ERROR:"+result.toString());
 
-                    break;
-                case NlsClient.ErrorCode.NOTHING:
-                    mVoiceTv.setText("NOTHING:"+"没有识别结果");
-                    break;
-            }
+    /*监听*/
+    private RecognizerListener recognizerListener = new RecognizerListener() {
+        @Override
+        public void onVolumeChanged(int i, byte[] bytes) {
+            //音量变化
+        }
+
+        @Override
+        public void onBeginOfSpeech() {
+            //开始说话
+            Log.e(TAG, "XF开始说话");
+        }
+
+        @Override
+        public void onEndOfSpeech() {
+            //结束说话
+            Log.e(TAG, "XF结束说话");
 
         }
 
-    };
-
-
-    /*录音状态监听*/
-    private StageListener mStageLinstener = new StageListener(){
-        //录音开始的回调
-        public void onStartRecording(NlsClient recognizer){
-            Log.e(TAG,"onStartRecording:"+recognizer.getObject());
-            super.onStartRecording(recognizer);
-        }
-        //录音结束的回调
-        public void onStopRecording(NlsClient recognizer){
-            Log.e(TAG,"onStopRecording:"+recognizer.getObject());
-            super.onStopRecording(recognizer);
-        }
-        //识别开始的回调
-        public void onStartRecognizing(NlsClient recognizer){
-            Log.e(TAG,"onStartRecognizing:"+recognizer.getObject().toString());
-            super.onStartRecognizing(recognizer);
-        }
-        //识别结束的回调
-        public void onStopRecognizing(NlsClient recognizer){
-
-            Log.e(TAG, "object:"+recognizer.getObject());
-            //获取录音样本，将样本保存到本地
-            try {
-                OutputStream outputStream=new FileOutputStream(new File(Environment.getExternalStorageDirectory() + "/msc/ali.wav"));
-                outputStream.write(recognizer.getObject());
-                outputStream.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Log.e(TAG,"onStopRecognizing:"+recognizer.getObject().toString());
-            super.onStopRecognizing(recognizer);
+        @Override
+        public void onResult(RecognizerResult recognizerResult, boolean b) {
+            //返回结果需要判断null
+            text = JsonParser.parseIatResult(recognizerResult.getResultString());
+            Log.e(TAG, "XFResult:" + text + "\n" + recognizerResult.getResultString());
+            mVoiceTv.setText(recognizerResult.getResultString());
+            printResult(recognizerResult);
         }
 
+        @Override
+        public void onError(SpeechError speechError) {
+            //错误回调
+            Log.e(TAG, "XFError:" + speechError.toString());
+
+        }
+
+        @Override
+        public void onEvent(int i, int i1, int i2, Bundle bundle) {
+            //事件拓展
+        }
     };
 }
