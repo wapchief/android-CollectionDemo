@@ -8,16 +8,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +25,7 @@ import wapchief.com.collectiondemo.activity.GlidePicassoActivity;
 import wapchief.com.collectiondemo.activity.JPushIMActivity;
 import wapchief.com.collectiondemo.activity.MessageActivity;
 import wapchief.com.collectiondemo.activity.OkhttpRetrofitActivity;
+import wapchief.com.collectiondemo.activity.RecyclerViewActivity;
 import wapchief.com.collectiondemo.activity.SearchViewGreenDaoActivity;
 import wapchief.com.collectiondemo.activity.SlidingUpMeiTuanActivity;
 import wapchief.com.collectiondemo.activity.UpdatePhotoActivity;

@@ -9,17 +9,12 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-import android.widget.VideoView;
-
-import com.airbnb.lottie.LottieAnimationView;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 import cn.jpush.android.api.JPushInterface;
 import wapchief.com.collectiondemo.MainActivity;
-import wapchief.com.collectiondemo.RecyclerViewActivity;
 import wapchief.com.collectiondemo.framework.BaseApplication;
 import wapchief.com.collectiondemo.utils.ToastsUtils;
 
@@ -43,7 +38,8 @@ public class RootActivity extends ListActivity {
             "仿美团、饿了么购物车本地存储数据",
             "XhsEmoticonsKeyboard仿qq微信键盘",
             "VideoPlayer播放器",
-            "Voice转文本(讯飞语音+百度语音)"
+            "Voice转文本(讯飞语音+百度语音)",
+            "随机云圆形标签"
     };
 
     private Class[] mActivities = new Class[]{
@@ -61,7 +57,8 @@ public class RootActivity extends ListActivity {
             ShoppingCartActivity.class,
             KeyBoardActivity.class,
             VideoPlayerActivity.class,
-            Voice2TextActivity.class
+            Voice2TextActivity.class,
+            CloudTagActivity.class
     };
 
     @Override

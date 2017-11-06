@@ -70,7 +70,7 @@
 
         </activity>
         <activity
-            android:name=".RecyclerViewActivity"
+            android:name=".activity.RecyclerViewActivity"
             android:persistableMode="persistAcrossReboots"/>
         <!--FlowLayout-->
         <activity android:name=".activity.FlowLayoutActivity"/>

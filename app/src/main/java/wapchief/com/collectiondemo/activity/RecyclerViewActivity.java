@@ -1,4 +1,4 @@
-package wapchief.com.collectiondemo;
+package wapchief.com.collectiondemo.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ import java.util.List;
 import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import wapchief.com.collectiondemo.R;
 import wapchief.com.collectiondemo.adapter.RecyclerViewAdapter;
 import wapchief.com.collectiondemo.customView.DividItemDecoration;
 import wapchief.com.collectiondemo.framework.system.SystemStatusManager;

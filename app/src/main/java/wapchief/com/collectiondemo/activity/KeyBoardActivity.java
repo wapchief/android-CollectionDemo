@@ -174,6 +174,9 @@ public class KeyBoardActivity extends BaseActivity {
         }
         // add a filter
         mEkBar.getEtChat().addEmoticonFilter(new EmojiFilter());
+
     }
+
+
 
 }
