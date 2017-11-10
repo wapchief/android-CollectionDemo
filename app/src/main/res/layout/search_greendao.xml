@@ -4,9 +4,11 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     xmlns:zhy="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:windowSoftInputMode="stateHidden">
 
     <RelativeLayout
+        android:id="@+id/search_main"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@color/theme_lanse"
@@ -30,7 +32,7 @@
             android:gravity="center_vertical"
             android:iconifiedByDefault="false"
             android:queryHint="请输入搜索内容"
-            android:background="@drawable/flowlayout_shap"
+            android:background="@drawable/shape_search"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true">
 

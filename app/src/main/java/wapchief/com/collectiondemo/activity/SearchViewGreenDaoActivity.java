@@ -1,7 +1,6 @@
 package wapchief.com.collectiondemo.activity;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -31,14 +30,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import wapchief.com.collectiondemo.R;
 import wapchief.com.collectiondemo.adapter.SearchViewGreenDaoAdapter;
-import wapchief.com.collectiondemo.framework.BaseApplication;
 import wapchief.com.collectiondemo.framework.GreenDaoHelper;
-import wapchief.com.collectiondemo.framework.system.SystemStatusManager;
 import wapchief.com.collectiondemo.framework.system.X_SystemBarUI;
-import wapchief.com.collectiondemo.greendao.model.User;
-import wapchief.com.collectiondemo.greendao.DaoMaster;
 import wapchief.com.collectiondemo.greendao.DaoSession;
 import wapchief.com.collectiondemo.greendao.UserDao;
+import wapchief.com.collectiondemo.greendao.model.User;
 
 /**
  * Created by Wu on 2017/4/26 0026 下午 5:41.
@@ -71,13 +67,22 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
     View viewflowlayout;
     Context context;
     GreenDaoHelper helper;
+    @BindView(R.id.search_main)
+    RelativeLayout mSearchMain;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_greendao);
         ButterKnife.bind(this);
-        X_SystemBarUI.initSystemBar(this,R.color.colorPrimary);
+        X_SystemBarUI.initSystemBar(this, R.color.colorPrimary);
         mContext = SearchViewGreenDaoActivity.this;
+//        searchview.setIconified(false);
+//        searchview.setFocusable(false);
+        searchview.setQueryHint("请输入");
+//        searchview.setIconifiedByDefault(false);
+         searchview.onActionViewExpanded();
+         searchview.clearFocus();
         delectUnderline();
         //初始化数据库
         initDbHelp();
@@ -86,7 +91,7 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
         searchGreendaoLv.setTextFilterEnabled(true);
     }
 
-//    /*初始化数据库相关*/
+    //    /*初始化数据库相关*/
     private void initDbHelp() {
         helper = new GreenDaoHelper(this);
         userDao = helper.initDao().getUserDao();
@@ -102,7 +107,7 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
                 final TextView tv = (TextView) LayoutInflater.from(mContext).inflate(
                         R.layout.search_page_flowlayout_tv, searchGreendaoFlowlayout, false);
                 tv.setText(s);
-                tv.setOnClickListener( new View.OnClickListener() {
+                tv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(mContext, "" + s, Toast.LENGTH_SHORT).show();
@@ -149,10 +154,10 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
         //查询所有
         list = userDao.queryBuilder().list();
         //这里用于判断是否有数据
-        if (list.size()==0){
+        if (list.size() == 0) {
             searchGreendaoRl.setVisibility(View.VISIBLE);
             searchGreendaoDelete.setVisibility(View.GONE);
-        }else {
+        } else {
             searchGreendaoRl.setVisibility(View.GONE);
             searchGreendaoDelete.setVisibility(View.VISIBLE);
         }
@@ -174,7 +179,7 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
                 userDao.deleteInTx(list2);
                 //添加
                 if (!name.equals(""))
-                userDao.insert(new User(null, name));
+                    userDao.insert(new User(null, name));
                 Toast.makeText(mContext, "插入数据成功:" + name, Toast.LENGTH_SHORT).show();
             } else {
                 //删除第一条数据，用于替换最后一条搜索
@@ -185,7 +190,7 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
                 userDao.deleteInTx(list3);
                 //添加
                 if (!name.equals(""))
-                userDao.insert(new User(null, name));
+                    userDao.insert(new User(null, name));
             }
             updateList();
         } catch (Exception e) {
@@ -236,16 +241,16 @@ public class SearchViewGreenDaoActivity extends AppCompatActivity {
      * 去掉searchview下划线
      */
     public void delectUnderline() {
-        if (searchGreendaoFlowlayout != null) {
+        if (searchview != null) {
             try {        //--拿到字节码
-                Class<?> argClass = searchGreendaoFlowlayout.getClass();
+                Class<?> argClass = searchview.getClass();
                 //--指定某个私有属性,mSearchPlate是搜索框父布局的名字
-                Field ownField = argClass.getDeclaredField("mSearchPlate");
+                Field ownField = argClass.getDeclaredField("mSearchMain");
                 //--暴力反射,只有暴力反射才能拿到私有属性
                 ownField.setAccessible(true);
-                View mView = (View) ownField.get(searchGreendaoFlowlayout);
+                View mView = (View) ownField.get(searchview);
                 //--设置背景
-                mView.setBackgroundColor(Color.TRANSPARENT);
+                mView.setBackgroundColor(R.drawable.shape_search);
             } catch (Exception e) {
                 e.printStackTrace();
             }

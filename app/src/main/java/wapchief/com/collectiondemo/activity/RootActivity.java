@@ -39,7 +39,7 @@ public class RootActivity extends ListActivity {
             "XhsEmoticonsKeyboard仿qq微信键盘",
             "VideoPlayer播放器",
             "Voice转文本(讯飞语音+百度语音)",
-            "随机云圆形标签"
+//            "随机云圆形标签"
     };
 
     private Class[] mActivities = new Class[]{
@@ -58,7 +58,7 @@ public class RootActivity extends ListActivity {
             KeyBoardActivity.class,
             VideoPlayerActivity.class,
             Voice2TextActivity.class,
-            CloudTagActivity.class
+//            CloudTagActivity.class
     };
 
     @Override
