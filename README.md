@@ -3,7 +3,7 @@
 
 下载APK：
 
-[![Crates.io](https://img.shields.io/badge/downloads-APK-blue.svg)](https://github.com/wapchief/android-CollectionDemo/raw/master/apk/app-debug.apk)
+[![Crates.io](https://img.shields.io/badge/downloads-APK-blue.svg)](https://fir.im/jy28)
 
 
 更新日志：
