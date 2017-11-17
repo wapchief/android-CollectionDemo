@@ -18,6 +18,7 @@
 ![](https://github.com/wapchief/android-CollectionDemo/blob/master/screenshot/device-2017-11-17-151731.png?raw=true)
 
 
+
 __所有页面均使用ButterKnife绑定View。相关教程发表在简书。__
 
 >
