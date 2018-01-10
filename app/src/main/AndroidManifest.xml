@@ -113,6 +113,8 @@
 
         </activity>
         <activity android:name=".activity.CloudTagActivity"/>
+
+        <activity android:name=".activity.MPChartActivity"/>
         <!--******************************百度语音**********************************-->
         <meta-data android:name="com.baidu.speech.APP_ID"
             android:value="8172882" />

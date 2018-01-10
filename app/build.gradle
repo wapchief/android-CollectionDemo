@@ -134,4 +134,7 @@ dependencies {
     compile 'cn.jzvd:jiaozivideoplayer:6.0.1'
     compile files('libs/NlsClientSdk.jar')
     compile 'com.alibaba:fastjson:1.1.56.android'
+
+    //图表MP-Chart
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 }

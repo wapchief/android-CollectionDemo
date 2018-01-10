@@ -39,6 +39,7 @@ public class RootActivity extends ListActivity {
             "XhsEmoticonsKeyboard仿qq微信键盘",
             "VideoPlayer播放器",
             "Voice转文本(讯飞语音+百度语音)",
+            "MP-Chart图表、走势图"
 //            "随机云圆形标签"
     };
 
@@ -58,6 +59,7 @@ public class RootActivity extends ListActivity {
             KeyBoardActivity.class,
             VideoPlayerActivity.class,
             Voice2TextActivity.class,
+            MPChartActivity.class,
 //            CloudTagActivity.class
     };
 

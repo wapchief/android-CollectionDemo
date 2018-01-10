@@ -34,8 +34,8 @@ public class GlidePicassoActivity extends AppCompatActivity {
     @BindView(R.id.picasso_bt)
     Button picassoBt;
 
-    String url = "http://upload.jianshu.io/users/upload_avatars/2858691/4db2d471c01c?imageMogr2/auto-orient/strip|imageView2/1/w/240/h/240";
-    String url2 = "http://upload.jianshu.io/users/upload_avatars/1767483/6321b54d19be.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/144/h/144";
+    String url = "http://preview.mypsy365.com/files/default/2017/11-28/144356ca4837921586.jpg";
+    String url2 = "https://preview.mypsy365.com/files/default/2017/11-28/144356ca4837921586.jpg";
     Uri ur = Uri.parse(url);
     Uri ur2 = Uri.parse(url2);
     @BindView(R.id.clean_bt)
