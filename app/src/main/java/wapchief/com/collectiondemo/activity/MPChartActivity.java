@@ -6,15 +6,26 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.text.Html;
+import android.util.Log;
 
+import com.blankj.utilcode.utils.LogUtils;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.MPPointF;
 import com.github.mikephil.charting.utils.Utils;
 
 import java.util.ArrayList;
@@ -33,16 +44,98 @@ public class MPChartActivity extends BaseActivity {
 
     @BindView(R.id.chartview)
     LineChart mChartview;
+    @BindView(R.id.pie_chart)
+    PieChart mPieChart;
 
+    //饼数
+    private int count = 2;
+    //饼总长度
+    private int range = 100;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
         ButterKnife.bind(this);
-        initView();
+        initViewLine();
+        initViewPie();
     }
 
-    private void initView() {
+    /*圆形*/
+    private void initViewPie() {
+
+        //中间圆盘的半径%,用来决定饼边框的大小
+        mPieChart.setHoleRadius(80);
+        mPieChart.setDrawCenterText(true);
+        String sum = 25 + "";
+        String s= sum+"%";
+        mPieChart.setCenterText(
+                Html.fromHtml("<font color='#FF4055'><big><big><big><big><big>"+s+"</big></big></big></big></big></font><br><font color='#9b9b9b'>超过全站</font>"));
+        //描述信息
+        mPieChart.setDescription(null);
+        setDataPie(2,100);
+//        Highlight[] highlights = {new Highlight(0,, 0, 0),new Highlight(0, 0, 0)};
+//        mPieChart.highlightValue(new Highlight(0, 0, 0));
+//        mPieChart.needsHighlight(1);
+//        LogUtils.e(mPieChart.getX()+"");
+        mPieChart.highlightValue(new Highlight(1,0,4),false);
+
+        //比例块
+        Legend mLegend = mPieChart.getLegend();
+        mLegend.setEnabled(false);
+    }
+
+
+    private void setDataPie(int count, float range) {
+
+        float mult = range;
+
+        ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
+
+        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
+        // the chart.
+        //添加数据
+        entries.add(new PieEntry(100-25));
+        entries.add(new PieEntry(25));
+
+        PieDataSet dataSet = new PieDataSet(entries, "");
+
+
+        dataSet.setDrawIcons(false);
+        dataSet.setSliceSpace(5f);
+        dataSet.setIconsOffset(new MPPointF(0, 40));
+        dataSet.setSelectionShift(5f);
+
+        // add a lot of colors
+
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+
+            colors.add(getResources().getColor(R.color.colorPrimary));
+
+            colors.add(getResources().getColor(R.color.red));
+
+
+        colors.add(ColorTemplate.getHoloBlue());
+
+        dataSet.setColors(colors);
+        //dataSet.setSelectionShift(0f);
+
+        //轮盘显示的%
+        PieData data = new PieData(dataSet);
+        data.setValueFormatter(new PercentFormatter());
+        data.setValueTextSize(0);
+        data.setValueTextColor(Color.WHITE);
+//        data.setValueTypeface(mTfLight);
+        mPieChart.setData(data);
+
+        // undo all highlights
+        mPieChart.highlightValues(null);
+
+        mPieChart.invalidate();
+    }
+
+
+    /*线性*/
+    private void initViewLine() {
         //禁用触摸事件
         mChartview.setTouchEnabled(false);
         //禁用拖动事件
@@ -68,7 +161,7 @@ public class MPChartActivity extends BaseActivity {
         //无右轴
         mChartview.getAxisRight().setEnabled(false);
         //图标数据源
-        setData(7,50);
+        setData(7, 50);
 
         List<ILineDataSet> sets = mChartview.getData().getDataSets();
         for (ILineDataSet iSet : sets) {
@@ -85,11 +178,11 @@ public class MPChartActivity extends BaseActivity {
         mChartview.invalidate();
     }
 
-    private void setData(int count,float range) {
+    private void setData(int count, float range) {
         ArrayList<Entry> values = new ArrayList<Entry>();
 
         for (int i = 0; i < count; i++) {
-
+            //随机数
             float val = (float) (Math.random() * range) + 3;
             values.add(new Entry(i, val, getResources().getDrawable(R.drawable.ic_message)));
         }
