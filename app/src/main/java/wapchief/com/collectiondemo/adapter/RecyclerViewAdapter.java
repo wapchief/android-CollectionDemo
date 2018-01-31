@@ -13,7 +13,7 @@ import wapchief.com.collectiondemo.R;
 
 
 /**
- * Created by WuBing on 2017/1/10 0010 下午 12:18.
+ * Created by Wu on 2017/1/10 0010 下午 12:18.
  * 描述：通用的RecyclerViewAdapter
  */
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

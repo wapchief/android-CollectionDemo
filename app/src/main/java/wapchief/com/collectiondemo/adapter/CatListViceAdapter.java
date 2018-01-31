@@ -80,8 +80,8 @@ public class CatListViceAdapter extends BaseAdapter {
                 public void onClick(View v) {
 //                    context.handlerCarNum(1,dataList.valueAt(position),true);
                     viewholder.iv_remove.setVisibility(View.VISIBLE);
-                    goodsAdapter.notifyDataSetChanged();
-
+//                    viewholder.notify();
+//                    notify();
                 }
             });
             viewholder.iv_remove.setOnClickListener(new View.OnClickListener() {
@@ -92,7 +92,8 @@ public class CatListViceAdapter extends BaseAdapter {
                         viewholder.tv_count.setVisibility(View.GONE);
                     }
 //                    activity.handlerCarNum(0,dataList.valueAt(position),true);
-                    goodsAdapter.notifyDataSetChanged();
+//                    goodsAdapter.notifyDataSetChanged();
+//                    notify();
                 }
             });
 

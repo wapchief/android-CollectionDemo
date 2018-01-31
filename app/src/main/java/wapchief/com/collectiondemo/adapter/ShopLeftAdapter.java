@@ -11,9 +11,7 @@ import java.util.List;
 
 import wapchief.com.collectiondemo.R;
 
-/**
- * 类名称： 类描述： 创建人： 夏正伟 创建时间：2016-4-22
- */
+
 public class ShopLeftAdapter extends BaseAdapter {
 	private Context context;
 	private List<String> list;
