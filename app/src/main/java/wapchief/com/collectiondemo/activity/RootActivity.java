@@ -1,7 +1,10 @@
 package wapchief.com.collectiondemo.activity;
 
+import android.annotation.SuppressLint;
 import android.app.ListActivity;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -9,9 +12,13 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import cn.jpush.android.api.JPushInterface;
 import wapchief.com.collectiondemo.MainActivity;
@@ -39,8 +46,9 @@ public class RootActivity extends ListActivity {
             "XhsEmoticonsKeyboard仿qq微信键盘",
             "VideoPlayer播放器",
             "Voice转文本(讯飞语音+百度语音)",
-            "MP-Chart图表、走势图"
-//            "随机云圆形标签"
+            "MP-Chart图表、走势图",
+            "直播点赞飘星效果",
+            "可折叠的TextView"
     };
 
     private Class[] mActivities = new Class[]{
@@ -60,7 +68,8 @@ public class RootActivity extends ListActivity {
             VideoPlayerActivity.class,
             Voice2TextActivity.class,
             MPChartActivity.class,
-//            CloudTagActivity.class
+            LikeStarAnimationActivity.class,
+            ExpandableTextViewActivity.class
     };
 
     @Override
@@ -86,7 +95,7 @@ public class RootActivity extends ListActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            exitBy2Click();
+            exitSystem();
         }
         return false;
     }
@@ -95,21 +104,23 @@ public class RootActivity extends ListActivity {
      * 双击退出
      */
     private static Boolean isExit = false;
-
-    private void exitBy2Click() {
-        Timer tExit = null;
+    /**
+     * 双击退出
+     */
+    private void exitSystem() {
+        // 准备退出
+        ScheduledExecutorService service = null;
         if (isExit == false) {
-            isExit = true; // 准备退出
-            ToastsUtils.showShort(this,"再按一次退出程序");
-            tExit = new Timer();
-            tExit.schedule(new TimerTask() {
+            isExit = true;
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            service = new ScheduledThreadPoolExecutor(2);
+            service.schedule(new Runnable() {
                 @Override
                 public void run() {
-                    isExit = false; // 取消退出
+                    isExit = false;
                 }
-            }, 2000); // 如果2秒钟内没有按下返回键，则启动定时器取消掉刚才执行的任务
-
-        } else {
+            },2, TimeUnit.SECONDS);
+        }else {
             finish();
             System.exit(0);
         }

@@ -70,6 +70,7 @@ public class MyReceiver extends BroadcastReceiver {
             //打开数据库弹窗，手动选择是否保存
             Intent intent1 = new Intent(context, JPushDialogActivity.class);
             intent1.putExtra("MESSAGE", content);
+            intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent1);
 
             Log.d(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);

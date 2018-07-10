@@ -39,6 +39,7 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.TYPE_APPLICATION_OVERLAY"/>
     <!--获取手机录音机使用权限，听写、识别、语义理解需要用到此权限 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <application
@@ -91,6 +92,7 @@
             android:persistableMode="persistAcrossReboots"/>
         <!--推送弹窗-->
         <activity android:name=".activity.JPushDialogActivity"
+            android:theme="@style/MyTranslucent"
             android:persistableMode="persistAcrossReboots"/>
         <!--仿美团-->
         <activity android:name=".activity.SlidingUpMeiTuanActivity"
@@ -115,6 +117,9 @@
         <activity android:name=".activity.CloudTagActivity"/>
 
         <activity android:name=".activity.MPChartActivity"/>
+        <activity android:name=".activity.LikeStarAnimationActivity"/>
+
+        <activity android:name=".activity.ExpandableTextViewActivity"/>
         <!--******************************百度语音**********************************-->
         <meta-data android:name="com.baidu.speech.APP_ID"
             android:value="8172882" />

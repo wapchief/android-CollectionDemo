@@ -1,5 +1,6 @@
 package wapchief.com.collectiondemo.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -27,7 +28,7 @@ import wapchief.com.collectiondemo.greendao.model.Message;
  * 推送的弹窗
  */
 
-public class JPushDialogActivity extends AppCompatActivity {
+public class JPushDialogActivity extends Activity {
 
     //收到的消息
     @BindView(R.id.dialog_message)
@@ -83,6 +84,7 @@ public class JPushDialogActivity extends AppCompatActivity {
                 messageDao.insert(new Message(null, "手动：" + str, message));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                JPushDialogActivity.this.finish();
                 break;
         }
     }
