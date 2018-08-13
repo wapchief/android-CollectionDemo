@@ -73,6 +73,7 @@ public class JPushDialogActivity extends Activity {
             case R.id.dialog_message:
                 break;
             case R.id.dialog_cancel:
+
                 finish();
                 break;
             case R.id.dialog_yes:
