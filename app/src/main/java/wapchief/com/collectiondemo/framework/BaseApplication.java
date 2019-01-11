@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.speech.SpeechRecognizer;
 
 import com.alibaba.idst.nls.NlsClient;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.Utils;
 import com.github.yuweiguocn.library.greendao.MigrationHelper;
 import com.iflytek.cloud.Setting;
 import com.iflytek.cloud.SpeechConstant;
@@ -51,6 +53,8 @@ public class BaseApplication extends Application {
 //        Setting.setShowLog(true);
         NlsClient.openLog(true);
         NlsClient.configure(mContext);
+        Utils.init(this);
+        LogUtils.getConfig().setLogSwitch(true);
         //数据库升级
         updateDB();
     }

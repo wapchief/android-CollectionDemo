@@ -14,6 +14,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.LogUtils;
+
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ScheduledExecutorService;
@@ -76,7 +78,7 @@ public class RootActivity extends ListActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setListAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mTitles));
-        Log.e("id===push===", JPushInterface.getRegistrationID(BaseApplication.mBaseApplication));
+        LogUtils.e("id===push===:" + JPushInterface.getRegistrationID(BaseApplication.mBaseApplication));
     }
 
     @Override

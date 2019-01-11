@@ -231,7 +231,7 @@ public class UpdatePhotoActivity extends AppCompatActivity{
             intent.setClipData(ClipData.newRawUri(MediaStore.EXTRA_OUTPUT, uri));
             uritempFile = uri;
         } else {
-            uritempFile = Uri.parse("file://" + "/" + Environment.getExternalStorageDirectory().getPath() + "/" + "small.jpg");
+            uritempFile = Uri.parse("file://" + "/" + Environment.getExternalStorageDirectory().getPath() + "/small.jpg");
         }
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uritempFile);
         intent.putExtra("return-data", false);

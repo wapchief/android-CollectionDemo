@@ -5,18 +5,26 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import wapchief.com.collectiondemo.R;
+import wapchief.com.collectiondemo.bean.EmojiBean;
 import wapchief.com.collectiondemo.framework.BaseApplication;
 import wapchief.com.collectiondemo.greendao.DaoMaster;
 import wapchief.com.collectiondemo.greendao.DaoSession;
@@ -52,10 +60,30 @@ public class JPushDialogActivity extends Activity {
         initView();
     }
 
+    String strEmoji = "😆";
+    Pattern emoji = Pattern.compile("[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]",
+            Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE);
     private void initView() {
-        if (getIntent().hasExtra("MESSAGE"))
-        message = getIntent().getStringExtra("MESSAGE");
-        dialogMessage.setText("收到的推送："+message);
+
+        String strEmj = new Gson().toJson(new EmojiBean(strEmoji));
+        LogUtils.e("反序列化："+strEmj);
+        if (getIntent().hasExtra("MESSAGE")) {
+            message = getIntent().getStringExtra("MESSAGE");
+        }
+//        LogUtils.e("原始："+message);
+//        Type type = new TypeToken<String>(){}.getType();
+//        EmojiBean s = new Gson().fromJson(message, EmojiBean.class);
+//        LogUtils.e("解析："+s.toString());
+//        Matcher matcher = emoji.matcher(message);
+        //方便格式化表情
+//        SpannableString spannableString = new SpannableString(message);
+        dialogMessage.setText(message);
+//        while(matcher.find()) {
+//            Log.e("接收到表情", "");
+//            // 输入表情
+//
+//        }
+
     }
 
     /*初始化数据库相关*/
@@ -89,4 +117,5 @@ public class JPushDialogActivity extends Activity {
                 break;
         }
     }
+
 }

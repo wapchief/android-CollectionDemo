@@ -9,7 +9,6 @@ import android.support.v4.content.ContextCompat;
 import android.text.Html;
 import android.util.Log;
 
-import com.blankj.utilcode.utils.LogUtils;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;

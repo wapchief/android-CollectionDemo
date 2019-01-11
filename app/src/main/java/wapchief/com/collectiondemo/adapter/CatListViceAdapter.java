@@ -1,6 +1,7 @@
 package wapchief.com.collectiondemo.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.blankj.utilcode.utils.EmptyUtils;
 
 import java.util.List;
 
@@ -67,7 +67,7 @@ public class CatListViceAdapter extends BaseAdapter {
             viewholder.tv_count.setText(""+dataList.get(position).getNum());
             viewholder.tv_price.setText(dataList.get(position).getPrice()+"");
         if (dataList.get(position).getNum()<=0||viewholder.tv_count.getText().equals("0")||
-                EmptyUtils.isEmpty(dataList.get(position).getNum())){
+                TextUtils.isEmpty(dataList.get(position).getNum()+"")){
             viewholder.iv_remove.setVisibility(View.GONE);
             viewholder.tv_count.setVisibility(View.GONE);
 

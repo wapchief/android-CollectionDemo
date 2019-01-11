@@ -1,5 +1,6 @@
 package wapchief.com.collectiondemo.broadcase;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -7,8 +8,13 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
+
+
+import com.blankj.utilcode.util.LogUtils;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,10 +24,13 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.logging.Logger;
 
+import cn.jpush.android.api.CustomPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
 import wapchief.com.collectiondemo.MainActivity;
+import wapchief.com.collectiondemo.R;
 import wapchief.com.collectiondemo.activity.JPushDialogActivity;
 import wapchief.com.collectiondemo.activity.MessageActivity;
+import wapchief.com.collectiondemo.bean.EmojiBean;
 import wapchief.com.collectiondemo.bean.JPushMessageBean;
 import wapchief.com.collectiondemo.bean.JPushModel;
 import wapchief.com.collectiondemo.framework.BaseApplication;
@@ -29,6 +38,8 @@ import wapchief.com.collectiondemo.greendao.DaoMaster;
 import wapchief.com.collectiondemo.greendao.DaoSession;
 import wapchief.com.collectiondemo.greendao.MessageDao;
 import wapchief.com.collectiondemo.greendao.model.Message;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 /**
  * Created by Wu on 2017/4/7 0007 下午 2:40.
@@ -44,19 +55,19 @@ public class MyReceiver extends BroadcastReceiver {
         Bundle bundle = intent.getExtras();
         //初始化数据库
         initDbHelp();
-        Log.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
+        LogUtils.e("[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
 
         if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
             String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
-            Log.d(TAG, "[MyReceiver] 接收Registration Id : " + regId);
+            LogUtils.e("[MyReceiver] 接收Registration Id : " + regId);
             //send the Registration Id to your server...
 
         } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
-            Log.d(TAG, "[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
+            LogUtils.e("[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
 //            processCustomMessage(context, bundle);
-
+            customMessage(context, bundle.getString(JPushInterface.EXTRA_MESSAGE));
         } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
-            Log.d(TAG, "[MyReceiver] 接收到推送下来的通知:" + bundle.getString(JPushInterface.EXTRA_ALERT));
+            LogUtils.e("[MyReceiver] 接收到推送下来的通知:" + bundle.getString(JPushInterface.EXTRA_ALERT));
             String content = bundle.getString(JPushInterface.EXTRA_ALERT);
 //            mContentBean.setN_content(bundle.getString(JPushInterface.EXTRA_ALERT));
 //            Log.e("mContentBean-Content",mContentBean.getN_content());
@@ -73,10 +84,10 @@ public class MyReceiver extends BroadcastReceiver {
             intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent1);
 
-            Log.d(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
+            LogUtils.e("[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
 
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
-            Log.d(TAG, "[MyReceiver] 用户点击打开了通知");
+            LogUtils.e("[MyReceiver] 用户点击打开了通知");
 
             //打开自定义的Activity
             Intent i = new Intent(context, MessageActivity.class);
@@ -138,6 +149,31 @@ public class MyReceiver extends BroadcastReceiver {
             }
         }
         return sb.toString();
+    }
+
+    private void customMessage(Context context, String msg) {
+        String message = "{\n" +
+                "\"emoji\":\"" +
+                msg +
+                "\"}";
+
+        LogUtils.e(message);
+        EmojiBean s = new Gson().fromJson(message, EmojiBean.class);
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(context)
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setContentTitle(s.getEmoji())
+                        .setContentText(s.getEmoji());
+
+        Notification notification = mBuilder.build();
+        NotificationManager mNotifyMgr =
+                (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+        mNotifyMgr.notify(1, notification);
+
+        Intent intent1 = new Intent(context, JPushDialogActivity.class);
+        intent1.putExtra("MESSAGE", message);
+        intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent1);
     }
 
 }
