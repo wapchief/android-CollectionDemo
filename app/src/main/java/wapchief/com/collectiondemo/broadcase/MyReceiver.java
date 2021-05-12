@@ -6,9 +6,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
+import androidx.core.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -22,17 +21,13 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.logging.Logger;
 
 import cn.jpush.android.api.CustomPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
-import wapchief.com.collectiondemo.MainActivity;
 import wapchief.com.collectiondemo.R;
 import wapchief.com.collectiondemo.activity.JPushDialogActivity;
 import wapchief.com.collectiondemo.activity.MessageActivity;
 import wapchief.com.collectiondemo.bean.EmojiBean;
-import wapchief.com.collectiondemo.bean.JPushMessageBean;
-import wapchief.com.collectiondemo.bean.JPushModel;
 import wapchief.com.collectiondemo.framework.BaseApplication;
 import wapchief.com.collectiondemo.greendao.DaoMaster;
 import wapchief.com.collectiondemo.greendao.DaoSession;

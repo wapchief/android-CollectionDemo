@@ -4,10 +4,6 @@
     android:versionCode="1"
     android:versionName="1.0.0">
 
-    <uses-sdk
-        android:minSdkVersion="9"
-        android:targetSdkVersion="25" />
-
     <!--相机-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
@@ -25,9 +21,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- Optional. Required for location feature -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 用于开启 debug 版本的应用在6.0 系统上 层叠窗口权限 -->
@@ -50,8 +44,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="wapchief.com.collectiondemo.fileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -59,7 +55,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-        <activity android:name=".activity.RootActivity">
+        <activity android:name=".activity.RootActivity"
+            android:label="CollectionDemo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

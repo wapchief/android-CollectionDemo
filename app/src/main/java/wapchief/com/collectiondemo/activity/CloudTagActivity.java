@@ -1,10 +1,7 @@
 package wapchief.com.collectiondemo.activity;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.util.AttributeSet;
-import android.view.View;
+import androidx.annotation.Nullable;
 
 import wapchief.com.collectiondemo.R;
 import wapchief.com.collectiondemo.framework.BaseActivity;

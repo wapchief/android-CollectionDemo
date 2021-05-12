@@ -1,14 +1,13 @@
 package wapchief.com.collectiondemo.activity;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -20,10 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.api.BasicCallback;
-import wapchief.com.collectiondemo.MainActivity;
 import wapchief.com.collectiondemo.R;
-import wapchief.com.collectiondemo.bean.TModel;
-import wapchief.com.collectiondemo.framework.callback.BasicCallBack;
 import wapchief.com.collectiondemo.utils.ToastsUtils;
 
 /**

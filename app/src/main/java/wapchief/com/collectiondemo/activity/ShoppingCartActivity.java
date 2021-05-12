@@ -2,12 +2,12 @@ package wapchief.com.collectiondemo.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.cpoopc.scrollablelayoutlib.ScrollableLayout;
 import com.flipboard.bottomsheet.BottomSheetLayout;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,8 @@ import wapchief.com.collectiondemo.framework.BaseActivity;
 import wapchief.com.collectiondemo.framework.GreenDaoHelper;
 import wapchief.com.collectiondemo.greendao.CarShopDao;
 import wapchief.com.collectiondemo.greendao.model.CarShop;
+
+import static androidx.viewpager.widget.ViewPager.*;
 
 /**
  * Created by wapchief on 2017/9/6.
@@ -152,9 +155,9 @@ public class ShoppingCartActivity extends BaseActivity {
 
     private void initViewPager() {
 
-        mVp.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+        mVp.setAdapter(new MyPagerAdapter(this.getSupportFragmentManager()));
         mTab.setupWithViewPager(mVp);
-        mVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mVp.addOnPageChangeListener(new OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 

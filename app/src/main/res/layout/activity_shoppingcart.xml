@@ -50,7 +50,7 @@
 
                     <!--置顶的部分-->
 
-                    <android.support.design.widget.TabLayout
+                    <com.google.android.material.tabs.TabLayout
                         android:id="@+id/tab"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -65,7 +65,7 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <android.support.v4.view.ViewPager
+                        <androidx.viewpager.widget.ViewPager
                             android:id="@+id/vp"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />

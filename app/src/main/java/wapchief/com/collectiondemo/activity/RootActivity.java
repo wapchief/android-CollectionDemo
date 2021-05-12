@@ -1,13 +1,10 @@
 package wapchief.com.collectiondemo.activity;
 
-import android.annotation.SuppressLint;
 import android.app.ListActivity;
-import android.app.NotificationManager;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.util.Log;
+import androidx.annotation.Nullable;
+
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -16,8 +13,6 @@ import android.widget.Toast;
 
 import com.blankj.utilcode.util.LogUtils;
 
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -25,7 +20,6 @@ import java.util.concurrent.TimeUnit;
 import cn.jpush.android.api.JPushInterface;
 import wapchief.com.collectiondemo.MainActivity;
 import wapchief.com.collectiondemo.framework.BaseApplication;
-import wapchief.com.collectiondemo.utils.ToastsUtils;
 
 /**
  * Created by Wu on 2017/7/3.
@@ -78,7 +72,7 @@ public class RootActivity extends ListActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setListAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mTitles));
-        LogUtils.e("id===push===:" + JPushInterface.getRegistrationID(BaseApplication.mBaseApplication));
+//        LogUtils.e("id===push===:" + JPushInterface.getRegistrationID(BaseApplication.mBaseApplication));
     }
 
     @Override

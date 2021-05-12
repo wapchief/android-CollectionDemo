@@ -1,16 +1,17 @@
 package wapchief.com.collectiondemo.framework;
 
-import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import static androidx.recyclerview.widget.RecyclerView.*;
+
 /**
  * Created by WuBing on 2017/1/13 0013 下午 3:25.
  * 描述：通用的ViewHolder
  */
-public class RecyclerViewHolder extends RecyclerView.ViewHolder {
+public class RecyclerViewHolder extends ViewHolder {
 
     private SparseArray<View> arrayView;
 

@@ -3,10 +3,11 @@ package wapchief.com.collectiondemo.activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -76,12 +77,12 @@ public class RecyclerViewActivity extends AppCompatActivity {
 
     /*添加header*/
     private void initHeader() {
-        vf.startFlipping();
-        View view = View.inflate(this, R.layout.item_viewflipper, null);
-        TextView tv = (TextView) view.findViewById(R.id.item_viewfip_tv);
-        tv.setText("新鲜水果限时开抢新鲜水果限时开抢新鲜水果限时开抢新鲜水果限时开抢新鲜水果限时开抢新鲜水果限时开抢！");
-        vf.addView(view);
-        recyclerViewHeader.attachTo(recyclerView);
+//        vf.startFlipping();
+//        View view = View.inflate(this, R.layout.item_viewflipper, null);
+//        TextView tv = (TextView) view.findViewById(R.id.item_viewfip_tv);
+//        tv.setText("新鲜水果限时开抢新鲜水果限时开抢新鲜水果限时开抢新鲜水果限时开抢新鲜水果限时开抢新鲜水果限时开抢！");
+//        vf.addView(view);
+//        recyclerViewHeader.attachTo(recyclerView);
     }
 
     private void initview() {

@@ -1,12 +1,11 @@
 package wapchief.com.collectiondemo.activity;
 
-import android.app.Application;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -20,7 +19,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import wapchief.com.collectiondemo.R;
-import wapchief.com.collectiondemo.framework.system.X_SystemBarUI;
 
 /**
  * Created by Wu on 2017/2/20 0020 下午 3:06.

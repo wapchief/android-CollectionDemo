@@ -48,8 +48,7 @@
         android:id="@+id/lv_product"
         android:background="@color/white"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        tools:listitem="@layout/product_item">
+        android:layout_height="fill_parent">
     </wapchief.com.collectiondemo.customView.MyListView>
 
     </LinearLayout>

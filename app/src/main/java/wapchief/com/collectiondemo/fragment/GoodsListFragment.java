@@ -1,19 +1,15 @@
 package wapchief.com.collectiondemo.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
+import androidx.annotation.Nullable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -23,10 +19,10 @@ import wapchief.com.collectiondemo.R;
 import wapchief.com.collectiondemo.adapter.CatListViceAdapter;
 import wapchief.com.collectiondemo.adapter.ShopLeftAdapter;
 import wapchief.com.collectiondemo.adapter.ShopRightAdapter;
-import wapchief.com.collectiondemo.customView.MyListView;
 import wapchief.com.collectiondemo.framework.GreenDaoHelper;
 import wapchief.com.collectiondemo.greendao.CarShopDao;
 import wapchief.com.collectiondemo.greendao.model.CarShop;
+import androidx.fragment.app.Fragment;
 
 /**
  * Created by wapchief on 2017/9/6.
@@ -47,7 +43,7 @@ public class GoodsListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = View.inflate(getActivity(), R.layout.fragment_goodslist, null);
+        View view = View.inflate(this.getActivity(), R.layout.fragment_goodslist, null);
         unbinder = ButterKnife.bind(this, view);
         initView();
         return view;
@@ -70,7 +66,7 @@ public class GoodsListFragment extends Fragment {
     }
 
     private void initListRight() {
-        adapterRight = new ShopRightAdapter(getActivity(), getData(),dao);
+        adapterRight = new ShopRightAdapter(this.getActivity(), getData(),dao);
         mGoodslistRight.setAdapter(adapterRight);
     }
 
@@ -95,7 +91,8 @@ public class GoodsListFragment extends Fragment {
         for (int i=0;i<mTitles.length;i++){
             list.add(i,mTitles[i]);
         }
-        mGoodslistLeft.setAdapter(new ArrayAdapter<String>(getActivity(),android.R.layout.simple_dropdown_item_1line,list));
+        mGoodslistLeft.setAdapter(new ArrayAdapter<String>(this.getActivity(),
+                android.R.layout.simple_dropdown_item_1line,list));
     }
 
 

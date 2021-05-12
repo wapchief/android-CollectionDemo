@@ -1,17 +1,21 @@
 package wapchief.com.collectiondemo;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.blankj.utilcode.util.SnackbarUtils;
 
 import java.util.List;
 
@@ -95,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         setNavClick();
         //注册激光
         JPushInterface.init(getApplicationContext());
+        showToast("RecyclerView");
 
         Log.e("id-------", JPushInterface.getRegistrationID(this));
 
@@ -121,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
     void submix(View view) {
         switch (view.getId()) {
             case R.id.bt2:
-                ToastsUtils.showShort(this, "tv被点击了");
                 Intent intent = new Intent(MainActivity.this, RecyclerViewActivity.class);
                 startActivity(intent);
                 break;
@@ -223,4 +227,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void showToast(String msg) {
+        SnackbarUtils.with(sideMain)
+                .setMessage(msg)
+                .setMessageColor(Color.BLACK)
+                .show();
+    }
 }

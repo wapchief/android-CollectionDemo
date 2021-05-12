@@ -25,7 +25,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true" />
 
-        <android.support.v7.widget.SearchView
+        <androidx.appcompat.widget.SearchView
             android:id="@+id/searchview"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true">
 
-        </android.support.v7.widget.SearchView>
+        </androidx.appcompat.widget.SearchView>
 
     </RelativeLayout>
 
